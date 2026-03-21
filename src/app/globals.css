@@ -31,12 +31,14 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   background: #000;
   color: #fff;
   font-family: var(--font-obviously), sans-serif;
+  overflow-x: hidden;
 }
 
 /* Scrollbar */
