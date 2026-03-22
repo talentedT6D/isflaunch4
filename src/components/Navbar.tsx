@@ -83,7 +83,7 @@ export default function Navbar() {
           <a
             key={link.href}
             href={link.href}
-            className={`nav-link uppercase leading-none whitespace-nowrap${activeSection === link.href ? " active" : ""}`}
+            className={`nav-link uppercase leading-none whitespace-nowrap${activeSection === link.href ? " active" : ""}${link.label === "SUBMIT FILM" ? " nav-link-submit" : ""}`}
           >
             {link.label}
           </a>
