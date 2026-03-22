@@ -213,11 +213,11 @@ export default function EventDetails() {
           </div>
 
           {/* Mobile venue image */}
-          <div className="lg:hidden shrink-0 h-[220px] mt-2">
+          <div className="lg:hidden shrink-0 mt-4 px-2">
             <img
               src="/events%20/event.png"
               alt="Venue"
-              className="w-full h-full object-contain object-right"
+              className="w-full h-auto object-contain"
             />
           </div>
         </div>
