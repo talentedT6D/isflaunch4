@@ -149,7 +149,7 @@ export default function Submit() {
                 }}
               />
             )}
-            <span className="relative z-[1]">SUBMIT YOUR FILM</span>
+            <span className="relative z-[1]" style={{ WebkitTextStroke: "1px #faff00" }}>SUBMIT YOUR FILM</span>
           </a>
           <a
             href="#criteria"
@@ -266,7 +266,7 @@ export default function Submit() {
                   }}
                 />
               )}
-              <span className="relative z-[1]">SUBMIT YOUR FILM</span>
+              <span className="relative z-[1]" style={{ WebkitTextStroke: "1px #faff00" }}>SUBMIT YOUR FILM</span>
             </a>
             <a
               href="#criteria"
