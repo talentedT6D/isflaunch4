@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { assets } from "@/lib/assets";
 
 const cards = [
@@ -19,16 +19,6 @@ const DURATION = "0.4s";
 
 export default function Process() {
   const [hovered, setHovered] = useState<number | null>(null);
-  const [activeCard, setActiveCard] = useState(0);
-
-  const nextCard = useCallback(() => {
-    setActiveCard((prev) => (prev + 1) % cards.length);
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(nextCard, 3000);
-    return () => clearInterval(timer);
-  }, [nextCard]);
 
   function col(i: number) { return i <= 1 ? 0 : 1; }
 
@@ -67,53 +57,36 @@ export default function Process() {
           HOW IT WORKS
         </h2>
 
-        {/* Mobile: fade carousel */}
-        <div className="md:hidden">
-          <div className="relative w-[280px] mx-auto" style={{ height: 400 }}>
-            {cards.map((card, i) => (
-              <div
-                key={i}
-                className="absolute inset-0 rounded-[16px] overflow-hidden"
-                style={{
-                  opacity: activeCard === i ? 1 : 0,
-                  transition: "opacity 0.6s ease-in-out",
-                  pointerEvents: activeCard === i ? "auto" : "none",
-                }}
-              >
-                <img src={card.img} alt="" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50" />
-                <div className="relative z-10 p-5 flex flex-col justify-between h-full">
-                  <div
-                    className="leading-none text-white glow-white uppercase mix-blend-screen"
-                    style={{ fontFamily: "obviously-extended", fontWeight: 600, fontSize: 34 }}
-                  >
-                    <p>{card.num}</p>
-                    {card.lines.map((line, j) => <p key={j}>{line}</p>)}
-                  </div>
-                  {card.desc && (
-                    <p
-                      className="text-[13px] text-white/80 leading-snug"
-                      style={{ fontFamily: "obviously", fontWeight: 300 }}
-                    >
-                      {card.desc}
-                    </p>
-                  )}
+        {/* Mobile: single column stack */}
+        <div className="flex flex-col gap-[6px] md:hidden">
+          {cards.map((card, i) => (
+            <div
+              key={i}
+              className="relative w-full rounded-[12px] overflow-hidden"
+              style={{ height: card.desc ? 220 : 190 }}
+            >
+              <img src={card.img} alt="" className="absolute inset-0 w-full h-full object-cover" />
+              {/* Dark gradient so text is always legible */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50" />
+              <div className="relative z-10 p-5 flex flex-col justify-between h-full">
+                <div
+                  className="leading-none text-white glow-white uppercase mix-blend-screen"
+                  style={{ fontFamily: "obviously-extended", fontWeight: 600, fontSize: 34 }}
+                >
+                  <p>{card.num}</p>
+                  {card.lines.map((line, j) => <p key={j}>{line}</p>)}
                 </div>
+                {card.desc && (
+                  <p
+                    className="text-[13px] text-white/80 leading-snug"
+                    style={{ fontFamily: "obviously", fontWeight: 300 }}
+                  >
+                    {card.desc}
+                  </p>
+                )}
               </div>
-            ))}
-          </div>
-
-          {/* Dots */}
-          <div className="flex justify-center gap-2 mt-4">
-            {cards.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveCard(i)}
-                className="w-2 h-2 rounded-full transition-colors duration-300"
-                style={{ background: activeCard === i ? "#ffffff" : "rgba(255,255,255,0.3)" }}
-              />
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
 
         {/* Desktop: 2-column grid — cards expand/shrink vertically only */}
