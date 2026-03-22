@@ -167,78 +167,69 @@ export default function About() {
             </p>
           </div>
 
-          {/* Right: Horizontal swipe carousel (desktop) */}
+          {/* Right: Crossfade card carousel (desktop) */}
           <div
             ref={cardAreaRef}
-            className="relative hidden lg:block overflow-hidden"
+            className="relative hidden lg:block"
             style={{ width: 431, height: 646 }}
           >
-            <div
-              className="flex will-change-transform"
-              style={{
-                transition: "transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)",
-                transform: `translateX(${-active * 431 + 30}px)`,
-                gap: 16,
-              }}
-            >
-              {cards.map((src, i) => {
-                const isCurrent = i === active;
-                return (
-                  <img
-                    key={src}
-                    src={src}
-                    alt={`card ${i + 1}`}
-                    className="rounded-[24px] object-cover flex-shrink-0 cursor-pointer"
-                    onClick={() => goTo(i)}
-                    style={{
-                      width: 385,
-                      height: 646,
-                      opacity: isCurrent ? 1 : 0.35,
-                      transform: isCurrent ? "scale(1)" : "scale(0.92)",
-                      transition:
-                        "opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)",
-                    }}
-                  />
-                );
-              })}
-            </div>
+            {cards.map((src, i) => {
+              const isCurrent = i === active;
+              const isPrev = i === active - 1;
+              return (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`card ${i + 1}`}
+                  className="absolute inset-0 rounded-[24px] object-cover will-change-[opacity,transform] cursor-pointer"
+                  onClick={() => goTo(i)}
+                  style={{
+                    width: 431,
+                    height: 646,
+                    opacity: isCurrent ? 1 : isPrev ? 0.15 : 0,
+                    transform: isCurrent
+                      ? "scale(1) translateX(0)"
+                      : isPrev
+                        ? "scale(0.93) translateX(-30px)"
+                        : "scale(0.93) translateX(30px)",
+                    transition: "opacity 0.5s ease, transform 0.5s ease",
+                    zIndex: isCurrent ? 2 : isPrev ? 1 : 0,
+                    pointerEvents: isCurrent || isPrev ? "auto" : "none",
+                  }}
+                />
+              );
+            })}
           </div>
 
-          {/* Mobile: Horizontal swipe carousel */}
+          {/* Mobile: Crossfade card carousel */}
           <div
-            className="lg:hidden relative w-full overflow-hidden mx-auto"
-            style={{ maxWidth: 320, aspectRatio: "2/3" }}
+            className="lg:hidden relative w-full mx-auto"
+            style={{ maxWidth: 280, aspectRatio: "2/3" }}
           >
-            <div
-              className="flex will-change-transform"
-              style={{
-                transition: "transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)",
-                transform: `translateX(calc(${-active * 240}px + 24px))`,
-                gap: 12,
-              }}
-            >
-              {cards.map((src, i) => {
-                const isCurrent = i === active;
-                return (
-                  <img
-                    key={src}
-                    src={src}
-                    alt={`card ${i + 1}`}
-                    className="rounded-[20px] object-cover flex-shrink-0"
-                    onClick={() => goTo(i)}
-                    style={{
-                      width: 228,
-                      height: "100%",
-                      aspectRatio: "2/3",
-                      opacity: isCurrent ? 1 : 0.35,
-                      transform: isCurrent ? "scale(1)" : "scale(0.92)",
-                      transition:
-                        "opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)",
-                    }}
-                  />
-                );
-              })}
-            </div>
+            {cards.map((src, i) => {
+              const isCurrent = i === active;
+              const isPrev = i === active - 1;
+              return (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`card ${i + 1}`}
+                  className="absolute inset-0 rounded-[20px] object-cover w-full h-full will-change-[opacity,transform]"
+                  onClick={() => goTo(i)}
+                  style={{
+                    opacity: isCurrent ? 1 : isPrev ? 0.15 : 0,
+                    transform: isCurrent
+                      ? "scale(1) translateX(0)"
+                      : isPrev
+                        ? "scale(0.93) translateX(-20px)"
+                        : "scale(0.93) translateX(20px)",
+                    transition: "opacity 0.5s ease, transform 0.5s ease",
+                    zIndex: isCurrent ? 2 : isPrev ? 1 : 0,
+                    pointerEvents: isCurrent || isPrev ? "auto" : "none",
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
