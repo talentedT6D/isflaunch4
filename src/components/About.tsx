@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { assets } from "@/lib/assets";
 
 const cards = [
@@ -12,71 +12,50 @@ const cards = [
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
+  const cardAreaRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  const lockedRef = useRef(false);
-  const scrollingRef = useRef(false); // debounce flag
+  const scrollingRef = useRef(false);
 
-  const isInView = useCallback(() => {
-    if (!sectionRef.current) return false;
-    const rect = sectionRef.current.getBoundingClientRect();
+  // Check if the card area is centered/visible in viewport
+  function isCardAreaLocked() {
+    if (!cardAreaRef.current) return false;
+    const rect = cardAreaRef.current.getBoundingClientRect();
     const windowH = window.innerHeight;
-    // Section is "in view" when its top is at or above viewport top
-    // and its bottom is at or below viewport bottom
-    const topVisible = rect.top <= 10;
-    const bottomVisible = rect.bottom >= windowH - 10;
-    return topVisible && bottomVisible;
-  }, []);
+    // Card area top is in upper half and bottom is in lower half of viewport
+    return rect.top <= windowH * 0.5 && rect.bottom >= windowH * 0.5;
+  }
 
   useEffect(() => {
     function handleWheel(e: WheelEvent) {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowH = window.innerHeight;
+      if (!isCardAreaLocked()) return;
 
       const scrollingDown = e.deltaY > 0;
       const scrollingUp = e.deltaY < 0;
 
-      // Check if section top has reached viewport top (scrolled to it)
-      const sectionAtTop = rect.top <= 10 && rect.top >= -10;
-      // Check if section is filling viewport
-      const sectionFillsView = rect.top <= 10 && rect.bottom >= windowH - 10;
-
-      // ENTERING: scrolling down and section top just hit viewport top
-      if (scrollingDown && sectionAtTop && active < cards.length - 1) {
+      if (scrollingDown && active < cards.length - 1) {
         e.preventDefault();
         if (scrollingRef.current) return;
         scrollingRef.current = true;
         setActive((prev) => Math.min(cards.length - 1, prev + 1));
-        setTimeout(() => { scrollingRef.current = false; }, 400);
+        setTimeout(() => { scrollingRef.current = false; }, 500);
         return;
       }
 
-      // LOCKED: section fills viewport, cards still cycling
-      if (scrollingDown && sectionFillsView && active < cards.length - 1) {
-        e.preventDefault();
-        if (scrollingRef.current) return;
-        scrollingRef.current = true;
-        setActive((prev) => Math.min(cards.length - 1, prev + 1));
-        setTimeout(() => { scrollingRef.current = false; }, 400);
-        return;
-      }
-
-      // SCROLLING UP: if we're at the section and active > 0, go back
-      if (scrollingUp && sectionFillsView && active > 0) {
+      if (scrollingUp && active > 0) {
         e.preventDefault();
         if (scrollingRef.current) return;
         scrollingRef.current = true;
         setActive((prev) => Math.max(0, prev - 1));
-        setTimeout(() => { scrollingRef.current = false; }, 400);
+        setTimeout(() => { scrollingRef.current = false; }, 500);
         return;
       }
     }
 
     window.addEventListener("wheel", handleWheel, { passive: false });
     return () => window.removeEventListener("wheel", handleWheel);
-  }, [active, isInView]);
+  }, [active]);
 
-  // Handle touch swipe for mobile
+  // Touch support for mobile
   const touchStartY = useRef(0);
 
   useEffect(() => {
@@ -85,15 +64,12 @@ export default function About() {
     }
 
     function handleTouchMove(e: TouchEvent) {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowH = window.innerHeight;
-      const deltaY = touchStartY.current - e.touches[0].clientY;
-      const scrollingDown = deltaY > 20;
-      const scrollingUp = deltaY < -20;
-      const sectionFillsView = rect.top <= 10 && rect.bottom >= windowH - 10;
+      if (!isCardAreaLocked()) return;
 
-      if (scrollingDown && sectionFillsView && active < cards.length - 1) {
+      const deltaY = touchStartY.current - e.touches[0].clientY;
+      const threshold = 30;
+
+      if (deltaY > threshold && active < cards.length - 1) {
         e.preventDefault();
         if (scrollingRef.current) return;
         scrollingRef.current = true;
@@ -103,7 +79,7 @@ export default function About() {
         return;
       }
 
-      if (scrollingUp && sectionFillsView && active > 0) {
+      if (deltaY < -threshold && active > 0) {
         e.preventDefault();
         if (scrollingRef.current) return;
         scrollingRef.current = true;
@@ -193,7 +169,7 @@ export default function About() {
           </div>
 
           {/* Right: Scroll-driven stacking cards (desktop) */}
-          <div className="relative hidden lg:block" style={{ width: 431, height: 646 }}>
+          <div ref={cardAreaRef} className="relative hidden lg:block" style={{ width: 431, height: 646 }}>
             {cards.map((src, i) => {
               const isActive = i <= active;
               return (
