@@ -25,7 +25,7 @@ export default function Judges() {
             <div className="mx-4 md:mx-6 flex-1 h-px md:w-auto" style={{ background: "#ff0000" }} />
           </div>
           <h2
-            className="text-white text-[28px] md:text-[64px] uppercase leading-none whitespace-nowrap shrink-0"
+            className="text-white text-[22px] sm:text-[28px] md:text-[64px] uppercase leading-none whitespace-nowrap shrink-0"
             style={{ fontFamily: "obviously-extended", fontWeight: 700 }}
           >
             THE JUDGES
