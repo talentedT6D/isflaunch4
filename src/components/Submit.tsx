@@ -32,7 +32,7 @@ export default function Submit() {
       id="submit"
       className="relative overflow-hidden"
       style={{
-        background: "linear-gradient(180deg, #050505 0%, #FF0000 75%, #FFF600 100%)",
+        background: "linear-gradient(180deg, #FFF600 0%, #FF0000 25%, #050505 100%)",
         minHeight: 420,
       }}
     >
