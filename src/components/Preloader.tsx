@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 
-const DURATION = 10000; // 10 seconds
+const DURATION = 5000; // 5 seconds
 
 export default function Preloader({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
