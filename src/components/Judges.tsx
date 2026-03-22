@@ -1,5 +1,11 @@
 export default function Judges() {
-  const src = "/jury/Group%2040%20(2).png";
+  const judges = [
+    { src: "/jury/Asset%201%404x-8.png", title: "LOADING\nVIRALITY", category: "Comedy" },
+    { src: "/jury/Asset%202%404x-8.png", title: "LOADING\nSTORYTELLER", category: "Emotional" },
+    { src: "/jury/Asset%203%404x-8.png", title: "LOADING\nFOODIE", category: "Food" },
+    { src: "/jury/Asset%204%404x-8.png", title: "GENERATING", category: "AI" },
+    { src: "/jury/Asset%205%404x-8.png", title: "LOADING\nANIMATION", category: "Edits" },
+  ];
 
   return (
     <section id="judges" className="py-16 md:py-20 px-6 md:px-[34px]">
@@ -16,22 +22,56 @@ export default function Judges() {
             JURY PANEL
           </p>
           <div className="mx-4 md:mx-6 flex-1 h-px" style={{ background: "#ff0000" }} />
+          <h2
+            className="text-white text-[32px] md:text-[64px] uppercase leading-none whitespace-nowrap shrink-0"
+            style={{ fontFamily: "obviously-extended", fontWeight: 700 }}
+          >
+            THE JUDGES
+          </h2>
         </div>
 
-        {/* Mobile: 2-column grid — all 5 same size */}
+        {/* Mobile: 2-column grid */}
         <div className="md:hidden grid grid-cols-2 gap-[6px]">
-          {[0, 1, 2, 3, 4].map((i) => (
-            <div key={i} className="relative rounded-[12px] overflow-hidden h-[180px]">
-              <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          {judges.map((judge, i) => (
+            <div key={i} className="relative rounded-[12px] overflow-hidden h-[220px]">
+              <img src={judge.src} alt="" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute bottom-0 left-0 right-0 p-3">
+                <p
+                  className="text-white text-[14px] uppercase leading-tight font-bold whitespace-pre-line"
+                  style={{ fontFamily: "obviously-extended" }}
+                >
+                  {judge.title}
+                </p>
+                <p
+                  className="text-[12px] mt-0.5"
+                  style={{ fontFamily: "obviously", fontWeight: 300, color: "rgba(255,255,255,0.7)" }}
+                >
+                  {judge.category}
+                </p>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Desktop: all 5 in one flex row — unchanged */}
+        {/* Desktop: all 5 in one flex row */}
         <div className="hidden md:flex gap-[6px]">
-          {[0, 1, 2, 3, 4].map((i) => (
-            <div key={i} className="relative flex-1 rounded-[16px] overflow-hidden" style={{ height: 340 }}>
-              <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          {judges.map((judge, i) => (
+            <div key={i} className="relative flex-1 rounded-[16px] overflow-hidden" style={{ height: 380 }}>
+              <img src={judge.src} alt="" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <p
+                  className="text-white text-[18px] uppercase leading-tight font-bold whitespace-pre-line"
+                  style={{ fontFamily: "obviously-extended" }}
+                >
+                  {judge.title}
+                </p>
+                <p
+                  className="text-[14px] mt-1"
+                  style={{ fontFamily: "obviously", fontWeight: 300, color: "rgba(255,255,255,0.7)" }}
+                >
+                  {judge.category}
+                </p>
+              </div>
             </div>
           ))}
         </div>
