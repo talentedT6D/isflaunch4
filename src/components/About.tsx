@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { assets } from "@/lib/assets";
 
 const cards = [
@@ -59,10 +59,9 @@ export default function About() {
     return () => window.removeEventListener("wheel", handleWheel);
   }, [active]);
 
-  // Mobile: separate active index with auto-rotation
+  // Mobile: separate active index — manual navigation only (no auto-rotation)
   const [mobileActive, setMobileActive] = useState(0);
   const [mobileDir, setMobileDir] = useState<"left" | "right">("left");
-  const mobileTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const mobileCardRef = useRef<HTMLDivElement>(null);
 
   const mobileGoTo = useCallback((index: number, dir: "left" | "right" = "left") => {
@@ -70,18 +69,13 @@ export default function About() {
     setMobileActive(index);
   }, []);
 
-  const resetMobileTimer = useCallback(() => {
-    if (mobileTimerRef.current) clearInterval(mobileTimerRef.current);
-    mobileTimerRef.current = setInterval(() => {
-      setMobileDir("left");
-      setMobileActive((prev) => (prev + 1) % cards.length);
-    }, 3000);
-  }, []);
+  const mobilePrev = useCallback(() => {
+    mobileGoTo((mobileActive - 1 + cards.length) % cards.length, "right");
+  }, [mobileActive, mobileGoTo]);
 
-  useEffect(() => {
-    resetMobileTimer();
-    return () => { if (mobileTimerRef.current) clearInterval(mobileTimerRef.current); };
-  }, [resetMobileTimer]);
+  const mobileNext = useCallback(() => {
+    mobileGoTo((mobileActive + 1) % cards.length, "left");
+  }, [mobileActive, mobileGoTo]);
 
   // Horizontal swipe support for mobile
   const touchStartX = useRef(0);
@@ -108,7 +102,6 @@ export default function About() {
       } else {
         mobileGoTo((mobileActive - 1 + cards.length) % cards.length, "right");
       }
-      resetMobileTimer();
     }
 
     el.addEventListener("touchstart", handleTouchStart, { passive: true });
@@ -117,7 +110,7 @@ export default function About() {
       el.removeEventListener("touchstart", handleTouchStart);
       el.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [resetMobileTimer]);
+  }, [mobileActive, mobileGoTo]);
 
   return (
     <section
@@ -249,14 +242,34 @@ export default function About() {
               );
             })}
 
+            {/* Left / Right arrows */}
+            <button
+              onClick={mobilePrev}
+              className="absolute top-1/2 -left-10 -translate-y-1/2 z-10"
+              aria-label="Previous card"
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#faff00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <button
+              onClick={mobileNext}
+              className="absolute top-1/2 -right-10 -translate-y-1/2 z-10"
+              aria-label="Next card"
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#faff00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 6 15 12 9 18" />
+              </svg>
+            </button>
+
             {/* Dots */}
             <div className="absolute -bottom-8 left-0 right-0 flex justify-center gap-2">
               {cards.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => { mobileGoTo(i, i > mobileActive ? "left" : "right"); resetMobileTimer(); }}
+                  onClick={() => mobileGoTo(i, i > mobileActive ? "left" : "right")}
                   className="w-2 h-2 rounded-full transition-colors duration-300"
-                  style={{ background: mobileActive === i ? "#ffffff" : "rgba(255,255,255,0.3)" }}
+                  style={{ background: mobileActive === i ? "#faff00" : "rgba(250,255,0,0.3)" }}
                 />
               ))}
             </div>
