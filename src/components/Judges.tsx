@@ -32,10 +32,10 @@ export default function Judges() {
           </h2>
         </div>
 
-        {/* Mobile: horizontal scroll */}
-        <div className="md:hidden flex gap-3 overflow-x-auto pb-2 -mx-1 px-1" style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}>
+        {/* Mobile: 2-column grid that fits the screen */}
+        <div className="md:hidden grid grid-cols-2 gap-2">
           {images.map((src, i) => (
-            <div key={i} className="relative rounded-[12px] overflow-hidden shrink-0" style={{ width: 160, height: 230 }}>
+            <div key={i} className="relative rounded-[12px] overflow-hidden" style={{ aspectRatio: "3/4" }}>
               <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover" />
             </div>
           ))}
