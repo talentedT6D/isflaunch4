@@ -43,7 +43,7 @@ export default function EventDetails() {
   const DAY_PX   = isMobile ? DAY_MOB   : DAY_DESK;
 
   useEffect(() => {
-    const STEP_DURATION = 10000; // ms per item
+    const STEP_DURATION = 5000; // ms per item
     const FPS = 60;
     const increment = 1 / (STEP_DURATION / (1000 / FPS));
     const id = setInterval(() => {
@@ -153,7 +153,7 @@ export default function EventDetails() {
                         lineHeight: 1.05,
                         color:      isActive ? "#faff00" : "#fff",
                         whiteSpace: "pre-line",
-                        transition: "font-size 0.9s ease, color 0.9s ease",
+                        transition: "font-size 0.5s ease, color 0.5s ease",
                       }}
                     >
                       {label}
@@ -164,7 +164,7 @@ export default function EventDetails() {
                       className="shrink-0 text-right leading-none"
                       style={{
                         color:      isActive ? "#faff00" : "#fff",
-                        transition: "color 0.9s ease",
+                        transition: "color 0.5s ease",
                       }}
                     >
                       <p style={{ fontFamily: "obviously", fontWeight: 300, fontSize: DATE_PX[dist] ?? 9 }}>
