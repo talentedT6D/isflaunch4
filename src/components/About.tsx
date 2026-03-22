@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { assets } from "@/lib/assets";
 
 const cards = [
@@ -16,15 +16,19 @@ export default function About() {
   const [active, setActive] = useState(0);
   const scrollingRef = useRef(false);
 
+  const goTo = useCallback((index: number) => {
+    setActive(Math.max(0, Math.min(cards.length - 1, index)));
+  }, []);
+
   // Check if the card area is centered/visible in viewport
   function isCardAreaLocked() {
     if (!cardAreaRef.current) return false;
     const rect = cardAreaRef.current.getBoundingClientRect();
     const windowH = window.innerHeight;
-    // Card area top is in upper half and bottom is in lower half of viewport
     return rect.top <= windowH * 0.5 && rect.bottom >= windowH * 0.5;
   }
 
+  // Scroll (wheel) driven card advance on desktop
   useEffect(() => {
     function handleWheel(e: WheelEvent) {
       if (!isCardAreaLocked()) return;
@@ -37,7 +41,7 @@ export default function About() {
         if (scrollingRef.current) return;
         scrollingRef.current = true;
         setActive((prev) => Math.min(cards.length - 1, prev + 1));
-        setTimeout(() => { scrollingRef.current = false; }, 200);
+        setTimeout(() => { scrollingRef.current = false; }, 300);
         return;
       }
 
@@ -46,7 +50,7 @@ export default function About() {
         if (scrollingRef.current) return;
         scrollingRef.current = true;
         setActive((prev) => Math.max(0, prev - 1));
-        setTimeout(() => { scrollingRef.current = false; }, 200);
+        setTimeout(() => { scrollingRef.current = false; }, 300);
         return;
       }
     }
@@ -55,46 +59,41 @@ export default function About() {
     return () => window.removeEventListener("wheel", handleWheel);
   }, [active]);
 
-  // Touch support for mobile
+  // Horizontal swipe support for mobile
+  const touchStartX = useRef(0);
   const touchStartY = useRef(0);
 
   useEffect(() => {
+    const el = cardAreaRef.current;
+    if (!el) return;
+
     function handleTouchStart(e: TouchEvent) {
+      touchStartX.current = e.touches[0].clientX;
       touchStartY.current = e.touches[0].clientY;
     }
 
-    function handleTouchMove(e: TouchEvent) {
-      if (!isCardAreaLocked()) return;
+    function handleTouchEnd(e: TouchEvent) {
+      const deltaX = touchStartX.current - e.changedTouches[0].clientX;
+      const deltaY = touchStartY.current - e.changedTouches[0].clientY;
+      const threshold = 40;
 
-      const deltaY = touchStartY.current - e.touches[0].clientY;
-      const threshold = 30;
+      // Only trigger if horizontal swipe is dominant
+      if (Math.abs(deltaX) < threshold || Math.abs(deltaX) < Math.abs(deltaY)) return;
 
-      if (deltaY > threshold && active < cards.length - 1) {
-        e.preventDefault();
-        if (scrollingRef.current) return;
-        scrollingRef.current = true;
-        setActive((prev) => Math.min(cards.length - 1, prev + 1));
-        touchStartY.current = e.touches[0].clientY;
-        setTimeout(() => { scrollingRef.current = false; }, 200);
-        return;
-      }
-
-      if (deltaY < -threshold && active > 0) {
-        e.preventDefault();
-        if (scrollingRef.current) return;
-        scrollingRef.current = true;
-        setActive((prev) => Math.max(0, prev - 1));
-        touchStartY.current = e.touches[0].clientY;
-        setTimeout(() => { scrollingRef.current = false; }, 200);
-        return;
+      if (deltaX > 0 && active < cards.length - 1) {
+        // Swipe left → next
+        setActive((prev) => prev + 1);
+      } else if (deltaX < 0 && active > 0) {
+        // Swipe right → prev
+        setActive((prev) => prev - 1);
       }
     }
 
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    el.addEventListener("touchstart", handleTouchStart, { passive: true });
+    el.addEventListener("touchend", handleTouchEnd, { passive: true });
     return () => {
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
+      el.removeEventListener("touchstart", handleTouchStart);
+      el.removeEventListener("touchend", handleTouchEnd);
     };
   }, [active]);
 
@@ -168,52 +167,78 @@ export default function About() {
             </p>
           </div>
 
-          {/* Right: Scroll-driven stacking cards (desktop) */}
-          <div ref={cardAreaRef} className="relative hidden lg:block" style={{ width: 431, height: 646 }}>
-            {cards.map((src, i) => {
-              const isActive = i <= active;
-              return (
-                <img
-                  key={src}
-                  src={src}
-                  alt={`card ${i + 1}`}
-                  className="absolute inset-0 rounded-[24px] object-cover will-change-transform"
-                  style={{
-                    width: 431,
-                    height: 646,
-                    opacity: isActive ? 1 : 0,
-                    transform: isActive
-                      ? "translateY(0)"
-                      : "translateY(60px)",
-                    transition: "opacity 0.2s ease, transform 0.2s ease",
-                    zIndex: i,
-                  }}
-                />
-              );
-            })}
+          {/* Right: Horizontal swipe carousel (desktop) */}
+          <div
+            ref={cardAreaRef}
+            className="relative hidden lg:block overflow-hidden"
+            style={{ width: 431, height: 646 }}
+          >
+            <div
+              className="flex will-change-transform"
+              style={{
+                transition: "transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)",
+                transform: `translateX(${-active * 431 + 30}px)`,
+                gap: 16,
+              }}
+            >
+              {cards.map((src, i) => {
+                const isCurrent = i === active;
+                return (
+                  <img
+                    key={src}
+                    src={src}
+                    alt={`card ${i + 1}`}
+                    className="rounded-[24px] object-cover flex-shrink-0 cursor-pointer"
+                    onClick={() => goTo(i)}
+                    style={{
+                      width: 385,
+                      height: 646,
+                      opacity: isCurrent ? 1 : 0.35,
+                      transform: isCurrent ? "scale(1)" : "scale(0.92)",
+                      transition:
+                        "opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)",
+                    }}
+                  />
+                );
+              })}
+            </div>
           </div>
 
-          {/* Mobile: Scroll-driven stacking cards */}
-          <div className="lg:hidden relative w-full mx-auto" style={{ aspectRatio: "2/3", maxWidth: 260 }}>
-            {cards.map((src, i) => {
-              const isActive = i <= active;
-              return (
-                <img
-                  key={src}
-                  src={src}
-                  alt={`card ${i + 1}`}
-                  className="absolute inset-0 rounded-[20px] object-cover w-full h-full will-change-transform"
-                  style={{
-                    opacity: isActive ? 1 : 0,
-                    transform: isActive
-                      ? "translateY(0)"
-                      : "translateY(40px)",
-                    transition: "opacity 0.2s ease, transform 0.2s ease",
-                    zIndex: i,
-                  }}
-                />
-              );
-            })}
+          {/* Mobile: Horizontal swipe carousel */}
+          <div
+            className="lg:hidden relative w-full overflow-hidden mx-auto"
+            style={{ maxWidth: 320, aspectRatio: "2/3" }}
+          >
+            <div
+              className="flex will-change-transform"
+              style={{
+                transition: "transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)",
+                transform: `translateX(calc(${-active * 240}px + 24px))`,
+                gap: 12,
+              }}
+            >
+              {cards.map((src, i) => {
+                const isCurrent = i === active;
+                return (
+                  <img
+                    key={src}
+                    src={src}
+                    alt={`card ${i + 1}`}
+                    className="rounded-[20px] object-cover flex-shrink-0"
+                    onClick={() => goTo(i)}
+                    style={{
+                      width: 228,
+                      height: "100%",
+                      aspectRatio: "2/3",
+                      opacity: isCurrent ? 1 : 0.35,
+                      transform: isCurrent ? "scale(1)" : "scale(0.92)",
+                      transition:
+                        "opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)",
+                    }}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
