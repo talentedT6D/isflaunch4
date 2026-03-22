@@ -2,13 +2,13 @@
 
 export default function Hero() {
   return (
-    <section className="relative h-screen min-h-[600px] md:max-h-[980px] overflow-hidden">
+    <section className="relative min-h-[600px] md:h-screen md:max-h-[980px] overflow-hidden">
       {/* Image background */}
-      <div className="absolute inset-0">
+      <div className="relative md:absolute md:inset-0">
         <img
           src="/videos/Group 50.png"
           alt="Hero background"
-          className="w-full h-full object-cover"
+          className="w-full h-auto md:h-full md:object-cover"
         />
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80" />
