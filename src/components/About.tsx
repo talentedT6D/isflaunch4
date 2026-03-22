@@ -19,10 +19,14 @@ export default function About() {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const windowH = window.innerHeight;
-      // progress 0→1 as section scrolls through viewport
-      const progress = 1 - rect.bottom / (windowH + rect.height);
+      // Start when section top hits bottom of viewport,
+      // end when section bottom hits top of viewport.
+      // Use rect.top relative to viewport height for a tighter range.
+      const start = windowH;       // section top at viewport bottom
+      const end = -rect.height;    // section bottom at viewport top
+      const progress = (start - rect.top) / (start - end);
       const clamped = Math.max(0, Math.min(1, progress));
-      // map scroll progress to card index
+      // map to card index — first card shows at 0%, last at ~75%+
       const idx = Math.min(
         cards.length - 1,
         Math.floor(clamped * cards.length)
