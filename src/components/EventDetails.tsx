@@ -88,14 +88,14 @@ export default function EventDetails() {
           }}
         />
 
-        {/* Black notch bottom-left — desktop only */}
+        {/* Black notch bottom-left */}
         <div
-          className="absolute bottom-0 left-0 bg-black hidden md:block"
+          className="absolute bottom-0 left-0 bg-black"
           style={{ width: "36%", height: 72, borderTopRightRadius: 60 }}
         />
 
         {/* Content */}
-        <div className="relative z-10 h-full flex flex-col px-4 sm:px-8 md:px-12 pt-8 pb-2 md:pb-4 max-w-[1440px] mx-auto w-full">
+        <div className="relative z-10 h-full flex flex-col px-4 sm:px-8 md:px-12 pt-8 pb-4 max-w-[1440px] mx-auto w-full">
 
           {/* Section label */}
           <div className="flex items-center gap-4 mb-2 shrink-0">
