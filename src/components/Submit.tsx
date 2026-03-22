@@ -48,7 +48,7 @@ function useButtonNoiseDataUrl(width = 300, height = 300) {
         d[i] = 255;
         d[i + 1] = 68;
         d[i + 2] = 0;
-        d[i + 3] = 200;
+        d[i + 3] = 102; // 40% opacity
       }
     }
     ctx.putImageData(img, 0, 0);
