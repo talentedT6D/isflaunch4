@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const timelineItems = [
   { label: "AWARDS NIGHT",        date: "DD/MM", day: "DAY" },
@@ -28,6 +28,8 @@ const OPACITY  = [1, 0.6, 0.35, 0.18, 0.08];
 export default function EventDetails() {
   const [continuous, setContinuous] = useState(2);
   const [isMobile, setIsMobile] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const timelineRef = useRef<HTMLDivElement>(null);
   const n = timelineItems.length;
 
   useEffect(() => {
@@ -42,7 +44,9 @@ export default function EventDetails() {
   const DATE_PX  = isMobile ? DATE_MOB  : DATE_DESK;
   const DAY_PX   = isMobile ? DAY_MOB   : DAY_DESK;
 
+  // Auto-scroll — pauses on hover
   useEffect(() => {
+    if (hovered) return;
     const STEP_DURATION = 5000; // ms per item
     const FPS = 60;
     const increment = 1 / (STEP_DURATION / (1000 / FPS));
@@ -50,7 +54,23 @@ export default function EventDetails() {
       setContinuous(prev => prev + increment);
     }, 1000 / FPS);
     return () => clearInterval(id);
-  }, []);
+  }, [hovered]);
+
+  // Manual scroll on hover — wheel up/down moves through items
+  useEffect(() => {
+    const el = timelineRef.current;
+    if (!el) return;
+
+    function handleWheel(e: WheelEvent) {
+      if (!hovered) return;
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? 0.15 : -0.15;
+      setContinuous(prev => prev + delta);
+    }
+
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    return () => el.removeEventListener("wheel", handleWheel);
+  }, [hovered]);
 
   const phase = continuous % n;
   const activeIndex = Math.round(phase) % n;
@@ -101,7 +121,10 @@ export default function EventDetails() {
 
             {/* ── LEFT: scroll-through timeline ── */}
             <div
-              className="relative overflow-hidden"
+              ref={timelineRef}
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
+              className="relative overflow-hidden cursor-ns-resize"
               style={{
                 WebkitMaskImage:
                   "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
