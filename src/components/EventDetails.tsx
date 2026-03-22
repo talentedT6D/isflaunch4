@@ -215,12 +215,12 @@ export default function EventDetails() {
           </div>
 
           {/* Mobile venue image */}
-          <div className="lg:hidden flex-1 min-h-0 mt-2 flex justify-center items-center">
-            <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer">
+          <div className="lg:hidden flex-1 min-h-0 mt-2 flex justify-end items-start">
+            <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer" className="w-[65%]">
               <img
                 src="/events%20/event.png"
                 alt="Venue"
-                className="max-h-[50vh] w-full object-contain"
+                className="w-full h-auto object-contain"
               />
             </a>
           </div>
