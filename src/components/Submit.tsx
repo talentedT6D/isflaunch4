@@ -15,9 +15,9 @@ function useNoiseDataUrl(width = 300, height = 300) {
     for (let i = 0; i < d.length; i += 4) {
       const n = Math.random();
       d[i] = 255;     // R (#FF)
-      d[i + 1] = 68;  // G (#44)
+      d[i + 1] = 0;   // G (#00)
       d[i + 2] = 0;   // B (#00)
-      d[i + 3] = n * 56; // ~22% max opacity
+      d[i + 3] = n * 191; // ~75% max opacity
     }
     ctx.putImageData(img, 0, 0);
     setUrl(c.toDataURL());
@@ -32,7 +32,7 @@ export default function Submit() {
       id="submit"
       className="relative overflow-hidden"
       style={{
-        background: "linear-gradient(180deg, #e8ff00 0%, #ff6a00 45%, #ff1a00 100%)",
+        background: "linear-gradient(180deg, #050505 0%, #FF0000 75%, #FFF600 100%)",
         minHeight: 420,
       }}
     >
