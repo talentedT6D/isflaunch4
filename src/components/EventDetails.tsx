@@ -117,7 +117,7 @@ export default function EventDetails() {
           </h2>
 
           {/* Main two-column grid */}
-          <div className="grid lg:grid-cols-[1fr_420px] gap-8 flex-1 min-h-0">
+          <div className="grid lg:grid-cols-[1fr_520px] gap-8 flex-1 min-h-0">
 
             {/* ── LEFT: scroll-through timeline ── */}
             <div
@@ -203,24 +203,24 @@ export default function EventDetails() {
             </div>
 
             {/* ── RIGHT: venue image — desktop only ── */}
-            <div className="hidden lg:flex items-center justify-center">
-              <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer">
+            <div className="hidden lg:flex items-center justify-center overflow-hidden">
+              <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer" className="w-full h-full flex items-center justify-center">
                 <img
                   src="/events%20/event.png"
                   alt="Venue"
-                  className="w-full h-full object-contain"
+                  className="max-w-full max-h-full object-contain"
                 />
               </a>
             </div>
           </div>
 
           {/* Mobile venue image */}
-          <div className="lg:hidden flex-1 min-h-0 mt-2 flex justify-end">
+          <div className="lg:hidden flex-1 min-h-0 mt-2 flex justify-center items-center">
             <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer">
               <img
                 src="/events%20/event.png"
                 alt="Venue"
-                className="max-h-[38vh] object-contain object-right"
+                className="max-h-[50vh] w-full object-contain"
               />
             </a>
           </div>
