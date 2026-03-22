@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { assets } from "@/lib/assets";
 
-const categories = ["Comedy", "AI", "Edits", "Emotional", "Food"];
+const categories = ["Comedy", "Edits", "Emotional", "Food", "AI"];
 
 const criteriaList = [
   "(1) Placeholder criteria line — e.g. video must be under 3 minutes in length.",
