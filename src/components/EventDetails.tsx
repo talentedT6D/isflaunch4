@@ -77,7 +77,7 @@ export default function EventDetails() {
 
   return (
     <section>
-      <div className="relative h-screen overflow-hidden">
+      <div className="relative md:h-screen overflow-hidden">
 
         {/* Red radial gradient background */}
         <div
@@ -124,7 +124,7 @@ export default function EventDetails() {
               ref={timelineRef}
               onMouseEnter={() => setHovered(true)}
               onMouseLeave={() => setHovered(false)}
-              className="relative overflow-hidden cursor-ns-resize"
+              className="relative overflow-hidden cursor-ns-resize h-[220px] md:h-auto"
               style={{
                 WebkitMaskImage:
                   "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
