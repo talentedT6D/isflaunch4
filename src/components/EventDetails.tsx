@@ -77,7 +77,7 @@ export default function EventDetails() {
 
   return (
     <section>
-      <div className="relative md:h-screen overflow-hidden">
+      <div className="relative min-h-[100svh] md:h-screen overflow-hidden">
 
         {/* Red radial gradient background */}
         <div
