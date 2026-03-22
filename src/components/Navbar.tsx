@@ -31,7 +31,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
+    <nav className="sticky top-0 left-0 right-0 z-50">
 
       {/* Black header shape — inlined SVG — desktop only */}
       <div className="absolute top-0 left-0 right-0 pointer-events-none hidden md:block" style={{ height: 310 }}>
