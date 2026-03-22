@@ -183,10 +183,10 @@ body {
   font-family: "obviously-extended", sans-serif;
   font-weight: 500;
 }
-.nav-link-submit:hover,
-.nav-link-submit.active {
+.nav-link.nav-link-submit:hover,
+.nav-link.nav-link-submit.active {
   color: #faff00;
   font-family: "obviously-extended", sans-serif;
   font-weight: 500;
-  text-shadow: 0 0 4px #FF0504;
+  text-shadow: 0 0 6px #FF0504, 0 0 12px #FF0504;
 }
