@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { assets } from "@/lib/assets";
 
 const cards = [
@@ -11,174 +11,236 @@ const cards = [
 ];
 
 export default function About() {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
-  const [extraHeight, setExtraHeight] = useState(0);
+  const lockedRef = useRef(false);
+  const scrollingRef = useRef(false); // debounce flag
 
-  // Once the sticky content renders, measure it and set wrapper height
-  useEffect(() => {
-    function measure() {
-      if (!stickyRef.current) return;
-      // extra scroll = 150px per card transition (after the first)
-      setExtraHeight((cards.length - 1) * 150);
-    }
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+  const isInView = useCallback(() => {
+    if (!sectionRef.current) return false;
+    const rect = sectionRef.current.getBoundingClientRect();
+    const windowH = window.innerHeight;
+    // Section is "in view" when its top is at or above viewport top
+    // and its bottom is at or below viewport bottom
+    const topVisible = rect.top <= 10;
+    const bottomVisible = rect.bottom >= windowH - 10;
+    return topVisible && bottomVisible;
   }, []);
 
   useEffect(() => {
-    function handleScroll() {
-      if (!wrapperRef.current || !stickyRef.current) return;
-      const rect = wrapperRef.current.getBoundingClientRect();
-      const contentH = stickyRef.current.offsetHeight;
-      const wrapperH = wrapperRef.current.offsetHeight;
-      const travel = wrapperH - contentH;
+    function handleWheel(e: WheelEvent) {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowH = window.innerHeight;
 
-      if (travel <= 0) {
-        setActive(0);
+      const scrollingDown = e.deltaY > 0;
+      const scrollingUp = e.deltaY < 0;
+
+      // Check if section top has reached viewport top (scrolled to it)
+      const sectionAtTop = rect.top <= 10 && rect.top >= -10;
+      // Check if section is filling viewport
+      const sectionFillsView = rect.top <= 10 && rect.bottom >= windowH - 10;
+
+      // ENTERING: scrolling down and section top just hit viewport top
+      if (scrollingDown && sectionAtTop && active < cards.length - 1) {
+        e.preventDefault();
+        if (scrollingRef.current) return;
+        scrollingRef.current = true;
+        setActive((prev) => Math.min(cards.length - 1, prev + 1));
+        setTimeout(() => { scrollingRef.current = false; }, 400);
         return;
       }
 
-      // How far the sticky content has scrolled within the wrapper
-      const scrolledPast = Math.max(0, -rect.top);
-      const progress = Math.min(1, scrolledPast / travel);
-      const idx = Math.min(
-        cards.length - 1,
-        Math.floor(progress * cards.length)
-      );
-      setActive(idx);
+      // LOCKED: section fills viewport, cards still cycling
+      if (scrollingDown && sectionFillsView && active < cards.length - 1) {
+        e.preventDefault();
+        if (scrollingRef.current) return;
+        scrollingRef.current = true;
+        setActive((prev) => Math.min(cards.length - 1, prev + 1));
+        setTimeout(() => { scrollingRef.current = false; }, 400);
+        return;
+      }
+
+      // SCROLLING UP: if we're at the section and active > 0, go back
+      if (scrollingUp && sectionFillsView && active > 0) {
+        e.preventDefault();
+        if (scrollingRef.current) return;
+        scrollingRef.current = true;
+        setActive((prev) => Math.max(0, prev - 1));
+        setTimeout(() => { scrollingRef.current = false; }, 400);
+        return;
+      }
     }
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [extraHeight]);
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    return () => window.removeEventListener("wheel", handleWheel);
+  }, [active, isInView]);
+
+  // Handle touch swipe for mobile
+  const touchStartY = useRef(0);
+
+  useEffect(() => {
+    function handleTouchStart(e: TouchEvent) {
+      touchStartY.current = e.touches[0].clientY;
+    }
+
+    function handleTouchMove(e: TouchEvent) {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      const deltaY = touchStartY.current - e.touches[0].clientY;
+      const scrollingDown = deltaY > 20;
+      const scrollingUp = deltaY < -20;
+      const sectionFillsView = rect.top <= 10 && rect.bottom >= windowH - 10;
+
+      if (scrollingDown && sectionFillsView && active < cards.length - 1) {
+        e.preventDefault();
+        if (scrollingRef.current) return;
+        scrollingRef.current = true;
+        setActive((prev) => Math.min(cards.length - 1, prev + 1));
+        touchStartY.current = e.touches[0].clientY;
+        setTimeout(() => { scrollingRef.current = false; }, 500);
+        return;
+      }
+
+      if (scrollingUp && sectionFillsView && active > 0) {
+        e.preventDefault();
+        if (scrollingRef.current) return;
+        scrollingRef.current = true;
+        setActive((prev) => Math.max(0, prev - 1));
+        touchStartY.current = e.touches[0].clientY;
+        setTimeout(() => { scrollingRef.current = false; }, 500);
+        return;
+      }
+    }
+
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, [active]);
 
   return (
-    <div
-      ref={wrapperRef}
+    <section
+      ref={sectionRef}
       id="about"
-      style={{ paddingBottom: extraHeight }}
+      className="relative py-10 md:py-20 px-6 md:px-[34px] overflow-hidden"
     >
-      <div
-        ref={stickyRef}
-        className="sticky top-0 py-10 md:py-20 px-6 md:px-[34px] overflow-hidden"
-      >
-        <div className="max-w-[1440px] mx-auto">
-          {/* Section label with decorative line */}
-          <div className="flex items-center gap-4 mb-6">
-            <p
-              className="text-[20px] uppercase text-red glow-red leading-none whitespace-pre"
-              style={{ fontFamily: "obviously-extended", fontWeight: 300 }}
+      <div className="max-w-[1440px] mx-auto">
+        {/* Section label with decorative line */}
+        <div className="flex items-center gap-4 mb-6">
+          <p
+            className="text-[20px] uppercase text-red glow-red leading-none whitespace-pre"
+            style={{ fontFamily: "obviously-extended", fontWeight: 300 }}
+          >
+            {`ABOUT THE  FESTIVAL`}
+          </p>
+          <img
+            src={assets.decorLines.line1}
+            alt=""
+            className="h-[16px] w-[371px] object-contain hidden sm:block"
+          />
+        </div>
+
+        <div className="grid lg:grid-cols-[1fr_420px] gap-6 lg:gap-16">
+          {/* Left: Content */}
+          <div>
+            <h2
+              className="text-[32px] md:text-[48px] leading-none uppercase text-white glow-white mb-4 md:mb-8"
+              style={{ fontFamily: "obviously-extended", fontWeight: 600 }}
             >
-              {`ABOUT THE  FESTIVAL`}
+              {`INDIA'S FIRST FESTIVAL BUILT FOR `}
+              <span>THE SCROLL GENERATION</span>
+            </h2>
+
+            <p
+              className="text-[17px] md:text-[24px] leading-[1.3] md:leading-[1.16] text-white max-w-[795px] mb-5 md:mb-10"
+              style={{
+                fontFamily: "obviously",
+                fontWeight: 300,
+                letterSpacing: "-0.5px",
+              }}
+            >
+              Short placeholder copy — 2–3 lines about what ISF is, who
+              it&apos;s for, and why it matters. Describe the mission of
+              celebrating India&apos;s most exciting short-form filmmakers across
+              comedy, AI, edits, emotional storytelling, and food content.
             </p>
-            <img
-              src={assets.decorLines.line1}
-              alt=""
-              className="h-[16px] w-[371px] object-contain hidden sm:block"
-            />
+
+            <p
+              className="text-[32px] md:text-[50px] lg:text-[85px] leading-[0.79] uppercase text-white mb-2"
+              style={{ fontFamily: "obviously-condensed", fontWeight: 100 }}
+            >
+              500+ submissions &middot; 12 judges
+            </p>
+
+            <p className="uppercase text-white leading-[0.79]">
+              <span
+                className="text-[64px] md:text-[160px] lg:text-[274px]"
+                style={{ fontFamily: "Roboto Condensed", fontWeight: 300 }}
+              >
+                &#8377;
+              </span>
+              <span
+                className="text-[64px] md:text-[160px] lg:text-[274px]"
+                style={{ fontFamily: "obviously-compressed", fontWeight: 700 }}
+              >
+                X in prizes{" "}
+              </span>
+            </p>
           </div>
 
-          <div className="grid lg:grid-cols-[1fr_420px] gap-6 lg:gap-16">
-            {/* Left: Content */}
-            <div>
-              <h2
-                className="text-[32px] md:text-[48px] leading-none uppercase text-white glow-white mb-4 md:mb-8"
-                style={{ fontFamily: "obviously-extended", fontWeight: 600 }}
-              >
-                {`INDIA'S FIRST FESTIVAL BUILT FOR `}
-                <span>THE SCROLL GENERATION</span>
-              </h2>
+          {/* Right: Scroll-driven stacking cards (desktop) */}
+          <div className="relative hidden lg:block" style={{ width: 431, height: 646 }}>
+            {cards.map((src, i) => {
+              const isActive = i <= active;
+              return (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`card ${i + 1}`}
+                  className="absolute inset-0 rounded-[24px] object-cover will-change-transform"
+                  style={{
+                    width: 431,
+                    height: 646,
+                    opacity: isActive ? 1 : 0,
+                    transform: isActive
+                      ? "translateY(0)"
+                      : "translateY(60px)",
+                    transition: "opacity 0.6s ease, transform 0.6s ease",
+                    zIndex: i,
+                  }}
+                />
+              );
+            })}
+          </div>
 
-              <p
-                className="text-[17px] md:text-[24px] leading-[1.3] md:leading-[1.16] text-white max-w-[795px] mb-5 md:mb-10"
-                style={{
-                  fontFamily: "obviously",
-                  fontWeight: 300,
-                  letterSpacing: "-0.5px",
-                }}
-              >
-                Short placeholder copy — 2–3 lines about what ISF is, who
-                it&apos;s for, and why it matters. Describe the mission of
-                celebrating India&apos;s most exciting short-form filmmakers across
-                comedy, AI, edits, emotional storytelling, and food content.
-              </p>
-
-              <p
-                className="text-[32px] md:text-[50px] lg:text-[85px] leading-[0.79] uppercase text-white mb-2"
-                style={{ fontFamily: "obviously-condensed", fontWeight: 100 }}
-              >
-                500+ submissions &middot; 12 judges
-              </p>
-
-              <p className="uppercase text-white leading-[0.79]">
-                <span
-                  className="text-[64px] md:text-[160px] lg:text-[274px]"
-                  style={{ fontFamily: "Roboto Condensed", fontWeight: 300 }}
-                >
-                  &#8377;
-                </span>
-                <span
-                  className="text-[64px] md:text-[160px] lg:text-[274px]"
-                  style={{ fontFamily: "obviously-compressed", fontWeight: 700 }}
-                >
-                  X in prizes{" "}
-                </span>
-              </p>
-            </div>
-
-            {/* Right: Scroll-driven stacking cards (desktop) */}
-            <div className="relative hidden lg:block" style={{ width: 431, height: 646 }}>
-              {cards.map((src, i) => {
-                const isActive = i <= active;
-                return (
-                  <img
-                    key={src}
-                    src={src}
-                    alt={`card ${i + 1}`}
-                    className="absolute inset-0 rounded-[24px] object-cover will-change-transform"
-                    style={{
-                      width: 431,
-                      height: 646,
-                      opacity: isActive ? 1 : 0,
-                      transform: isActive
-                        ? "translateY(0)"
-                        : "translateY(60px)",
-                      transition: "opacity 0.6s ease, transform 0.6s ease",
-                      zIndex: i,
-                    }}
-                  />
-                );
-              })}
-            </div>
-
-            {/* Mobile: Scroll-driven stacking cards */}
-            <div className="lg:hidden relative w-full mx-auto" style={{ aspectRatio: "2/3", maxWidth: 260 }}>
-              {cards.map((src, i) => {
-                const isActive = i <= active;
-                return (
-                  <img
-                    key={src}
-                    src={src}
-                    alt={`card ${i + 1}`}
-                    className="absolute inset-0 rounded-[20px] object-cover w-full h-full will-change-transform"
-                    style={{
-                      opacity: isActive ? 1 : 0,
-                      transform: isActive
-                        ? "translateY(0)"
-                        : "translateY(40px)",
-                      transition: "opacity 0.6s ease, transform 0.6s ease",
-                      zIndex: i,
-                    }}
-                  />
-                );
-              })}
-            </div>
+          {/* Mobile: Scroll-driven stacking cards */}
+          <div className="lg:hidden relative w-full mx-auto" style={{ aspectRatio: "2/3", maxWidth: 260 }}>
+            {cards.map((src, i) => {
+              const isActive = i <= active;
+              return (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`card ${i + 1}`}
+                  className="absolute inset-0 rounded-[20px] object-cover w-full h-full will-change-transform"
+                  style={{
+                    opacity: isActive ? 1 : 0,
+                    transform: isActive
+                      ? "translateY(0)"
+                      : "translateY(40px)",
+                    transition: "opacity 0.6s ease, transform 0.6s ease",
+                    zIndex: i,
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
