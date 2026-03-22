@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { assets } from "@/lib/assets";
 
 const cards = [
@@ -12,6 +12,8 @@ const cards = [
 
 export default function About() {
   const [active, setActive] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [parallaxY, setParallaxY] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,8 +22,24 @@ export default function About() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    function handleScroll() {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      // progress: 0 when section enters viewport bottom, 1 when it leaves top
+      const progress = 1 - (rect.bottom / (windowH + rect.height));
+      // clamp to 0–1, then map to -30..30px range for subtle parallax
+      const clamped = Math.max(0, Math.min(1, progress));
+      setParallaxY((clamped - 0.5) * 60); // -30 to +30
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section id="about" className="relative py-10 md:py-20 px-6 md:px-[34px] overflow-hidden">
+    <section ref={sectionRef} id="about" className="relative py-10 md:py-20 px-6 md:px-[34px] overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
         {/* Section label with decorative line */}
         <div className="flex items-center gap-4 mb-6">
@@ -86,17 +104,19 @@ export default function About() {
             </p>
           </div>
 
-          {/* Right: Auto-switching fade cards (desktop) */}
-          <div className="relative hidden lg:block" style={{ width: 431, height: 646 }}>
+          {/* Right: Auto-switching fade cards with parallax (desktop) */}
+          <div className="relative hidden lg:block overflow-hidden rounded-[24px]" style={{ width: 431, height: 646 }}>
             {cards.map((src, i) => (
               <img
                 key={src}
                 src={src}
                 alt={`card ${i + 1}`}
-                className="absolute inset-0 rounded-[24px] object-cover"
+                className="absolute inset-0 object-cover will-change-transform"
                 style={{
-                  width: 431.12,
-                  height: 645.59,
+                  width: 431,
+                  height: 746,
+                  top: -50,
+                  transform: `translateY(${parallaxY}px)`,
                   opacity: i === active ? 1 : 0,
                   transition: "opacity 0.8s ease",
                   zIndex: i === active ? 1 : 0,
@@ -105,15 +125,18 @@ export default function About() {
             ))}
           </div>
 
-          {/* Mobile: fade cards — full width, aspect-ratio locked */}
-          <div className="lg:hidden relative w-full mx-auto" style={{ aspectRatio: "2/3", maxWidth: 260 }}>
+          {/* Mobile: fade cards with parallax — full width, aspect-ratio locked */}
+          <div className="lg:hidden relative w-full mx-auto overflow-hidden rounded-[20px]" style={{ aspectRatio: "2/3", maxWidth: 260 }}>
             {cards.map((src, i) => (
               <img
                 key={src}
                 src={src}
                 alt={`card ${i + 1}`}
-                className="absolute inset-0 rounded-[20px] object-cover w-full h-full"
+                className="absolute object-cover w-full will-change-transform"
                 style={{
+                  height: "120%",
+                  top: "-10%",
+                  transform: `translateY(${parallaxY}px)`,
                   opacity: i === active ? 1 : 0,
                   transition: "opacity 0.8s ease",
                   zIndex: i === active ? 1 : 0,
