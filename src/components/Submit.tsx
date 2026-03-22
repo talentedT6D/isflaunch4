@@ -17,7 +17,7 @@ function useNoiseDataUrl(width = 300, height = 300) {
       d[i] = 255;     // R (#FF)
       d[i + 1] = 68;  // G (#44)
       d[i + 2] = 0;   // B (#00)
-      d[i + 3] = n * 56; // ~22% max opacity
+      d[i + 3] = n * 140; // ~55% max opacity
     }
     ctx.putImageData(img, 0, 0);
     setUrl(c.toDataURL());
