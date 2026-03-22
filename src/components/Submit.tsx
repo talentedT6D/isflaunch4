@@ -37,7 +37,7 @@ function useButtonNoiseDataUrl(width = 300, height = 300) {
     const d = img.data;
     for (let i = 0; i < d.length; i += 4) {
       const n = Math.random();
-      if (n > 0.25) {
+      if (n > 0.2) {
         // Yellow pixel (#FAFF00)
         d[i] = 250;
         d[i + 1] = 255;
