@@ -2,16 +2,21 @@
 
 import { useEffect, useState, useRef } from "react";
 
-const DURATION = 5000; // 5 seconds
+const DURATION = 10000; // 10 seconds
 
 export default function Preloader({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
   const [exiting, setExiting] = useState(false);
   const [done, setDone] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
   const startTime = useRef(0);
   const rafRef = useRef<number>(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Wait for video to start playing before beginning the progress bar
   useEffect(() => {
+    if (!videoReady) return;
+
     startTime.current = performance.now();
 
     function tick(now: number) {
@@ -31,7 +36,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
 
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, []);
+  }, [videoReady]);
 
   // After exit animation finishes, remove preloader
   useEffect(() => {
@@ -57,10 +62,12 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
     >
       {/* Video background */}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
+        onPlaying={() => setVideoReady(true)}
         className="absolute inset-0 w-full h-full object-cover"
       >
         <source src="/videos/landing-page.mp4" type="video/mp4" />
