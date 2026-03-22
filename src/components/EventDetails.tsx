@@ -17,10 +17,10 @@ const DATE_DESK  = [28, 24, 20, 17, 14];
 const DAY_DESK   = [36, 30, 25, 20, 16];
 
 // Mobile sizes — scaled down so multi-word labels fit the pill width
-const ROW_MOB   = 65;
-const LABEL_MOB = [16, 14, 12, 10, 8];
-const DATE_MOB  = [13, 11, 10,  8, 7];
-const DAY_MOB   = [16, 13, 11,  9, 7];
+const ROW_MOB   = 55;
+const LABEL_MOB = [13, 11, 10, 8, 7];
+const DATE_MOB  = [11, 9,  8,  7, 6];
+const DAY_MOB   = [13, 11, 9,  7, 6];
 
 const BLUR_PX  = [ 0,  1,  3,  5,  8];
 const OPACITY  = [1, 0.6, 0.35, 0.18, 0.08];
@@ -217,7 +217,7 @@ export default function EventDetails() {
             <img
               src="/events%20/event.png"
               alt="Venue"
-              className="max-h-[45vh] object-contain object-right"
+              className="max-h-[38vh] object-contain object-right"
             />
           </div>
         </div>
