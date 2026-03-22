@@ -180,6 +180,7 @@ body {
 
 .nav-link-submit {
   color: #faff00;
+  font-family: "obviously", sans-serif;
   font-weight: 500;
 }
 .nav-link-submit:hover,
