@@ -119,8 +119,11 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="flex items-center py-4 text-[22px] uppercase text-white border-b border-white/8 last:border-0"
-              style={{ fontFamily: "obviously-narrow", fontWeight: 400 }}
+              className={`flex items-center py-4 text-[22px] uppercase border-b border-white/8 last:border-0 ${link.label === "SUBMIT FILM" ? "text-[#faff00]" : "text-white"}`}
+              style={{
+                fontFamily: link.label === "SUBMIT FILM" ? "obviously-extended" : "obviously-narrow",
+                fontWeight: link.label === "SUBMIT FILM" ? 500 : 400,
+              }}
             >
               {link.label}
             </a>
