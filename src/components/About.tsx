@@ -37,7 +37,7 @@ export default function About() {
         if (scrollingRef.current) return;
         scrollingRef.current = true;
         setActive((prev) => Math.min(cards.length - 1, prev + 1));
-        setTimeout(() => { scrollingRef.current = false; }, 500);
+        setTimeout(() => { scrollingRef.current = false; }, 200);
         return;
       }
 
@@ -46,7 +46,7 @@ export default function About() {
         if (scrollingRef.current) return;
         scrollingRef.current = true;
         setActive((prev) => Math.max(0, prev - 1));
-        setTimeout(() => { scrollingRef.current = false; }, 500);
+        setTimeout(() => { scrollingRef.current = false; }, 200);
         return;
       }
     }
@@ -75,7 +75,7 @@ export default function About() {
         scrollingRef.current = true;
         setActive((prev) => Math.min(cards.length - 1, prev + 1));
         touchStartY.current = e.touches[0].clientY;
-        setTimeout(() => { scrollingRef.current = false; }, 500);
+        setTimeout(() => { scrollingRef.current = false; }, 200);
         return;
       }
 
@@ -85,7 +85,7 @@ export default function About() {
         scrollingRef.current = true;
         setActive((prev) => Math.max(0, prev - 1));
         touchStartY.current = e.touches[0].clientY;
-        setTimeout(() => { scrollingRef.current = false; }, 500);
+        setTimeout(() => { scrollingRef.current = false; }, 200);
         return;
       }
     }
@@ -185,7 +185,7 @@ export default function About() {
                     transform: isActive
                       ? "translateY(0)"
                       : "translateY(60px)",
-                    transition: "opacity 0.6s ease, transform 0.6s ease",
+                    transition: "opacity 0.2s ease, transform 0.2s ease",
                     zIndex: i,
                   }}
                 />
@@ -208,7 +208,7 @@ export default function About() {
                     transform: isActive
                       ? "translateY(0)"
                       : "translateY(40px)",
-                    transition: "opacity 0.6s ease, transform 0.6s ease",
+                    transition: "opacity 0.2s ease, transform 0.2s ease",
                     zIndex: i,
                   }}
                 />
