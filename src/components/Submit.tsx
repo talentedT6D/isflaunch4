@@ -36,6 +36,18 @@ export default function Submit() {
         minHeight: 420,
       }}
     >
+      {/* Noise texture overlay on background */}
+      {noiseUrl && (
+        <div
+          className="absolute inset-0 pointer-events-none z-[1]"
+          style={{
+            backgroundImage: `url(${noiseUrl})`,
+            backgroundRepeat: "repeat",
+            mixBlendMode: "overlay",
+          }}
+        />
+      )}
+
       {/* Mobile layout */}
       <div className="md:hidden px-6 py-12 flex flex-col gap-6 items-center text-center">
         <div className="relative">
