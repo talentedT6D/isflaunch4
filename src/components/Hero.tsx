@@ -2,7 +2,7 @@
 
 export default function Hero() {
   return (
-    <section className="relative h-screen min-h-[600px] max-h-[980px] overflow-hidden">
+    <section className="relative h-screen min-h-[600px] md:max-h-[980px] overflow-hidden">
       {/* Image background */}
       <div className="absolute inset-0">
         <img
