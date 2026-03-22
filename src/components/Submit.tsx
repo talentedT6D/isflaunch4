@@ -36,32 +36,42 @@ export default function Submit() {
         minHeight: 420,
       }}
     >
-      {/* Noise texture overlay */}
-      {noiseUrl && (
-        <div
-          className="absolute inset-0 pointer-events-none z-[1]"
-          style={{
-            backgroundImage: `url(${noiseUrl})`,
-            backgroundRepeat: "repeat",
-            mixBlendMode: "overlay",
-          }}
-        />
-      )}
-
       {/* Mobile layout */}
-      <div className="md:hidden px-6 py-12 flex flex-col gap-6 items-center text-center relative z-[2]">
-        <p
-          className="uppercase leading-[0.88]"
-          style={{
-            fontFamily: "obviously-compressed",
-            fontWeight: 300,
-            fontSize: 80,
-            color: "#ffffff",
-            mixBlendMode: "overlay",
-          }}
-        >
-          READY TO SUBMIT?
-        </p>
+      <div className="md:hidden px-6 py-12 flex flex-col gap-6 items-center text-center">
+        <div className="relative">
+          <p
+            className="uppercase leading-[0.88]"
+            style={{
+              fontFamily: "obviously-compressed",
+              fontWeight: 300,
+              fontSize: 80,
+              color: "#ffffff",
+              mixBlendMode: "overlay",
+            }}
+          >
+            READY TO SUBMIT?
+          </p>
+          {/* Noise clipped to text */}
+          {noiseUrl && (
+            <p
+              aria-hidden="true"
+              className="absolute inset-0 uppercase leading-[0.88] pointer-events-none"
+              style={{
+                fontFamily: "obviously-compressed",
+                fontWeight: 300,
+                fontSize: 80,
+                color: "transparent",
+                backgroundImage: `url(${noiseUrl})`,
+                backgroundRepeat: "repeat",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                mixBlendMode: "overlay",
+              }}
+            >
+              READY TO SUBMIT?
+            </p>
+          )}
+        </div>
 
         <div
           style={{ fontFamily: "obviously", fontWeight: 300, fontSize: 18, color: "#faff00", lineHeight: 1.4 }}
@@ -106,7 +116,7 @@ export default function Submit() {
       </div>
 
       {/* Desktop layout */}
-      <div className="hidden md:flex max-w-[1440px] mx-auto items-center relative z-[2]" style={{ minHeight: 420 }}>
+      <div className="hidden md:flex max-w-[1440px] mx-auto items-center" style={{ minHeight: 420 }}>
 
         {/* LEFT: Giant text — absolutely positioned per Figma x:14 */}
         <div className="flex-1 min-w-0 relative self-stretch">
@@ -124,6 +134,28 @@ export default function Submit() {
           >
             READY TO SUBMIT?
           </p>
+          {/* Noise clipped to text */}
+          {noiseUrl && (
+            <p
+              aria-hidden="true"
+              className="absolute uppercase whitespace-nowrap leading-[0.82] pointer-events-none"
+              style={{
+                fontFamily: "obviously-compressed",
+                fontWeight: 300,
+                fontSize: 381,
+                color: "transparent",
+                backgroundImage: `url(${noiseUrl})`,
+                backgroundRepeat: "repeat",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                mixBlendMode: "overlay",
+                left: 14,
+                top: 4,
+              }}
+            >
+              READY TO SUBMIT?
+            </p>
+          )}
         </div>
 
         {/* RIGHT: description + buttons */}
