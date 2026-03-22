@@ -180,10 +180,12 @@ body {
 
 .nav-link-submit {
   color: #faff00;
-  font-family: "obviously", sans-serif;
-  font-weight: 400;
+  font-family: "obviously-extended", sans-serif;
+  font-weight: 500;
 }
 .nav-link-submit:hover,
 .nav-link-submit.active {
   color: #faff00;
+  font-family: "obviously-extended", sans-serif;
+  font-weight: 500;
 }
