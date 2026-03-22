@@ -10,53 +10,62 @@ const cards = [
   "/cards/card4.png",
 ];
 
-// Extra scroll height per card (in vh units worth of pixels)
-const SCROLL_PER_CARD = 0.6; // 60vh per card transition
-const EXTRA_SCROLL = SCROLL_PER_CARD * cards.length; // total extra scroll in vh
-
 export default function About() {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const [extraHeight, setExtraHeight] = useState(0);
+
+  // Once the sticky content renders, measure it and set wrapper height
+  useEffect(() => {
+    function measure() {
+      if (!stickyRef.current) return;
+      // extra scroll = 150px per card transition (after the first)
+      setExtraHeight((cards.length - 1) * 150);
+    }
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
   useEffect(() => {
     function handleScroll() {
-      if (!wrapperRef.current) return;
-      const wrapper = wrapperRef.current;
-      const rect = wrapper.getBoundingClientRect();
-      const windowH = window.innerHeight;
+      if (!wrapperRef.current || !stickyRef.current) return;
+      const rect = wrapperRef.current.getBoundingClientRect();
+      const contentH = stickyRef.current.offsetHeight;
+      const wrapperH = wrapperRef.current.offsetHeight;
+      const travel = wrapperH - contentH;
 
-      // How far we've scrolled past the top of the wrapper
-      // The sticky content pins at top:0, so we measure how much
-      // of the wrapper's extra height has scrolled past
-      const scrolledPast = -rect.top;
-      const stickyTravel = wrapper.offsetHeight - windowH;
-
-      if (stickyTravel <= 0) {
+      if (travel <= 0) {
         setActive(0);
         return;
       }
 
-      const progress = scrolledPast / stickyTravel;
-      const clamped = Math.max(0, Math.min(1, progress));
+      // How far the sticky content has scrolled within the wrapper
+      const scrolledPast = Math.max(0, -rect.top);
+      const progress = Math.min(1, scrolledPast / travel);
       const idx = Math.min(
         cards.length - 1,
-        Math.floor(clamped * cards.length)
+        Math.floor(progress * cards.length)
       );
       setActive(idx);
     }
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [extraHeight]);
 
   return (
     <div
       ref={wrapperRef}
       id="about"
-      style={{ height: `calc(100vh + ${EXTRA_SCROLL * 100}vh)` }}
+      style={{ paddingBottom: extraHeight }}
     >
-      <section className="sticky top-0 h-screen py-10 md:py-20 px-6 md:px-[34px] overflow-hidden flex items-center">
-        <div className="max-w-[1440px] mx-auto w-full">
+      <div
+        ref={stickyRef}
+        className="sticky top-0 py-10 md:py-20 px-6 md:px-[34px] overflow-hidden"
+      >
+        <div className="max-w-[1440px] mx-auto">
           {/* Section label with decorative line */}
           <div className="flex items-center gap-4 mb-6">
             <p
@@ -169,7 +178,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
