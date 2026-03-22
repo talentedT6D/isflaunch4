@@ -123,13 +123,13 @@ export default function About() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative py-10 md:py-20 px-6 md:px-[34px] overflow-hidden"
+      className="relative py-10 md:py-20 px-4 md:px-[34px] overflow-hidden"
     >
       <div className="max-w-[1440px] mx-auto">
         {/* Section label with decorative line */}
         <div className="flex items-center gap-4 mb-6">
           <p
-            className="text-[20px] uppercase text-red glow-red leading-none whitespace-pre"
+            className="text-[14px] md:text-[20px] uppercase text-red glow-red leading-none whitespace-pre"
             style={{ fontFamily: "obviously-extended", fontWeight: 300 }}
           >
             {`ABOUT THE  FESTIVAL`}
@@ -145,7 +145,7 @@ export default function About() {
           {/* Left: Content */}
           <div>
             <h2
-              className="text-[32px] md:text-[48px] leading-none uppercase text-white glow-white mb-4 md:mb-8"
+              className="text-[20px] sm:text-[28px] md:text-[48px] leading-none uppercase text-white glow-white mb-4 md:mb-8"
               style={{ fontFamily: "obviously-extended", fontWeight: 600 }}
             >
               {`INDIA'S FIRST FESTIVAL BUILT FOR `}
@@ -167,7 +167,7 @@ export default function About() {
             </p>
 
             <p
-              className="text-[32px] md:text-[50px] lg:text-[85px] leading-[0.79] uppercase text-white mb-2"
+              className="text-[22px] sm:text-[32px] md:text-[50px] lg:text-[85px] leading-[0.79] uppercase text-white mb-2"
               style={{ fontFamily: "obviously-condensed", fontWeight: 100 }}
             >
               500+ submissions &middot; 12 judges
@@ -175,13 +175,13 @@ export default function About() {
 
             <p className="uppercase text-white leading-[0.79]">
               <span
-                className="text-[64px] md:text-[160px] lg:text-[274px]"
+                className="text-[40px] sm:text-[64px] md:text-[160px] lg:text-[274px]"
                 style={{ fontFamily: "Roboto Condensed", fontWeight: 300 }}
               >
                 &#8377;
               </span>
               <span
-                className="text-[64px] md:text-[160px] lg:text-[274px]"
+                className="text-[40px] sm:text-[64px] md:text-[160px] lg:text-[274px]"
                 style={{ fontFamily: "obviously-compressed", fontWeight: 700 }}
               >
                 X in prizes{" "}

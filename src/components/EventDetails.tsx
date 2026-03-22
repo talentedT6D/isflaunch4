@@ -110,7 +110,7 @@ export default function EventDetails() {
 
           {/* Title */}
           <h2
-            className="text-[26px] sm:text-[38px] md:text-[76px] leading-none uppercase text-white mb-4 shrink-0"
+            className="text-[20px] sm:text-[38px] md:text-[76px] leading-none uppercase text-white mb-4 shrink-0"
             style={{ fontFamily: "obviously-extended", fontWeight: 700 }}
           >
             DATE AND VENUE

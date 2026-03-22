@@ -51,7 +51,7 @@ export default function Process() {
         </div>
 
         <h2
-          className="text-[32px] md:text-[48px] leading-none uppercase text-white glow-white mb-6 md:mb-12"
+          className="text-[24px] sm:text-[32px] md:text-[48px] leading-none uppercase text-white glow-white mb-6 md:mb-12"
           style={{ fontFamily: "obviously-extended", fontWeight: 600 }}
         >
           HOW IT WORKS
