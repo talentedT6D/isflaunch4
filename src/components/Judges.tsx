@@ -14,26 +14,28 @@ export default function Judges() {
         style={{ background: "#080808", border: "1.5px solid rgba(255,255,255,0.25)" }}
       >
         {/* Header */}
-        <div className="flex items-center mb-5 md:mb-8">
-          <p
-            className="text-[14px] md:text-[18px] uppercase text-red glow-red leading-none whitespace-nowrap shrink-0 tracking-[0.18em]"
-            style={{ fontFamily: "obviously-extended", fontWeight: 300 }}
-          >
-            JURY PANEL
-          </p>
-          <div className="mx-4 md:mx-6 flex-1 h-px" style={{ background: "#ff0000" }} />
+        <div className="flex flex-col md:flex-row md:items-center mb-5 md:mb-8 gap-2 md:gap-0">
+          <div className="flex items-center">
+            <p
+              className="text-[14px] md:text-[18px] uppercase text-red glow-red leading-none whitespace-nowrap shrink-0 tracking-[0.18em]"
+              style={{ fontFamily: "obviously-extended", fontWeight: 300 }}
+            >
+              JURY PANEL
+            </p>
+            <div className="mx-4 md:mx-6 flex-1 h-px md:w-auto" style={{ background: "#ff0000" }} />
+          </div>
           <h2
-            className="text-white text-[32px] md:text-[64px] uppercase leading-none whitespace-nowrap shrink-0"
+            className="text-white text-[28px] md:text-[64px] uppercase leading-none whitespace-nowrap shrink-0"
             style={{ fontFamily: "obviously-extended", fontWeight: 700 }}
           >
             THE JUDGES
           </h2>
         </div>
 
-        {/* Mobile: 2-column grid */}
-        <div className="md:hidden grid grid-cols-2 gap-[6px]">
+        {/* Mobile: horizontal scroll */}
+        <div className="md:hidden flex gap-3 overflow-x-auto pb-2 -mx-1 px-1" style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}>
           {images.map((src, i) => (
-            <div key={i} className="relative rounded-[12px] overflow-hidden h-[220px]">
+            <div key={i} className="relative rounded-[12px] overflow-hidden shrink-0" style={{ width: 160, height: 230 }}>
               <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover" />
             </div>
           ))}
