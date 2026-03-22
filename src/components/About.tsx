@@ -227,7 +227,7 @@ export default function About() {
           <div
             ref={mobileCardRef}
             className="lg:hidden relative w-full mx-auto"
-            style={{ maxWidth: 280, aspectRatio: "2/3" }}
+            style={{ maxWidth: 220, aspectRatio: "2/3" }}
           >
             {cards.map((src, i) => {
               const isCurrent = mobileActive === i;
