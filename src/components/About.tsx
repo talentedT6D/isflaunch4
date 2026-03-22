@@ -61,12 +61,19 @@ export default function About() {
 
   // Mobile: separate active index with auto-rotation
   const [mobileActive, setMobileActive] = useState(0);
+  const [mobileDir, setMobileDir] = useState<"left" | "right">("left");
   const mobileTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const mobileCardRef = useRef<HTMLDivElement>(null);
+
+  const mobileGoTo = useCallback((index: number, dir: "left" | "right" = "left") => {
+    setMobileDir(dir);
+    setMobileActive(index);
+  }, []);
 
   const resetMobileTimer = useCallback(() => {
     if (mobileTimerRef.current) clearInterval(mobileTimerRef.current);
     mobileTimerRef.current = setInterval(() => {
+      setMobileDir("left");
       setMobileActive((prev) => (prev + 1) % cards.length);
     }, 3000);
   }, []);
@@ -97,9 +104,9 @@ export default function About() {
       if (Math.abs(deltaX) < threshold || Math.abs(deltaX) < Math.abs(deltaY)) return;
 
       if (deltaX > 0) {
-        setMobileActive((prev) => (prev + 1) % cards.length);
+        mobileGoTo((mobileActive + 1) % cards.length, "left");
       } else {
-        setMobileActive((prev) => (prev - 1 + cards.length) % cards.length);
+        mobileGoTo((mobileActive - 1 + cards.length) % cards.length, "right");
       }
       resetMobileTimer();
     }
@@ -222,26 +229,32 @@ export default function About() {
             className="lg:hidden relative w-full mx-auto"
             style={{ maxWidth: 280, aspectRatio: "2/3" }}
           >
-            {cards.map((src, i) => (
-              <img
-                key={src}
-                src={src}
-                alt={`card ${i + 1}`}
-                className="absolute inset-0 rounded-[20px] object-cover w-full h-full"
-                style={{
-                  opacity: mobileActive === i ? 1 : 0,
-                  transition: "opacity 0.6s ease-in-out",
-                  zIndex: mobileActive === i ? 2 : 1,
-                }}
-              />
-            ))}
+            {cards.map((src, i) => {
+              const isCurrent = mobileActive === i;
+              const exitDir = mobileDir === "left" ? "-60px" : "60px";
+              const enterDir = mobileDir === "left" ? "60px" : "-60px";
+              return (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`card ${i + 1}`}
+                  className="absolute inset-0 rounded-[20px] object-cover w-full h-full"
+                  style={{
+                    opacity: isCurrent ? 1 : 0,
+                    transform: isCurrent ? "translateX(0)" : `translateX(${exitDir})`,
+                    transition: "opacity 0.6s ease-in-out, transform 0.6s ease-in-out",
+                    zIndex: isCurrent ? 2 : 1,
+                  }}
+                />
+              );
+            })}
 
             {/* Dots */}
             <div className="absolute -bottom-8 left-0 right-0 flex justify-center gap-2">
               {cards.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => { setMobileActive(i); resetMobileTimer(); }}
+                  onClick={() => { mobileGoTo(i, i > mobileActive ? "left" : "right"); resetMobileTimer(); }}
                   className="w-2 h-2 rounded-full transition-colors duration-300"
                   style={{ background: mobileActive === i ? "#ffffff" : "rgba(255,255,255,0.3)" }}
                 />
