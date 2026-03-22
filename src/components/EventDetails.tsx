@@ -204,21 +204,25 @@ export default function EventDetails() {
 
             {/* ── RIGHT: venue image — desktop only ── */}
             <div className="hidden lg:flex items-center justify-center">
-              <img
-                src="/events%20/event.png"
-                alt="Venue"
-                className="w-full h-full object-contain"
-              />
+              <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer">
+                <img
+                  src="/events%20/event.png"
+                  alt="Venue"
+                  className="w-full h-full object-contain"
+                />
+              </a>
             </div>
           </div>
 
           {/* Mobile venue image */}
           <div className="lg:hidden flex-1 min-h-0 mt-2 flex justify-end">
-            <img
-              src="/events%20/event.png"
-              alt="Venue"
-              className="max-h-[38vh] object-contain object-right"
-            />
+            <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer">
+              <img
+                src="/events%20/event.png"
+                alt="Venue"
+                className="max-h-[38vh] object-contain object-right"
+              />
+            </a>
           </div>
         </div>
       </div>
