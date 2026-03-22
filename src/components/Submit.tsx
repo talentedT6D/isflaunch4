@@ -43,7 +43,7 @@ export default function Submit() {
           style={{
             backgroundImage: `url(${noiseUrl})`,
             backgroundRepeat: "repeat",
-            mixBlendMode: "multiply",
+            mixBlendMode: "overlay",
           }}
         />
       )}
