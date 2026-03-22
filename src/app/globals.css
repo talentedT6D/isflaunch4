@@ -178,6 +178,9 @@ body {
   color: #ffffff;
 }
 
+.nav-link-submit {
+  color: #faff00;
+}
 .nav-link-submit:hover,
 .nav-link-submit.active {
   color: #faff00;
