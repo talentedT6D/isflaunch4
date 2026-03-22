@@ -94,7 +94,7 @@ export default function Submit() {
         <div className="flex flex-col gap-3 w-full">
           <a
             href="#"
-            className="flex items-center justify-center uppercase w-full"
+            className="flex items-center justify-center uppercase w-full relative overflow-hidden"
             style={{
               fontFamily: "obviously-narrow",
               fontWeight: 400,
@@ -106,11 +106,22 @@ export default function Submit() {
               background: "#faff00",
             }}
           >
-            SUBMIT YOUR FILM
+            {noiseUrl && (
+              <span
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  backgroundImage: `url(${noiseUrl})`,
+                  backgroundRepeat: "repeat",
+                  mixBlendMode: "overlay",
+                  borderRadius: 9999,
+                }}
+              />
+            )}
+            <span className="relative z-[1]">SUBMIT YOUR FILM</span>
           </a>
           <a
             href="#criteria"
-            className="flex items-center justify-center uppercase w-full border"
+            className="flex items-center justify-center uppercase w-full border relative overflow-hidden"
             style={{
               fontFamily: "obviously-narrow",
               fontWeight: 400,
@@ -122,7 +133,18 @@ export default function Submit() {
               background: "transparent",
             }}
           >
-            VIEW CRITERIA
+            {noiseUrl && (
+              <span
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  backgroundImage: `url(${noiseUrl})`,
+                  backgroundRepeat: "repeat",
+                  mixBlendMode: "overlay",
+                  borderRadius: 9999,
+                }}
+              />
+            )}
+            <span className="relative z-[1]">VIEW CRITERIA</span>
           </a>
         </div>
       </div>
@@ -202,11 +224,22 @@ export default function Submit() {
                 background: "#faff00",
               }}
             >
-              SUBMIT YOUR FILM
+              {noiseUrl && (
+                <span
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    backgroundImage: `url(${noiseUrl})`,
+                    backgroundRepeat: "repeat",
+                    mixBlendMode: "overlay",
+                    borderRadius: 9999,
+                  }}
+                />
+              )}
+              <span className="relative z-[1]">SUBMIT YOUR FILM</span>
             </a>
             <a
               href="#criteria"
-              className="inline-flex items-center justify-center uppercase whitespace-nowrap border transition-all"
+              className="inline-flex items-center justify-center uppercase whitespace-nowrap border transition-all relative overflow-hidden"
               style={{
                 fontFamily: "obviously-narrow",
                 fontWeight: 400,
@@ -221,7 +254,18 @@ export default function Submit() {
                 boxSizing: "border-box",
               }}
             >
-              VIEW CRITERIA
+              {noiseUrl && (
+                <span
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    backgroundImage: `url(${noiseUrl})`,
+                    backgroundRepeat: "repeat",
+                    mixBlendMode: "overlay",
+                    borderRadius: 9999,
+                  }}
+                />
+              )}
+              <span className="relative z-[1]">VIEW CRITERIA</span>
             </a>
           </div>
         </div>
