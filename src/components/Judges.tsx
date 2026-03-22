@@ -40,9 +40,9 @@ export default function Judges() {
         </div>
 
         {/* Desktop: all 5 in one flex row */}
-        <div className="hidden md:flex gap-[6px]">
+        <div className="hidden md:flex gap-[6px] justify-center">
           {images.map((src, i) => (
-            <div key={i} className="relative flex-1 rounded-[16px] overflow-hidden" style={{ height: 380 }}>
+            <div key={i} className="relative rounded-[16px] overflow-hidden" style={{ width: 237, height: 340 }}>
               <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover" />
             </div>
           ))}
