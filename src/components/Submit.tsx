@@ -25,8 +25,41 @@ function useNoiseDataUrl(width = 300, height = 300) {
   return url;
 }
 
+function useButtonNoiseDataUrl(width = 300, height = 300) {
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    const c = document.createElement("canvas");
+    c.width = width;
+    c.height = height;
+    const ctx = c.getContext("2d");
+    if (!ctx) return;
+    const img = ctx.createImageData(width, height);
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const n = Math.random();
+      if (n > 0.5) {
+        // Yellow pixel (#FAFF00)
+        d[i] = 250;
+        d[i + 1] = 255;
+        d[i + 2] = 0;
+        d[i + 3] = 255;
+      } else {
+        // Orange-red pixel (#FF4400)
+        d[i] = 255;
+        d[i + 1] = 68;
+        d[i + 2] = 0;
+        d[i + 3] = 200;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+    setUrl(c.toDataURL());
+  }, [width, height]);
+  return url;
+}
+
 export default function Submit() {
   const noiseUrl = useNoiseDataUrl();
+  const buttonNoiseUrl = useButtonNoiseDataUrl();
   return (
     <section
       id="submit"
@@ -106,13 +139,12 @@ export default function Submit() {
               background: "linear-gradient(90deg, rgba(255,68,0,0.4) 27%, #FAFF00 77%)",
             }}
           >
-            {noiseUrl && (
+            {buttonNoiseUrl && (
               <span
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                  backgroundImage: `url(${noiseUrl})`,
+                  backgroundImage: `url(${buttonNoiseUrl})`,
                   backgroundRepeat: "repeat",
-                  mixBlendMode: "overlay",
                   borderRadius: 9999,
                 }}
               />
@@ -224,13 +256,12 @@ export default function Submit() {
                 background: "linear-gradient(90deg, rgba(255,68,0,0.4) 27%, #FAFF00 77%)",
               }}
             >
-              {noiseUrl && (
+              {buttonNoiseUrl && (
                 <span
                   className="absolute inset-0 pointer-events-none"
                   style={{
-                    backgroundImage: `url(${noiseUrl})`,
+                    backgroundImage: `url(${buttonNoiseUrl})`,
                     backgroundRepeat: "repeat",
-                    mixBlendMode: "overlay",
                     borderRadius: 9999,
                   }}
                 />
