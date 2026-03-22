@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { assets } from "@/lib/assets";
 
 const cards = [
@@ -59,12 +59,29 @@ export default function About() {
     return () => window.removeEventListener("wheel", handleWheel);
   }, [active]);
 
+  // Mobile: separate active index with auto-rotation
+  const [mobileActive, setMobileActive] = useState(0);
+  const mobileTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const mobileCardRef = useRef<HTMLDivElement>(null);
+
+  const resetMobileTimer = useCallback(() => {
+    if (mobileTimerRef.current) clearInterval(mobileTimerRef.current);
+    mobileTimerRef.current = setInterval(() => {
+      setMobileActive((prev) => (prev + 1) % cards.length);
+    }, 3000);
+  }, []);
+
+  useEffect(() => {
+    resetMobileTimer();
+    return () => { if (mobileTimerRef.current) clearInterval(mobileTimerRef.current); };
+  }, [resetMobileTimer]);
+
   // Horizontal swipe support for mobile
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
 
   useEffect(() => {
-    const el = cardAreaRef.current;
+    const el = mobileCardRef.current;
     if (!el) return;
 
     function handleTouchStart(e: TouchEvent) {
@@ -77,16 +94,14 @@ export default function About() {
       const deltaY = touchStartY.current - e.changedTouches[0].clientY;
       const threshold = 40;
 
-      // Only trigger if horizontal swipe is dominant
       if (Math.abs(deltaX) < threshold || Math.abs(deltaX) < Math.abs(deltaY)) return;
 
-      if (deltaX > 0 && active < cards.length - 1) {
-        // Swipe left → next
-        setActive((prev) => prev + 1);
-      } else if (deltaX < 0 && active > 0) {
-        // Swipe right → prev
-        setActive((prev) => prev - 1);
+      if (deltaX > 0) {
+        setMobileActive((prev) => (prev + 1) % cards.length);
+      } else {
+        setMobileActive((prev) => (prev - 1 + cards.length) % cards.length);
       }
+      resetMobileTimer();
     }
 
     el.addEventListener("touchstart", handleTouchStart, { passive: true });
@@ -95,7 +110,7 @@ export default function About() {
       el.removeEventListener("touchstart", handleTouchStart);
       el.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [active]);
+  }, [resetMobileTimer]);
 
   return (
     <section
@@ -201,35 +216,37 @@ export default function About() {
             })}
           </div>
 
-          {/* Mobile: Crossfade card carousel */}
+          {/* Mobile: Auto-rotating fade carousel */}
           <div
+            ref={mobileCardRef}
             className="lg:hidden relative w-full mx-auto"
             style={{ maxWidth: 280, aspectRatio: "2/3" }}
           >
-            {cards.map((src, i) => {
-              const isCurrent = i === active;
-              const isPrev = i === active - 1;
-              return (
-                <img
-                  key={src}
-                  src={src}
-                  alt={`card ${i + 1}`}
-                  className="absolute inset-0 rounded-[20px] object-cover w-full h-full will-change-[opacity,transform]"
-                  onClick={() => goTo(i)}
-                  style={{
-                    opacity: isCurrent ? 1 : isPrev ? 0.15 : 0,
-                    transform: isCurrent
-                      ? "scale(1) translateX(0)"
-                      : isPrev
-                        ? "scale(0.93) translateX(-20px)"
-                        : "scale(0.93) translateX(20px)",
-                    transition: "opacity 0.5s ease, transform 0.5s ease",
-                    zIndex: isCurrent ? 2 : isPrev ? 1 : 0,
-                    pointerEvents: isCurrent || isPrev ? "auto" : "none",
-                  }}
+            {cards.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt={`card ${i + 1}`}
+                className="absolute inset-0 rounded-[20px] object-cover w-full h-full"
+                style={{
+                  opacity: mobileActive === i ? 1 : 0,
+                  transition: "opacity 0.6s ease-in-out",
+                  zIndex: mobileActive === i ? 2 : 1,
+                }}
+              />
+            ))}
+
+            {/* Dots */}
+            <div className="absolute -bottom-8 left-0 right-0 flex justify-center gap-2">
+              {cards.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setMobileActive(i); resetMobileTimer(); }}
+                  className="w-2 h-2 rounded-full transition-colors duration-300"
+                  style={{ background: mobileActive === i ? "#ffffff" : "rgba(255,255,255,0.3)" }}
                 />
-              );
-            })}
+              ))}
+            </div>
           </div>
         </div>
       </div>
