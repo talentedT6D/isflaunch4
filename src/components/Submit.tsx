@@ -1,4 +1,32 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+function useNoiseDataUrl(width = 300, height = 300) {
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    const c = document.createElement("canvas");
+    c.width = width;
+    c.height = height;
+    const ctx = c.getContext("2d");
+    if (!ctx) return;
+    const img = ctx.createImageData(width, height);
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const n = Math.random();
+      d[i] = 255;     // R (#FF)
+      d[i + 1] = 68;  // G (#44)
+      d[i + 2] = 0;   // B (#00)
+      d[i + 3] = n * 56; // ~22% max opacity
+    }
+    ctx.putImageData(img, 0, 0);
+    setUrl(c.toDataURL());
+  }, [width, height]);
+  return url;
+}
+
 export default function Submit() {
+  const noiseUrl = useNoiseDataUrl();
   return (
     <section
       id="submit"
@@ -8,8 +36,20 @@ export default function Submit() {
         minHeight: 420,
       }}
     >
+      {/* Noise texture overlay */}
+      {noiseUrl && (
+        <div
+          className="absolute inset-0 pointer-events-none z-[1]"
+          style={{
+            backgroundImage: `url(${noiseUrl})`,
+            backgroundRepeat: "repeat",
+            mixBlendMode: "multiply",
+          }}
+        />
+      )}
+
       {/* Mobile layout */}
-      <div className="md:hidden px-6 py-12 flex flex-col gap-6 items-center text-center">
+      <div className="md:hidden px-6 py-12 flex flex-col gap-6 items-center text-center relative z-[2]">
         <p
           className="uppercase leading-[0.88]"
           style={{
@@ -66,7 +106,7 @@ export default function Submit() {
       </div>
 
       {/* Desktop layout */}
-      <div className="hidden md:flex max-w-[1440px] mx-auto items-center" style={{ minHeight: 420 }}>
+      <div className="hidden md:flex max-w-[1440px] mx-auto items-center relative z-[2]" style={{ minHeight: 420 }}>
 
         {/* LEFT: Giant text — absolutely positioned per Figma x:14 */}
         <div className="flex-1 min-w-0 relative self-stretch">
