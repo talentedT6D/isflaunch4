@@ -11,27 +11,23 @@ const cards = [
 ];
 
 export default function About() {
-  const [active, setActive] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const [parallaxY, setParallaxY] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActive((prev) => (prev + 1) % cards.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  const [active, setActive] = useState(0);
 
   useEffect(() => {
     function handleScroll() {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const windowH = window.innerHeight;
-      // progress: 0 when section enters viewport bottom, 1 when it leaves top
-      const progress = 1 - (rect.bottom / (windowH + rect.height));
-      // clamp to 0–1, then map to -30..30px range for subtle parallax
+      // progress 0→1 as section scrolls through viewport
+      const progress = 1 - rect.bottom / (windowH + rect.height);
       const clamped = Math.max(0, Math.min(1, progress));
-      setParallaxY((clamped - 0.5) * 60); // -30 to +30
+      // map scroll progress to card index
+      const idx = Math.min(
+        cards.length - 1,
+        Math.floor(clamped * cards.length)
+      );
+      setActive(idx);
     }
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
@@ -104,45 +100,52 @@ export default function About() {
             </p>
           </div>
 
-          {/* Right: Auto-switching fade cards with parallax (desktop) */}
-          <div className="relative hidden lg:block overflow-hidden rounded-[24px]" style={{ width: 431, height: 646 }}>
-            {cards.map((src, i) => (
-              <img
-                key={src}
-                src={src}
-                alt={`card ${i + 1}`}
-                className="absolute inset-0 object-cover will-change-transform"
-                style={{
-                  width: 431,
-                  height: 746,
-                  top: -50,
-                  transform: `translateY(${parallaxY}px)`,
-                  opacity: i === active ? 1 : 0,
-                  transition: "opacity 0.8s ease",
-                  zIndex: i === active ? 1 : 0,
-                }}
-              />
-            ))}
+          {/* Right: Scroll-driven stacking cards (desktop) */}
+          <div className="relative hidden lg:block" style={{ width: 431, height: 646 }}>
+            {cards.map((src, i) => {
+              const isActive = i <= active;
+              return (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`card ${i + 1}`}
+                  className="absolute inset-0 rounded-[24px] object-cover will-change-transform"
+                  style={{
+                    width: 431,
+                    height: 646,
+                    opacity: isActive ? 1 : 0,
+                    transform: isActive
+                      ? "translateY(0)"
+                      : "translateY(60px)",
+                    transition: "opacity 0.6s ease, transform 0.6s ease",
+                    zIndex: i,
+                  }}
+                />
+              );
+            })}
           </div>
 
-          {/* Mobile: fade cards with parallax — full width, aspect-ratio locked */}
-          <div className="lg:hidden relative w-full mx-auto overflow-hidden rounded-[20px]" style={{ aspectRatio: "2/3", maxWidth: 260 }}>
-            {cards.map((src, i) => (
-              <img
-                key={src}
-                src={src}
-                alt={`card ${i + 1}`}
-                className="absolute object-cover w-full will-change-transform"
-                style={{
-                  height: "120%",
-                  top: "-10%",
-                  transform: `translateY(${parallaxY}px)`,
-                  opacity: i === active ? 1 : 0,
-                  transition: "opacity 0.8s ease",
-                  zIndex: i === active ? 1 : 0,
-                }}
-              />
-            ))}
+          {/* Mobile: Scroll-driven stacking cards */}
+          <div className="lg:hidden relative w-full mx-auto" style={{ aspectRatio: "2/3", maxWidth: 260 }}>
+            {cards.map((src, i) => {
+              const isActive = i <= active;
+              return (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`card ${i + 1}`}
+                  className="absolute inset-0 rounded-[20px] object-cover w-full h-full will-change-transform"
+                  style={{
+                    opacity: isActive ? 1 : 0,
+                    transform: isActive
+                      ? "translateY(0)"
+                      : "translateY(40px)",
+                    transition: "opacity 0.6s ease, transform 0.6s ease",
+                    zIndex: i,
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
