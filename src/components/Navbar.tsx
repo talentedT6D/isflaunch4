@@ -13,8 +13,10 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
+    let lastY = window.scrollY;
     const handleScroll = () => {
       const trigger = window.innerHeight * 0.4;
       let current = "";
@@ -25,6 +27,10 @@ export default function Navbar() {
         }
       }
       setActiveSection(current);
+
+      const y = window.scrollY;
+      setHidden(y > 150 && y > lastY);
+      lastY = y;
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
@@ -32,7 +38,10 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
+    <nav
+      className="fixed top-0 left-0 right-0 z-50 transition-transform duration-300"
+      style={{ transform: hidden ? "translateY(-100%)" : "translateY(0)" }}
+    >
 
       {/* Black header shape — inlined SVG — desktop only */}
       <div className="absolute top-0 left-0 right-0 pointer-events-none hidden md:block" style={{ height: 310 }}>
