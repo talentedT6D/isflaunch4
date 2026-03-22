@@ -14,10 +14,14 @@ function useNoiseDataUrl(width = 300, height = 300) {
     const d = img.data;
     for (let i = 0; i < d.length; i += 4) {
       const n = Math.random();
-      d[i] = 255;     // R (#FF)
-      d[i + 1] = 0;   // G (#00)
-      d[i + 2] = 0;   // B (#00)
-      d[i + 3] = n * 191; // ~75% max opacity
+      // Gradient from #FF4400 at 40% (27%) to #FAFF00 at 100% (77%)
+      const y = Math.floor((i / 4) / width) / height;
+      const t = Math.min(1, Math.max(0, (y - 0.27) / (0.77 - 0.27)));
+      d[i] = Math.round(255 + (250 - 255) * t);     // R: FF -> FA
+      d[i + 1] = Math.round(68 + (255 - 68) * t);   // G: 44 -> FF
+      d[i + 2] = Math.round(0 + (0 - 0) * t);       // B: 00 -> 00
+      const alpha = 0.4 + (1.0 - 0.4) * t;           // 40% -> 100%
+      d[i + 3] = n * (alpha * 255);
     }
     ctx.putImageData(img, 0, 0);
     setUrl(c.toDataURL());
