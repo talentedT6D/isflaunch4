@@ -103,7 +103,7 @@ export default function Submit() {
               borderRadius: 9999,
               color: "#ff0504",
               border: "1px solid #febc01",
-              background: "#faff00",
+              background: "linear-gradient(90deg, rgba(255,68,0,0.4) 27%, #FAFF00 77%)",
             }}
           >
             {noiseUrl && (
@@ -221,7 +221,7 @@ export default function Submit() {
                 padding: 0,
                 boxSizing: "border-box",
                 border: "1px solid #febc01",
-                background: "#faff00",
+                background: "linear-gradient(90deg, rgba(255,68,0,0.4) 27%, #FAFF00 77%)",
               }}
             >
               {noiseUrl && (
