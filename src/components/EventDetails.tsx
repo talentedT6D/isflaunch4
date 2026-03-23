@@ -235,29 +235,13 @@ export default function EventDetails() {
 
           {/* Mobile venue section */}
           <div className="lg:hidden mt-4">
-            <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer">
+            <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer" className="block w-[75%]">
               <img
                 src="/events/venuedd.png"
                 alt="Venue"
                 className="w-full h-auto object-contain rounded-lg"
               />
             </a>
-
-            <h3
-              className="text-[28px] sm:text-[36px] leading-none uppercase text-white mt-6"
-              style={{ fontFamily: "obviously-extended", fontWeight: 700 }}
-            >
-              BANGALORE<br />INTERNATIONAL<br />CENTRE
-            </h3>
-
-            <div
-              className="mt-4 text-[14px] sm:text-[16px] uppercase text-white/80 leading-relaxed"
-              style={{ fontFamily: "obviously-extended", fontWeight: 300 }}
-            >
-              <p>DATE TBD · 2026</p>
-              <p>VENUE NAME TBD</p>
-              <p>VENUE ADDRESS TBD</p>
-            </div>
           </div>
         </div>
       </div>
