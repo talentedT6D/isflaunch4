@@ -77,7 +77,7 @@ export default function EventDetails() {
 
   return (
     <section>
-      <div className="relative min-h-[100svh] md:h-screen overflow-hidden rounded-b-[52px]">
+      <div className="relative min-h-[100svh] md:h-screen overflow-hidden">
 
         {/* Red radial gradient background */}
         <div
@@ -88,10 +88,10 @@ export default function EventDetails() {
           }}
         />
 
-        {/* Black notch bottom-left */}
+        {/* Black bottom bar — full width, curved top-right */}
         <div
-          className="absolute bottom-0 left-0 bg-black"
-          style={{ width: "36%", height: 72, borderTopRightRadius: 52 }}
+          className="absolute bottom-0 left-0 w-full bg-black"
+          style={{ height: 72, borderTopRightRadius: 52 }}
         />
 
         {/* Content */}
