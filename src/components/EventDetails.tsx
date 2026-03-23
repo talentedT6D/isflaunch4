@@ -91,7 +91,7 @@ export default function EventDetails() {
         {/* Black notch bottom-left */}
         <div
           className="absolute bottom-0 left-0 bg-black"
-          style={{ width: "36%", height: 72, borderTopRightRadius: 60 }}
+          style={{ width: "36%", height: 72, borderTopRightRadius: 52 }}
         />
 
         {/* Content */}
