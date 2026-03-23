@@ -57,7 +57,7 @@ export default function Process() {
           HOW IT WORKS
         </h2>
 
-        {/* Mobile: single column stack */}
+        {/* Mobile: single column stack — smaller font to prevent overflow */}
         <div className="flex flex-col gap-[6px] md:hidden">
           {cards.map((card, i) => (
             <div
