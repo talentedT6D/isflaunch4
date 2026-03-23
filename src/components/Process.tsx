@@ -71,7 +71,7 @@ export default function Process() {
               <div className="relative z-10 p-5 flex flex-col justify-between h-full">
                 <div
                   className="leading-none text-white glow-white uppercase mix-blend-screen"
-                  style={{ fontFamily: "obviously-extended", fontWeight: 600, fontSize: 34 }}
+                  style={{ fontFamily: "obviously-extended", fontWeight: 600, fontSize: 24 }}
                 >
                   <p>{card.num}</p>
                   {card.lines.map((line, j) => <p key={j}>{line}</p>)}
