@@ -121,7 +121,7 @@ export default function Process() {
                   </div>
                   {cards[i].desc && hovered === i && (
                     <p
-                      className="text-[16px] text-white/80 leading-snug max-w-[617px]"
+                      className="text-[16px] text-black leading-snug max-w-[617px]"
                       style={{ fontFamily: "obviously", fontWeight: 300 }}
                     >
                       {cards[i].desc}
@@ -161,7 +161,7 @@ export default function Process() {
                   </div>
                   {cards[i].desc && hovered === i && (
                     <p
-                      className="text-[16px] text-white/80 leading-snug max-w-[617px]"
+                      className="text-[16px] text-black leading-snug max-w-[617px]"
                       style={{ fontFamily: "obviously", fontWeight: 300 }}
                     >
                       {cards[i].desc}
