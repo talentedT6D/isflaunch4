@@ -88,10 +88,22 @@ export default function EventDetails() {
           }}
         />
 
-        {/* Black bottom bar — full width, curved top-right */}
+        {/* Black notch bottom-left */}
         <div
-          className="absolute bottom-0 left-0 w-full bg-black"
-          style={{ height: 72, borderTopRightRadius: 52 }}
+          className="absolute bottom-0 left-0 bg-black"
+          style={{ width: "36%", height: 72, borderTopRightRadius: 52 }}
+        />
+        {/* Inverse corner — smooth red-to-black curve right of notch */}
+        <div
+          className="absolute bottom-0"
+          style={{
+            left: "36%",
+            width: 52,
+            height: 52,
+            background: "transparent",
+            boxShadow: "-52px 0 0 0 #000",
+            borderBottomLeftRadius: 52,
+          }}
         />
 
         {/* Content */}
