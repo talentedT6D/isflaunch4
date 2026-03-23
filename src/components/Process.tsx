@@ -106,9 +106,9 @@ export default function Process() {
                 onMouseLeave={() => setHovered(null)}
               >
                 <img src={cards[i].img} alt="" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="relative z-10 p-6 flex flex-col justify-between h-full mix-blend-screen">
+                <div className="relative z-10 p-6 flex flex-col justify-between h-full">
                   <div
-                    className="leading-none text-white glow-white uppercase"
+                    className="leading-none text-white glow-white uppercase mix-blend-screen"
                     style={{
                       fontFamily: "obviously-extended",
                       fontWeight: 600,
@@ -121,7 +121,7 @@ export default function Process() {
                   </div>
                   {cards[i].desc && hovered === i && (
                     <p
-                      className="text-[16px] text-black leading-snug max-w-[617px]"
+                      className="text-[16px] text-white/80 leading-snug max-w-[617px]"
                       style={{ fontFamily: "obviously", fontWeight: 300 }}
                     >
                       {cards[i].desc}
@@ -146,9 +146,9 @@ export default function Process() {
                 onMouseLeave={() => setHovered(null)}
               >
                 <img src={cards[i].img} alt="" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="relative z-10 p-6 flex flex-col justify-between h-full mix-blend-screen">
+                <div className="relative z-10 p-6 flex flex-col justify-between h-full">
                   <div
-                    className="leading-none text-white glow-white uppercase"
+                    className="leading-none text-white glow-white uppercase mix-blend-screen"
                     style={{
                       fontFamily: "obviously-extended",
                       fontWeight: 600,
@@ -161,7 +161,7 @@ export default function Process() {
                   </div>
                   {cards[i].desc && hovered === i && (
                     <p
-                      className="text-[16px] text-black leading-snug max-w-[617px]"
+                      className="text-[16px] text-white/80 leading-snug max-w-[617px]"
                       style={{ fontFamily: "obviously", fontWeight: 300 }}
                     >
                       {cards[i].desc}
