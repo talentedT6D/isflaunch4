@@ -83,7 +83,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
           className="text-[12px] md:text-[14px] uppercase tracking-[0.3em] text-white/60 mb-3"
           style={{ fontFamily: "obviously-extended", fontWeight: 300 }}
         >
-          Loading experience
+          Scrolling {Math.round(progress)}%
         </p>
 
         {/* Progress bar track */}
