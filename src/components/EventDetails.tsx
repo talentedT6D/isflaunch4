@@ -95,16 +95,23 @@ export default function EventDetails() {
         />
         {/* Inverse corner — smooth red-to-black curve right of notch */}
         <div
-          className="absolute bottom-0"
+          className="absolute overflow-hidden"
           style={{
             left: "36%",
+            bottom: 72,
             width: 52,
             height: 52,
-            background: "transparent",
-            boxShadow: "-52px 0 0 0 #000",
-            borderBottomLeftRadius: 52,
           }}
-        />
+        >
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              borderBottomLeftRadius: 52,
+              boxShadow: "0 52px 0 0 #000",
+            }}
+          />
+        </div>
 
         {/* Content */}
         <div className="relative z-10 h-full flex flex-col px-4 sm:px-8 md:px-12 pt-8 pb-4 max-w-[1440px] mx-auto w-full">
