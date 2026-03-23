@@ -141,8 +141,10 @@ export default function About() {
               className="text-[20px] sm:text-[28px] md:text-[48px] leading-none uppercase text-white glow-white mb-4 md:mb-8"
               style={{ fontFamily: "obviously-extended", fontWeight: 600 }}
             >
-              {`INDIA'S FIRST FESTIVAL BUILT FOR `}
-              <span>THE SCROLL GENERATION</span>
+              INDIA&apos;S FIRST<br />
+              FESTIVAL BUILT<br />
+              FOR THE SCROLL<br />
+              GENERATION
             </h2>
 
             <p
