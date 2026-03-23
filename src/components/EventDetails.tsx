@@ -81,7 +81,7 @@ export default function EventDetails() {
 
         {/* Red radial gradient background */}
         <div
-          className="absolute inset-0 rounded-b-[52px]"
+          className="absolute inset-0 rounded-br-[52px]"
           style={{
             background:
               "radial-gradient(ellipse 120% 100% at 55% 60%, #cc0000 0%, #7a0000 45%, #1a0000 75%, #000 100%)",
