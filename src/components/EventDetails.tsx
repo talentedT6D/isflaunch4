@@ -225,7 +225,7 @@ export default function EventDetails() {
             <div className="hidden lg:flex items-center justify-center overflow-hidden">
               <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer" className="w-full h-full flex items-center justify-center">
                 <img
-                  src="/events%20/event.png"
+                  src="/assets/Group 51.png"
                   alt="Venue"
                   className="max-w-full max-h-full object-contain"
                 />
@@ -235,9 +235,9 @@ export default function EventDetails() {
 
           {/* Mobile venue section */}
           <div className="lg:hidden mt-4 flex justify-end">
-            <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer" className="block w-[75%]">
+            <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer" className="block w-[90%]">
               <img
-                src="/events/venuedd.png"
+                src="/assets/Group 52.png"
                 alt="Venue"
                 className="w-full h-auto object-contain rounded-lg"
               />
