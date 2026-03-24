@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { assets } from "@/lib/assets";
 
-const categories = ["Comedy", "Edits", "Emotional", "Food", "AI"];
+const categories = ["Comedy", "AI", "Edits", "Emotional", "Food"];
 
 const criteriaList = [
   "(1) Placeholder criteria line — e.g. video must be under 3 minutes in length.",
@@ -52,7 +52,7 @@ export default function Criteria() {
             className="text-[15px] md:text-[21px] uppercase text-red glow-red leading-none whitespace-nowrap"
             style={{ fontFamily: "obviously-extended", fontWeight: 300 }}
           >
-            PICK YOUR sTYLE
+            SCROLL YOUR GENRE
           </p>
           <img
             src={assets.decorLines.line4}
@@ -94,10 +94,10 @@ export default function Criteria() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 md:px-6 py-2 md:py-3 rounded-full text-[13px] md:text-[24px] uppercase transition-all cursor-pointer leading-none ${
+                className={`px-4 md:px-6 py-2 md:py-3 rounded-full text-[13px] md:text-[24px] uppercase transition-all cursor-pointer leading-none border-2 ${
                   activeCategory === cat
-                    ? "bg-black text-white"
-                    : "bg-transparent text-black hover:bg-black/10"
+                    ? "bg-black text-white border-black"
+                    : "bg-transparent text-black border-transparent hover:bg-black/10"
                 }`}
                 style={{
                   fontFamily:
