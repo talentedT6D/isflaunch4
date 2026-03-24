@@ -121,7 +121,7 @@ export default function Submit() {
         <div
           style={{ fontFamily: "obviously", fontWeight: 300, fontSize: 18, color: "#faff00", lineHeight: 1.4 }}
         >
-          <p>Submit your film across Comedy, AI, Edits, Emotional, or Food. One submission per category allowed.</p>
+          <p>Submit your film across Comedy, AI, Edits, Emotional, or Food.</p>
         </div>
 
         <div className="flex flex-col gap-3 w-full">
@@ -176,7 +176,7 @@ export default function Submit() {
                 }}
               />
             )}
-            <span className="relative z-[1]">VIEW CRITERIA</span>
+            <span className="relative z-[1]">VIEW CATEGORIES</span>
           </a>
         </div>
       </div>
@@ -234,8 +234,6 @@ export default function Submit() {
             style={{ fontFamily: "obviously", fontWeight: 300, fontSize: 20, color: "#faff00" }}
           >
             <p>Submit your film across Comedy, AI, Edits, Emotional, or Food.</p>
-            <br />
-            <p>One submission per category allowed.</p>
           </div>
 
           <div className="flex gap-4">
@@ -296,7 +294,7 @@ export default function Submit() {
                   }}
                 />
               )}
-              <span className="relative z-[1]">VIEW CRITERIA</span>
+              <span className="relative z-[1]">VIEW CATEGORIES</span>
             </a>
           </div>
         </div>
