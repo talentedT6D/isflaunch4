@@ -2,16 +2,32 @@
 
 import { useEffect, useState, useRef } from "react";
 
+const DURATION = 7000; // 7 seconds
+
 export default function Preloader({ onComplete }: { onComplete: () => void }) {
   const [exiting, setExiting] = useState(false);
   const [done, setDone] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout>>(null);
+  const [percent, setPercent] = useState(0);
+  const startRef = useRef<number>(0);
+  const rafRef = useRef<number>(0);
 
   useEffect(() => {
-    timerRef.current = setTimeout(() => {
-      setExiting(true);
-    }, 5000);
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+    startRef.current = performance.now();
+
+    const tick = (now: number) => {
+      const elapsed = now - startRef.current;
+      const progress = Math.min(elapsed / DURATION, 1);
+      setPercent(Math.floor(progress * 100));
+
+      if (progress < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        setExiting(true);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
   }, []);
 
   useEffect(() => {
@@ -27,7 +43,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] bg-black"
+      className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center"
       style={{
         opacity: exiting ? 0 : 1,
         transition: "opacity 0.8s ease",
@@ -39,10 +55,28 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
         muted
         loop
         playsInline
-        className="w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/videos/preloader.mp4" type="video/mp4" />
+        <source src="/assets/Loading screen 02 (without text).mp4" type="video/mp4" />
       </video>
+
+      {/* Scrolling percentage text */}
+      <div
+        className="absolute bottom-[18%] left-1/2 -translate-x-1/2 flex items-center gap-3"
+        style={{
+          fontFamily: "obviously-extended",
+          fontWeight: 300,
+          fontSize: 18,
+          color: "#ffffff",
+          letterSpacing: "0.2em",
+          textTransform: "uppercase",
+        }}
+      >
+        <span>SCROLLING</span>
+        <span style={{ fontVariantNumeric: "tabular-nums", minWidth: "3.5ch", textAlign: "right" }}>
+          {percent}%
+        </span>
+      </div>
     </div>
   );
 }
