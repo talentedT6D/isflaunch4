@@ -185,7 +185,7 @@ export default function Submit() {
       <div className="hidden md:flex max-w-[1440px] mx-auto items-center" style={{ minHeight: 420 }}>
 
         {/* LEFT: Giant text — absolutely positioned per Figma x:14 */}
-        <div className="flex-1 min-w-0 relative self-stretch">
+        <div className="flex-1 min-w-0 relative self-stretch overflow-hidden">
           <p
             className="absolute uppercase whitespace-nowrap leading-[0.82]"
             style={{

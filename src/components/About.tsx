@@ -254,7 +254,7 @@ export default function About() {
             {/* Left / Right arrows */}
             <button
               onClick={mobilePrev}
-              className="absolute top-1/2 -left-10 -translate-y-1/2 z-10"
+              className="absolute top-1/2 -left-8 -translate-y-1/2 z-10"
               aria-label="Previous card"
             >
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#faff00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -263,7 +263,7 @@ export default function About() {
             </button>
             <button
               onClick={mobileNext}
-              className="absolute top-1/2 -right-10 -translate-y-1/2 z-10"
+              className="absolute top-1/2 -right-8 -translate-y-1/2 z-10"
               aria-label="Next card"
             >
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#faff00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
