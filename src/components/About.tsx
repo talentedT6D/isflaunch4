@@ -141,10 +141,11 @@ export default function About() {
               className="text-[20px] sm:text-[28px] md:text-[48px] leading-none uppercase text-white glow-white mb-4 md:mb-8"
               style={{ fontFamily: "obviously-extended", fontWeight: 600 }}
             >
-              INDIA&apos;S FIRST<br />
-              FESTIVAL BUILT<br />
-              FOR THE SCROLL<br />
-              GENERATION
+              HISTORY&apos;S MOST<br />
+              WATCHED VIDEO<br />
+              FORMAT -<br />
+              NOW IN<br />
+              THEATRES
             </h2>
 
             <p
@@ -155,17 +156,23 @@ export default function About() {
                 letterSpacing: "-0.5px",
               }}
             >
-              Short placeholder copy — 2–3 lines about what ISF is, who
-              it&apos;s for, and why it matters. Describe the mission of
-              celebrating India&apos;s most exciting short-form filmmakers across
-              comedy, AI, edits, emotional storytelling, and food content.
+              <span style={{ fontFamily: "obviously", fontWeight: 700 }}>Indian Scroll Festival (ISF)</span> Is A First-Of-Its-Kind Vertical Film
+              Festival Celebrating Short-Form Content By Giving It The Big
+              Screen It Deserves. It&apos;s For Every Creator Chasing That One Reel
+              That Blows Up, And For Every Scroller Who Believes Reels Are The
+              New Cinema.
+              <br /><br />
+              &nbsp;&nbsp;&nbsp;&nbsp;The Final Shortlists Get Their Entries Screened At The
+              Bangalore International Centre, Where Winners Are Decided By A
+              Jury Panel Along With Live Audience Voting On The Day Of The
+              Event.
             </p>
 
             <p
               className="text-[22px] sm:text-[32px] md:text-[50px] lg:text-[85px] leading-[0.79] uppercase text-white mb-2"
               style={{ fontFamily: "obviously-condensed", fontWeight: 100 }}
             >
-              500+ submissions &middot; 12 judges
+              THE INTERNET&apos;S FAVOURITE JUDGES +
             </p>
 
             <p className="uppercase text-white leading-[0.79]">
