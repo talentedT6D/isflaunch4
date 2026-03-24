@@ -202,10 +202,10 @@ body {
 }
 
 /* Email popup entrance */
-@keyframes popIn {
-  from { opacity: 0; transform: scale(0.95) translateY(8px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-.pop-in {
-  animation: popIn 0.3s ease-out;
+.slide-up {
+  animation: slideUp 0.4s ease-out;
 }
