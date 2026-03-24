@@ -15,14 +15,14 @@ export default function Judges() {
       >
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center mb-5 md:mb-8 gap-2 md:gap-0">
-          <div className="flex items-center">
+          <div className="flex items-center flex-1">
             <p
               className="text-[14px] md:text-[18px] uppercase text-red glow-red leading-none whitespace-nowrap shrink-0 tracking-[0.18em]"
               style={{ fontFamily: "obviously-extended", fontWeight: 300 }}
             >
               DOOMSCROLL WITH
             </p>
-            <div className="mx-4 md:mx-6 flex-1 h-px md:w-auto" style={{ background: "#ff0000" }} />
+            <div className="mx-4 md:mx-6 flex-1 h-px" style={{ background: "#ff0000" }} />
           </div>
           <h2
             className="text-white text-[22px] sm:text-[28px] md:text-[64px] uppercase leading-none whitespace-nowrap shrink-0"
