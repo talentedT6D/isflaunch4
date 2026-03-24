@@ -13,7 +13,7 @@ export default function EmailPopup() {
   const timerRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   useEffect(() => {
-    timerRef.current = setTimeout(() => setVisible(true), 20000);
+    timerRef.current = setTimeout(() => setVisible(true), 16000);
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
   }, []);
 
