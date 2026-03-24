@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { createClient } from "@supabase/supabase-js";
 
-const GOOGLE_SHEET_URL =
-  "https://script.google.com/macros/s/AKfycbzbaxUrhZIBw_DFbuQtiMQBYB5Z8Fexpc1qKql0zx16GyHoNNE1DwUminpOXFZExHkHcw/exec";
+const supabase = createClient(
+  "https://odomuvbvmhitwxmyjfcn.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kb211dmJ2bWhpdHd4bXlqZmNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzNTUwNTUsImV4cCI6MjA4OTkzMTA1NX0.zhWhPosr177zdfpDpFX1JTXDbgc-yGa3GyFrbED1ztM"
+);
 
 export default function EmailPopup() {
   const [visible, setVisible] = useState(false);
@@ -34,9 +37,12 @@ export default function EmailPopup() {
 
     setStatus("sending");
     try {
-      await fetch(`${GOOGLE_SHEET_URL}?email=${encodeURIComponent(email.trim())}`, {
-        mode: "no-cors",
-      });
+      const { error } = await supabase
+        .from("emails")
+        .insert({ email: email.trim() });
+
+      if (error) throw error;
+
       setStatus("sent");
       setTimeout(() => handleDismiss(), 2000);
     } catch {
