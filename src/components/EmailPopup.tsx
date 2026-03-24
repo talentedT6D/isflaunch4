@@ -24,6 +24,15 @@ export default function EmailPopup() {
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
   }, []);
 
+  useEffect(() => {
+    if (visible && !dismissed) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [visible, dismissed]);
+
   const handleDismiss = () => {
     setDismissed(true);
     if (typeof window !== "undefined") {
@@ -53,8 +62,8 @@ export default function EmailPopup() {
   if (dismissed || !visible) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9998] w-[340px] max-w-[calc(100vw-3rem)] slide-up">
-      <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-5 relative">
+    <div className="fixed inset-0 z-[9998] flex items-center justify-center px-4" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+      <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-5 relative w-full max-w-[340px] slide-up">
         {/* Close button */}
         <button
           onClick={handleDismiss}
