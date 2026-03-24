@@ -12,6 +12,7 @@ import Submit from "@/components/Submit";
 import Footer from "@/components/Footer";
 import ScrollAnimator from "@/components/ScrollAnimator";
 import Preloader from "@/components/Preloader";
+import EmailPopup from "@/components/EmailPopup";
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -55,6 +56,7 @@ export default function Home() {
           </div>
         </main>
         <Footer />
+        <EmailPopup />
       </div>
     </>
   );
