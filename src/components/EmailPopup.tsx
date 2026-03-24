@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 
 const GOOGLE_SHEET_URL =
-  "https://script.google.com/macros/s/AKfycbzNvFJFCqGIWlO6S1yUOwkwMEaUlPZ5SInKee3Xv4VXkQR9mMvp1ss6yOASwJM_5ONUNg/exec";
+  "https://script.google.com/macros/s/AKfycbzbaxUrhZIBw_DFbuQtiMQBYB5Z8Fexpc1qKql0zx16GyHoNNE1DwUminpOXFZExHkHcw/exec";
 
 export default function EmailPopup() {
   const [visible, setVisible] = useState(false);
