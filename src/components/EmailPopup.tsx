@@ -34,11 +34,12 @@ export default function EmailPopup() {
 
     setStatus("sending");
     try {
+      const formData = new URLSearchParams();
+      formData.append("email", email.trim());
       await fetch(GOOGLE_SHEET_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim() }),
+        body: formData,
       });
       setStatus("sent");
       setTimeout(() => handleDismiss(), 2000);
