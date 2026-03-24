@@ -1,10 +1,10 @@
 export default function Judges() {
-  const judges = [
-    { src: "/jury/Asset%201%404x-8.png", title: "LMAO-ING SOON", category: "Comedy" },
-    { src: "/jury/Asset%202%404x-8.png", title: "TOUCHING KIDNEYS SOON", category: "Emotional" },
-    { src: "/jury/Asset%203%404x-8.png", title: "COOKING SOON", category: "Food" },
-    { src: "/jury/Asset%204%404x-8.png", title: "GENERATING", category: "AI" },
-    { src: "/jury/Asset%205%404x-8.png", title: "EXPORTING SOON", category: "Edits" },
+  const images = [
+    "/jury/Asset%201%404x-8.png",
+    "/jury/Asset%202%404x-8.png",
+    "/jury/Asset%203%404x-8.png",
+    "/jury/Asset%204%404x-8.png",
+    "/jury/Asset%205%404x-8.png",
   ];
 
   return (
@@ -34,46 +34,18 @@ export default function Judges() {
 
         {/* Mobile: 2-column grid */}
         <div className="md:hidden grid grid-cols-2 gap-2">
-          {judges.map(({ src, title, category }, i) => (
+          {images.map((src, i) => (
             <div key={i} className="relative rounded-[12px] overflow-hidden" style={{ aspectRatio: "3/4" }}>
               <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute bottom-0 left-0 right-0 p-3">
-                <p
-                  className="text-white text-[12px] uppercase leading-tight font-bold"
-                  style={{ fontFamily: "obviously-compressed", fontWeight: 700 }}
-                >
-                  {title}
-                </p>
-                <p
-                  className="text-white text-[11px] italic"
-                  style={{ fontFamily: "obviously", fontWeight: 300 }}
-                >
-                  {category}
-                </p>
-              </div>
             </div>
           ))}
         </div>
 
         {/* Desktop: all 5 in one flex row */}
         <div className="hidden md:grid grid-cols-5 gap-4">
-          {judges.map(({ src, title, category }, i) => (
+          {images.map((src, i) => (
             <div key={i} className="relative rounded-[16px] overflow-hidden" style={{ aspectRatio: "3/4" }}>
               <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute bottom-0 left-0 right-0 p-4">
-                <p
-                  className="text-white text-[18px] lg:text-[22px] uppercase leading-tight"
-                  style={{ fontFamily: "obviously-compressed", fontWeight: 700 }}
-                >
-                  {title}
-                </p>
-                <p
-                  className="text-white text-[14px] lg:text-[16px] italic"
-                  style={{ fontFamily: "obviously", fontWeight: 300 }}
-                >
-                  {category}
-                </p>
-              </div>
             </div>
           ))}
         </div>
