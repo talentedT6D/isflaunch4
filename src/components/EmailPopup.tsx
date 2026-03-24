@@ -34,12 +34,8 @@ export default function EmailPopup() {
 
     setStatus("sending");
     try {
-      const formData = new URLSearchParams();
-      formData.append("email", email.trim());
-      await fetch(GOOGLE_SHEET_URL, {
-        method: "POST",
+      await fetch(`${GOOGLE_SHEET_URL}?email=${encodeURIComponent(email.trim())}`, {
         mode: "no-cors",
-        body: formData,
       });
       setStatus("sent");
       setTimeout(() => handleDismiss(), 2000);
