@@ -56,8 +56,9 @@ export default function Home() {
           </div>
         </main>
         <Footer />
-        <EmailPopup />
       </div>
+
+      <EmailPopup />
     </>
   );
 }
