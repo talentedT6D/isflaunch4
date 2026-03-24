@@ -53,7 +53,7 @@ export default function EmailPopup() {
   if (dismissed || !visible) return null;
 
   return (
-    <div className="fixed bottom-6 left-6 z-[9998] w-[340px] max-w-[calc(100vw-3rem)] slide-up">
+    <div className="fixed bottom-6 right-6 z-[9998] w-[340px] max-w-[calc(100vw-3rem)] slide-up">
       <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-5 relative">
         {/* Close button */}
         <button
