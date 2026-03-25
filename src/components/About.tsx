@@ -141,11 +141,7 @@ export default function About() {
               className="text-[20px] sm:text-[28px] md:text-[48px] leading-none uppercase text-white glow-white mb-4 md:mb-8"
               style={{ fontFamily: "obviously-extended", fontWeight: 600 }}
             >
-              HISTORY&apos;S MOST<br />
-              WATCHED VIDEO<br />
-              FORMAT -<br />
-              NOW IN<br />
-              THEATRES
+              HISTORY&apos;S MOST WATCHED VIDEO FORMAT- NOW IN THEATRES
             </h2>
 
             <p
@@ -156,7 +152,7 @@ export default function About() {
                 letterSpacing: "-0.5px",
               }}
             >
-              <span style={{ fontFamily: "obviously", fontWeight: 700 }}>Indian Scroll Festival (ISF)</span> is India&apos;s first vertical film
+              Indian Scroll Festival (ISF) is India&apos;s first vertical film
               festival celebrating short-form content in its full glory.
               ISF is here to turn creators from posting into premiering.
               It&apos;s about time the 9:16 feeds we share become a
