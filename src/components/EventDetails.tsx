@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 
 const timelineItems = [
-  { label: "AWARDS NIGHT",        date: "DD/MM", day: "DAY" },
-  { label: "SUBMISSIONS OPEN",    date: "DD/MM", day: "DAY" },
-  { label: "SUBMISSION DEADLINE", date: "DD/MM", day: "DAY" },
-  { label: "SHORTLIST ANNOUNCED", date: "DD/MM", day: "DAY" },
-  { label: "AWARDS NIGHT",        date: "DD/MM", day: "DAY" },
+  { label: "AWARDS NIGHT",        date: "16/05", day: "SAT" },
+  { label: "SUBMISSIONS OPEN",    date: "01/04", day: "WED" },
+  { label: "SUBMISSION DEADLINE", date: "23/04", day: "THU" },
+  { label: "SHORTLIST ANNOUNCED", date: "01/05", day: "FRI" },
+  { label: "AWARDS NIGHT",        date: "16/05", day: "SAT" },
 ];
 
 // Desktop sizes
