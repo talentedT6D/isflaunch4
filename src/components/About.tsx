@@ -169,13 +169,13 @@ export default function About() {
 
             <p className="uppercase text-white leading-[0.79]">
               <span
-                className="text-[40px] sm:text-[64px] md:text-[160px] lg:text-[274px]"
+                className="text-[32px] sm:text-[48px] md:text-[80px] lg:text-[120px]"
                 style={{ fontFamily: "Roboto Condensed", fontWeight: 300 }}
               >
                 &#8377;
               </span>
               <span
-                className="text-[40px] sm:text-[64px] md:text-[160px] lg:text-[274px]"
+                className="text-[32px] sm:text-[48px] md:text-[80px] lg:text-[120px]"
                 style={{ fontFamily: "obviously-compressed", fontWeight: 700 }}
               >
                 800,000 IN PRIZES{" "}
