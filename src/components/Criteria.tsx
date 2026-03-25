@@ -5,12 +5,37 @@ import { assets } from "@/lib/assets";
 
 const categories = ["Comedy", "AI", "Edits", "Emotional", "Food"];
 
-const criteriaList = [
-  "(1) Placeholder criteria line — e.g. video must be under 3 minutes in length.",
-  "(2) Placeholder criteria line — e.g. originally created content only, no reposts.",
-  "(3) Placeholder criteria line — e.g. must have been published/created in 2025–2026.",
-  "(4) Placeholder criteria line — add more specific rules per category as needed.",
-];
+const criteriaByCategory: Record<string, string[]> = {
+  Comedy: [
+    "(1) Content should make people laugh. That's it.",
+    "(2) Skits, brainrot, elite humour, stand-up,",
+    "(3) Content created must be unpublished and original.",
+    "(4) Max duration – 2 minutes Max size – 200mb.",
+  ],
+  AI: [
+    "(1) Placeholder criteria line — e.g. video must be under 3 minutes in length.",
+    "(2) Placeholder criteria line — e.g. originally created content only, no reposts.",
+    "(3) Placeholder criteria line — e.g. must have been published/created in 2025–2026.",
+    "(4) Placeholder criteria line — add more specific rules per category as needed.",
+  ],
+  Edits: [
+    "(1) Any edit that makes people go 🔥🔥🔥",
+    "(2) Sports, music, couples, anime, lifestyle. No category is off limits.",
+    "(3) Content created must be unpublished and original.",
+    "(4) Max duration – 1 minute, Max size – 200mb.",
+  ],
+  Emotional: [
+    "(1) Help us get in touch with our feelings with your entry.",
+    "(2) Nostalgia, happiness, sadness, heck create an emotion.",
+    "(3) Content created must be unpublished and original.",
+    "(4) Max duration – 2 minutes, Max size – 200mb.",
+  ],
+  Food: [
+    "(1) Basically, food porn. Just make people hungry.",
+    "(2) Content created must be unpublished and original.",
+    "(3) Max duration – 1 minute, Max size – 200mb.",
+  ],
+};
 
 function useNoiseCanvas(width = 300, height = 300) {
   const [dataUrl, setDataUrl] = useState("");
@@ -114,7 +139,7 @@ export default function Criteria() {
 
           {/* Criteria rows */}
           <div className="relative z-10 space-y-2 md:space-y-3">
-            {criteriaList.map((item, index) => (
+            {(criteriaByCategory[activeCategory] ?? []).map((item, index) => (
               <div
                 key={index}
                 className="border border-black bg-transparent flex items-start w-full"
@@ -143,7 +168,7 @@ export default function Criteria() {
             className="text-[13px] md:text-[24px] uppercase text-white leading-none"
             style={{ fontFamily: "obviously-narrow", fontWeight: 400 }}
           >
-            Date TBD · 11:59 PM IST
+            23 April · 11:59 PM IST
           </span>
         </div>
       </div>
