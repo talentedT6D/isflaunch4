@@ -7,7 +7,7 @@ const navLinks = [
   { label: "HOW IT WORKS", href: "#process" },
   { label: "JUDGES",       href: "#judges" },
   { label: "CRITERIA",     href: "#criteria" },
-  { label: "SUBMIT FILM",  href: "#submit" },
+  { label: "SUBMIT FILM",  href: "https://www.scrollfestival.com/" },
 ];
 
 export default function Navbar() {
@@ -82,6 +82,7 @@ export default function Navbar() {
           <a
             key={link.href}
             href={link.href}
+            {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             className={`nav-link uppercase leading-none whitespace-nowrap${activeSection === link.href ? " active" : ""}${link.label === "SUBMIT FILM" ? " nav-link-submit" : ""}`}
           >
             {link.label}
@@ -118,6 +119,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
+              {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               onClick={() => setOpen(false)}
               className={`flex items-center py-4 text-[22px] uppercase border-b border-white/8 last:border-0 ${link.label === "SUBMIT FILM" ? "text-[#faff00]" : "text-white"}`}
               style={{

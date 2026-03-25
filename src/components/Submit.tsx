@@ -126,7 +126,9 @@ export default function Submit() {
 
         <div className="flex flex-col gap-3 w-full">
           <a
-            href="#"
+            href="https://www.scrollfestival.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center justify-center uppercase w-full relative overflow-hidden"
             style={{
               fontFamily: "obviously-narrow",
@@ -238,7 +240,9 @@ export default function Submit() {
 
           <div className="flex gap-4">
             <a
-              href="#"
+              href="https://www.scrollfestival.com/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="whitespace-nowrap inline-flex items-center justify-center uppercase relative overflow-hidden"
               style={{
                 fontFamily: "obviously-narrow",
