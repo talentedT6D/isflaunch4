@@ -156,16 +156,12 @@ export default function About() {
                 letterSpacing: "-0.5px",
               }}
             >
-              <span style={{ fontFamily: "obviously", fontWeight: 700 }}>Indian Scroll Festival (ISF)</span> Is A First-Of-Its-Kind Vertical Film
-              Festival Celebrating Short-Form Content By Giving It The Big
-              Screen It Deserves. It&apos;s For Every Creator Chasing That One Reel
-              That Blows Up, And For Every Scroller Who Believes Reels Are The
-              New Cinema.
-              <br /><br />
-              &nbsp;&nbsp;&nbsp;&nbsp;The Final Shortlists Get Their Entries Screened At The
-              Bangalore International Centre, Where Winners Are Decided By A
-              Jury Panel Along With Live Audience Voting On The Day Of The
-              Event.
+              <span style={{ fontFamily: "obviously", fontWeight: 700 }}>Indian Scroll Festival (ISF)</span> is India&apos;s first vertical film
+              festival celebrating short-form content in its full glory.
+              ISF is here to turn creators from posting into premiering.
+              It&apos;s about time the 9:16 feeds we share become a
+              collective cinematic experience. Experience the scroll
+              culture on the big screen.
             </p>
 
             <p
@@ -186,7 +182,7 @@ export default function About() {
                 className="text-[40px] sm:text-[64px] md:text-[160px] lg:text-[274px]"
                 style={{ fontFamily: "obviously-compressed", fontWeight: 700 }}
               >
-                X in prizes{" "}
+                800,000 IN PRIZES{" "}
               </span>
             </p>
           </div>
