@@ -11,7 +11,7 @@ const supabase = createClient(
 export default function EmailPopup() {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const timerRef = useRef<ReturnType<typeof setTimeout>>(null);
 
@@ -42,13 +42,13 @@ export default function EmailPopup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.trim()) return;
+    if (!phone.trim()) return;
 
     setStatus("sending");
     try {
       const { error } = await supabase
-        .from("emails")
-        .insert({ email: email.trim() });
+        .from("phone_numbers")
+        .insert({ phone: phone.trim() });
 
       if (error) throw error;
 
@@ -78,7 +78,7 @@ export default function EmailPopup() {
           Want to apply but don&apos;t have a video ready?
         </h3>
         <p className="text-[13px] text-gray-500 mb-4">
-          Sign up to stay updated.
+          Drop your number, we&apos;ll remind you before the deadline.
         </p>
 
         {status === "sent" ? (
@@ -86,11 +86,11 @@ export default function EmailPopup() {
         ) : (
           <form onSubmit={handleSubmit} className="flex gap-2">
             <input
-              type="email"
+              type="tel"
               required
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your phone number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="flex-1 min-w-0 px-3 py-2 text-[13px] rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 outline-none focus:border-gray-400 transition-colors"
             />
             <button
