@@ -13,10 +13,10 @@ const criteriaByCategory: Record<string, string[]> = {
     "(4) Max duration – 2 minutes Max size – 200mb.",
   ],
   AI: [
-    "(1) Placeholder criteria line — e.g. video must be under 3 minutes in length.",
-    "(2) Placeholder criteria line — e.g. originally created content only, no reposts.",
-    "(3) Placeholder criteria line — e.g. must have been published/created in 2025–2026.",
-    "(4) Placeholder criteria line — add more specific rules per category as needed.",
+    "(1) AI content that's worth the 2 sticks of RAM.",
+    "(2) At least 50% of your entry needs to be generated",
+    "(3) Content created must be unpublished and original.",
+    "(4) Max duration – 2 minutes, Max size – 200mb.",
   ],
   Edits: [
     "(1) Any edit that makes people go 🔥🔥🔥",
