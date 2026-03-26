@@ -178,7 +178,7 @@ export default function About() {
                 className="text-[40px] sm:text-[64px] md:text-[160px] lg:text-[230px]"
                 style={{ fontFamily: "obviously-compressed", fontWeight: 700 }}
               >
-                800,000 IN PRIZES{" "}
+                8 LAKHS IN PRIZES{" "}
               </span>
             </p>
           </div>
