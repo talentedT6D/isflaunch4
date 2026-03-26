@@ -20,7 +20,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Indian Scroll Festival",
   icons: {
-    icon: "/assets/logo.png",
+    icon: "/favicon.jpg",
   },
   description:
     "India's first festival built for the scroll generation. Submit your short-form films across Comedy, AI, Edits, Emotional, and Food categories.",
