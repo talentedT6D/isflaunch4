@@ -1,10 +1,10 @@
 export default function Judges() {
   const images = [
-    "/jury/Asset%201%404x-8.png",
-    "/jury/Asset%202%404x-8.png",
-    "/jury/Asset%203%404x-8.png",
-    "/jury/Asset%204%404x-8.png",
-    "/jury/Asset%205%404x-8.png",
+    "/jury/judge%201%404x-8.png",
+    "/jury/judge%202%404x-8.png",
+    "/jury/judge%203%404x-8.png",
+    "/jury/judge%204%404x-8.png",
+    "/jury/judge%205%404x-8.png",
   ];
 
   return (
