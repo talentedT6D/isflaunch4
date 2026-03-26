@@ -228,7 +228,7 @@ export default function EventDetails() {
             <div className="hidden lg:flex items-center justify-center overflow-hidden">
               <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer" className="w-full h-full flex items-center justify-center">
                 <img
-                  src="/assets/Group 51.png"
+                  src="/assets/Gallery%20Desktop.png"
                   alt="Venue"
                   className="max-w-full max-h-full object-contain"
                 />
@@ -240,7 +240,7 @@ export default function EventDetails() {
           <div className="lg:hidden mt-4 flex justify-center">
             <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer" className="block w-[90%]">
               <img
-                src="/assets/Group 52.png"
+                src="/assets/Gallery%20Mobile.png"
                 alt="Venue"
                 className="w-full h-auto object-contain rounded-lg"
               />
