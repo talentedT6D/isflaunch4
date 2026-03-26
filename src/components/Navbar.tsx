@@ -7,7 +7,7 @@ const navLinks = [
   { label: "HOW IT WORKS", href: "#process" },
   { label: "JUDGES",       href: "#judges" },
   { label: "CRITERIA",     href: "#criteria" },
-  { label: "SUBMIT FILM",  href: "https://www.scrollfestival.com/" },
+  { label: "SUBMIT FILM",  href: "https://payment.indianscrollfestival.com/" },
 ];
 
 export default function Navbar() {
