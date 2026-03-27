@@ -14,10 +14,12 @@ import ScrollAnimator from "@/components/ScrollAnimator";
 import Preloader from "@/components/Preloader";
 import EmailPopup from "@/components/EmailPopup";
 import FaqPopup from "@/components/FaqPopup";
+import TermsPopup from "@/components/TermsPopup";
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
   const [faqOpen, setFaqOpen] = useState(false);
+  const [termsOpen, setTermsOpen] = useState(false);
 
   const handlePreloaderComplete = useCallback(() => {
     setLoaded(true);
@@ -57,11 +59,12 @@ export default function Home() {
             <Submit />
           </div>
         </main>
-        <Footer />
+        <Footer onTermsClick={() => setTermsOpen(true)} />
       </div>
 
       <EmailPopup />
       {faqOpen && <FaqPopup onClose={() => setFaqOpen(false)} />}
+      {termsOpen && <TermsPopup onClose={() => setTermsOpen(false)} />}
     </>
   );
 }
