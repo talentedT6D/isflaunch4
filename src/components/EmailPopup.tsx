@@ -88,7 +88,7 @@ export default function EmailPopup() {
             <input
               type="tel"
               required
-              placeholder="Enter your phone number"
+              placeholder="Phone number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="flex-1 min-w-0 px-3 py-2 text-[13px] rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 outline-none focus:border-gray-400 transition-colors"

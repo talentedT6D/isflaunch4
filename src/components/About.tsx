@@ -141,7 +141,7 @@ export default function About() {
               className="text-[20px] sm:text-[28px] md:text-[48px] leading-none uppercase text-white glow-white mb-4 md:mb-8"
               style={{ fontFamily: "obviously-extended", fontWeight: 600 }}
             >
-              HISTORY&apos;S MOST WATCHED VIDEO FORMAT- NOW IN THEATRES
+              HISTORY&apos;S MOST WATCHED VIDEO FORMAT - NOW IN THEATRES
             </h2>
 
             <p
