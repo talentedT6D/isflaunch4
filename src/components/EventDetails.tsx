@@ -237,7 +237,7 @@ export default function EventDetails() {
           </div>
 
           {/* Mobile venue section */}
-          <div className="lg:hidden mt-4 flex justify-center">
+          <div className="lg:hidden mt-4 mb-5 flex justify-center">
             <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer" className="block w-[90%]">
               <img
                 src="/assets/Gallery%20Mobile.png"
