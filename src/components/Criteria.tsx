@@ -10,7 +10,7 @@ const criteriaByCategory: Record<string, string[]> = {
     "(1) Content should make people laugh. That's it.",
     "(2) Skits, brainrot, elite humour, stand-up,",
     "(3) Content created must be unpublished and original.",
-    "(4) Max duration – 2 minutes Max size – 200mb.",
+    "(4) Max duration – 2 minutes, Max size – 200mb.",
   ],
   AI: [
     "(1) AI content that's worth the 2 sticks of RAM.",
