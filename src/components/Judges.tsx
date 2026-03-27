@@ -56,9 +56,9 @@ export default function Judges() {
           style={{ fontFamily: "obviously", fontWeight: 300, color: "rgba(255,255,255,0.4)" }}
         >
           More judges coming soon &bull; Have a suggestion?{" "}
-          <span className="underline text-white" style={{ fontWeight: 400 }}>
+          <a href="https://www.instagram.com/indianscrollfestival/" target="_blank" rel="noopener noreferrer" className="underline text-white" style={{ fontWeight: 400 }}>
             Tag us on stories
-          </span>
+          </a>
         </p>
       </div>
     </section>
