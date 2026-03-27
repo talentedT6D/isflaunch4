@@ -10,7 +10,8 @@ const cards = [
   { num: "04.", lines: ["STAGE", "SCROLL"],          img: assets.process.card4, desc: "Winners per category are announced live on stage and awarded prizes and recognition." },
 ];
 
-// Cards 0,1 = left column (top, bottom) | Cards 2,3 = right column (top, bottom)
+// Mobile order: 01, 02, 03, 04 (sequential by number)
+const mobileOrder = [0, 2, 1, 3];
 const NORMAL_H   = 219;
 const EXPANDED_H = 300;
 const SHRUNK_H   = 124;   // 219*2 - 300 = 138, but user specified 124 — gap covers delta
@@ -59,9 +60,9 @@ export default function Process() {
 
         {/* Mobile: single column stack — smaller font to prevent overflow */}
         <div className="flex flex-col gap-[6px] md:hidden">
-          {cards.map((card, i) => (
+          {mobileOrder.map((idx) => { const card = cards[idx]; return (
             <div
-              key={i}
+              key={idx}
               className="relative w-full rounded-[12px] overflow-hidden"
               style={{ height: card.desc ? 220 : 190 }}
             >
@@ -86,7 +87,7 @@ export default function Process() {
                 )}
               </div>
             </div>
-          ))}
+          ); })}
         </div>
 
         {/* Desktop: 2-column grid — cards expand/shrink vertically only */}
