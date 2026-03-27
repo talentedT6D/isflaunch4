@@ -7,7 +7,7 @@ const navLinks = [
   { label: "HOW IT WORKS", href: "#process" },
   { label: "JUDGES",       href: "#judges" },
   { label: "CRITERIA",     href: "#criteria" },
-  { label: "FAQ",           href: "#faq" },
+  { label: "FAQs",           href: "#faq" },
   { label: "SUBMIT FILM",  href: "https://payment.indianscrollfestival.com/" },
 ];
 
@@ -84,10 +84,10 @@ export default function Navbar({ onFaqClick }: { onFaqClick?: () => void }) {
         {navLinks.map((link) => (
           <a
             key={link.label}
-            href={link.label === "FAQ" ? undefined : link.href}
+            href={link.label === "FAQs" ? undefined : link.href}
             {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            onClick={link.label === "FAQ" ? (e) => { e.preventDefault(); onFaqClick?.(); } : undefined}
-            className={`nav-link uppercase leading-none whitespace-nowrap cursor-pointer${activeSection === link.href ? " active" : ""}${link.label === "SUBMIT FILM" ? " nav-link-submit" : ""}${link.label === "FAQ" ? " nav-link-faq" : ""}`}
+            onClick={link.label === "FAQs" ? (e) => { e.preventDefault(); onFaqClick?.(); } : undefined}
+            className={`nav-link uppercase leading-none whitespace-nowrap cursor-pointer${activeSection === link.href ? " active" : ""}${link.label === "SUBMIT FILM" ? " nav-link-submit" : ""}${link.label === "FAQs" ? " nav-link-faq" : ""}`}
           >
             {link.label}
           </a>
@@ -122,16 +122,16 @@ export default function Navbar({ onFaqClick }: { onFaqClick?: () => void }) {
           {navLinks.map((link) => (
             <a
               key={link.label}
-              href={link.label === "FAQ" ? undefined : link.href}
+              href={link.label === "FAQs" ? undefined : link.href}
               {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               onClick={() => {
-                if (link.label === "FAQ") { onFaqClick?.(); }
+                if (link.label === "FAQs") { onFaqClick?.(); }
                 setOpen(false);
               }}
-              className={`flex items-center py-4 text-[22px] uppercase border-b border-white/8 last:border-0 cursor-pointer ${link.label === "SUBMIT FILM" ? "text-[#faff00]" : link.label === "FAQ" ? "text-[#ff0000]" : "text-white"}`}
+              className={`flex items-center py-4 text-[22px] uppercase border-b border-white/8 last:border-0 cursor-pointer ${link.label === "SUBMIT FILM" ? "text-[#faff00]" : link.label === "FAQs" ? "text-[#ff0000]" : "text-white"}`}
               style={{
-                fontFamily: (link.label === "SUBMIT FILM" || link.label === "FAQ") ? "obviously-extended" : "obviously-narrow",
-                fontWeight: (link.label === "SUBMIT FILM" || link.label === "FAQ") ? 500 : 400,
+                fontFamily: (link.label === "SUBMIT FILM" || link.label === "FAQs") ? "obviously-extended" : "obviously-narrow",
+                fontWeight: (link.label === "SUBMIT FILM" || link.label === "FAQs") ? 500 : 400,
               }}
             >
               {link.label}
