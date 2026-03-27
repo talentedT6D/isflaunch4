@@ -7,6 +7,7 @@ const navLinks = [
   { label: "HOW IT WORKS", href: "#process" },
   { label: "JUDGES",       href: "#judges" },
   { label: "CRITERIA",     href: "#criteria" },
+  { label: "FAQ",           href: "#faq" },
   { label: "SUBMIT FILM",  href: "https://payment.indianscrollfestival.com/" },
 ];
 
@@ -83,7 +84,7 @@ export default function Navbar() {
             key={link.href}
             href={link.href}
             {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            className={`nav-link uppercase leading-none whitespace-nowrap${activeSection === link.href ? " active" : ""}${link.label === "SUBMIT FILM" ? " nav-link-submit" : ""}`}
+            className={`nav-link uppercase leading-none whitespace-nowrap${activeSection === link.href ? " active" : ""}${link.label === "SUBMIT FILM" ? " nav-link-submit" : ""}${link.label === "FAQ" ? " nav-link-faq" : ""}`}
           >
             {link.label}
           </a>
@@ -121,10 +122,10 @@ export default function Navbar() {
               href={link.href}
               {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               onClick={() => setOpen(false)}
-              className={`flex items-center py-4 text-[22px] uppercase border-b border-white/8 last:border-0 ${link.label === "SUBMIT FILM" ? "text-[#faff00]" : "text-white"}`}
+              className={`flex items-center py-4 text-[22px] uppercase border-b border-white/8 last:border-0 ${link.label === "SUBMIT FILM" ? "text-[#faff00]" : link.label === "FAQ" ? "text-[#ff0000]" : "text-white"}`}
               style={{
-                fontFamily: link.label === "SUBMIT FILM" ? "obviously-extended" : "obviously-narrow",
-                fontWeight: link.label === "SUBMIT FILM" ? 500 : 400,
+                fontFamily: (link.label === "SUBMIT FILM" || link.label === "FAQ") ? "obviously-extended" : "obviously-narrow",
+                fontWeight: (link.label === "SUBMIT FILM" || link.label === "FAQ") ? 500 : 400,
               }}
             >
               {link.label}
