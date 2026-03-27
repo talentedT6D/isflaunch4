@@ -4,9 +4,9 @@ import { useState } from "react";
 import { assets } from "@/lib/assets";
 
 const cards = [
-  { num: "01.", lines: ["SUBMIT", "YOUR REEL"],     img: assets.process.card1, desc: "Upload your short-form video via the submission form. Pick your category and fill in your details." },
+  { num: "01.", lines: ["SUBMIT", "YOUR REEL"],     img: assets.process.card1, desc: "Upload your short-form video via the submission form. Pick your category, and fill in your details." },
   { num: "03.", lines: ["SHORTLIST", "ANNOUNCED"],  img: assets.process.card3, desc: "Top finalists are announced publicly and invited to attend the gala screening night." },
-  { num: "02.", lines: ["JURY REVIEW"],             img: assets.process.card2, desc: "A jury of industry experts will shortlist top entries in each category for the stage round." },
+  { num: "02.", lines: ["JURY REVIEW"],             img: assets.process.card2, desc: "A jury of creators and creatives will shortlist top entries for the stage round." },
   { num: "04.", lines: ["STAGE", "SCROLL"],          img: assets.process.card4, desc: "Winners per category are announced live on stage and awarded prizes and recognition." },
 ];
 
