@@ -6,8 +6,12 @@ export default function Footer({ onTermsClick }: { onTermsClick?: () => void }) 
       <div className="md:hidden px-6 py-8 flex flex-col items-center gap-6 text-center">
         {/* Partner logos */}
         <div className="flex items-center gap-4">
-          <img src="/logo/Logo%20Variation%20white%20v2-01.png" alt="T6D" className="h-[48px] w-auto rounded-[12px]" />
-          <img src="/logo/mk.png" alt="MK" className="h-[38px] w-auto" />
+          <a href="https://www.talented.agency/" target="_blank" rel="noopener noreferrer">
+            <img src="/logo/Logo%20Variation%20white%20v2-01.png" alt="Talented" className="h-[48px] w-auto rounded-[12px]" />
+          </a>
+          <a href="https://mktg-stack.com/" target="_blank" rel="noopener noreferrer">
+            <img src="/logo/mk.png" alt="MK" className="h-[38px] w-auto" />
+          </a>
         </div>
 
         {/* Copyright */}
@@ -46,8 +50,12 @@ export default function Footer({ onTermsClick }: { onTermsClick?: () => void }) 
         </p>
 
         <div className="flex items-center gap-4">
-          <img src="/logo/Logo%20Variation%20white%20v2-01.png" alt="T6D" className="h-[68px] w-auto rounded-[14px]" />
-          <img src="/logo/mk.png" alt="MK" className="h-[56px] w-auto" />
+          <a href="https://www.talented.agency/" target="_blank" rel="noopener noreferrer">
+            <img src="/logo/Logo%20Variation%20white%20v2-01.png" alt="Talented" className="h-[68px] w-auto rounded-[14px]" />
+          </a>
+          <a href="https://mktg-stack.com/" target="_blank" rel="noopener noreferrer">
+            <img src="/logo/mk.png" alt="MK" className="h-[56px] w-auto" />
+          </a>
         </div>
 
         <div className="flex items-center gap-6">
