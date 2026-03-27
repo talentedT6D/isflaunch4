@@ -13,9 +13,11 @@ import Footer from "@/components/Footer";
 import ScrollAnimator from "@/components/ScrollAnimator";
 import Preloader from "@/components/Preloader";
 import EmailPopup from "@/components/EmailPopup";
+import FaqPopup from "@/components/FaqPopup";
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
+  const [faqOpen, setFaqOpen] = useState(false);
 
   const handlePreloaderComplete = useCallback(() => {
     setLoaded(true);
@@ -35,7 +37,7 @@ export default function Home() {
         }}
       >
         <ScrollAnimator />
-        <Navbar />
+        <Navbar onFaqClick={() => setFaqOpen(true)} />
         <main>
           <Hero />
           <div className="fade-in">
@@ -59,6 +61,7 @@ export default function Home() {
       </div>
 
       <EmailPopup />
+      {faqOpen && <FaqPopup onClose={() => setFaqOpen(false)} />}
     </>
   );
 }

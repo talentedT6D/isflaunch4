@@ -11,7 +11,7 @@ const navLinks = [
   { label: "SUBMIT FILM",  href: "https://payment.indianscrollfestival.com/" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onFaqClick }: { onFaqClick?: () => void }) {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   useEffect(() => {
@@ -19,9 +19,11 @@ export default function Navbar() {
       const trigger = window.innerHeight * 0.4;
       let current = "";
       for (const link of navLinks) {
-        const el = document.getElementById(link.href.slice(1));
-        if (el && el.getBoundingClientRect().top <= trigger) {
-          current = link.href;
+        if (link.href.startsWith("#")) {
+          const el = document.getElementById(link.href.slice(1));
+          if (el && el.getBoundingClientRect().top <= trigger) {
+            current = link.href;
+          }
         }
       }
       setActiveSection(current);
@@ -81,10 +83,11 @@ export default function Navbar() {
       >
         {navLinks.map((link) => (
           <a
-            key={link.href}
-            href={link.href}
+            key={link.label}
+            href={link.label === "FAQ" ? undefined : link.href}
             {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            className={`nav-link uppercase leading-none whitespace-nowrap${activeSection === link.href ? " active" : ""}${link.label === "SUBMIT FILM" ? " nav-link-submit" : ""}${link.label === "FAQ" ? " nav-link-faq" : ""}`}
+            onClick={link.label === "FAQ" ? (e) => { e.preventDefault(); onFaqClick?.(); } : undefined}
+            className={`nav-link uppercase leading-none whitespace-nowrap cursor-pointer${activeSection === link.href ? " active" : ""}${link.label === "SUBMIT FILM" ? " nav-link-submit" : ""}${link.label === "FAQ" ? " nav-link-faq" : ""}`}
           >
             {link.label}
           </a>
@@ -118,11 +121,14 @@ export default function Navbar() {
         <div className="md:hidden relative z-10 bg-black backdrop-blur-sm border-b border-white/10 px-5 py-2">
           {navLinks.map((link) => (
             <a
-              key={link.href}
-              href={link.href}
+              key={link.label}
+              href={link.label === "FAQ" ? undefined : link.href}
               {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              onClick={() => setOpen(false)}
-              className={`flex items-center py-4 text-[22px] uppercase border-b border-white/8 last:border-0 ${link.label === "SUBMIT FILM" ? "text-[#faff00]" : link.label === "FAQ" ? "text-[#ff0000]" : "text-white"}`}
+              onClick={() => {
+                if (link.label === "FAQ") { onFaqClick?.(); }
+                setOpen(false);
+              }}
+              className={`flex items-center py-4 text-[22px] uppercase border-b border-white/8 last:border-0 cursor-pointer ${link.label === "SUBMIT FILM" ? "text-[#faff00]" : link.label === "FAQ" ? "text-[#ff0000]" : "text-white"}`}
               style={{
                 fontFamily: (link.label === "SUBMIT FILM" || link.label === "FAQ") ? "obviously-extended" : "obviously-narrow",
                 fontWeight: (link.label === "SUBMIT FILM" || link.label === "FAQ") ? 500 : 400,
