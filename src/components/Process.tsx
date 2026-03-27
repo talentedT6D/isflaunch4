@@ -79,7 +79,7 @@ export default function Process() {
                 </div>
                 {card.desc && (
                   <p
-                    className="text-[13px] text-white/80 leading-snug"
+                    className="text-[15px] text-white/80 leading-snug"
                     style={{ fontFamily: "obviously", fontWeight: 300 }}
                   >
                     {card.desc}
