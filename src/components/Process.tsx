@@ -50,7 +50,7 @@ export default function Process() {
           >
             PROCESS
           </p>
-          <img src={assets.decorLines.line3} alt="" className="h-[16px] w-[476px] object-contain hidden sm:block" />
+          <div className="hidden sm:block h-px flex-1 max-w-[476px]" style={{ background: "#ff0000" }} />
         </div>
 
         <h2
@@ -68,9 +68,6 @@ export default function Process() {
               className="relative w-full rounded-[12px] overflow-hidden"
               style={{ height: card.desc ? 220 : 190, background: CARD_GRADIENT }}
             >
-              <img src={card.img} alt="" className="absolute inset-0 w-full h-full object-cover" />
-              {/* Dark gradient so text is always legible */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50" />
               <div className="relative z-10 p-5 flex flex-col justify-between h-full">
                 <div
                   className="leading-none text-white glow-white uppercase mix-blend-screen"
@@ -109,7 +106,6 @@ export default function Process() {
                 onMouseEnter={() => setHovered(i)}
                 onMouseLeave={() => setHovered(null)}
               >
-                <img src={cards[i].img} alt="" className="absolute inset-0 w-full h-full object-cover" />
                 <div className="relative z-10 p-6 flex flex-col justify-between h-full">
                   <div
                     className="leading-none text-white glow-white uppercase mix-blend-screen"
@@ -150,7 +146,6 @@ export default function Process() {
                 onMouseEnter={() => setHovered(i)}
                 onMouseLeave={() => setHovered(null)}
               >
-                <img src={cards[i].img} alt="" className="absolute inset-0 w-full h-full object-cover" />
                 <div className="relative z-10 p-6 flex flex-col justify-between h-full">
                   <div
                     className="leading-none text-white glow-white uppercase mix-blend-screen"
