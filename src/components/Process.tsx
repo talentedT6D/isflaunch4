@@ -10,6 +10,8 @@ const cards = [
   { num: "04.", lines: ["STAGE", "SCROLL"],          img: assets.process.card4, desc: "Finalists will have their reels scrolled in a 9:16 format theatre that would make Nolan quake." },
 ];
 
+const CARD_GRADIENT = "linear-gradient(180deg, #ff1a00 0%, #ff6a00 55%, #e8ff00 100%)";
+
 // Mobile order: 01, 02, 03, 04 (sequential by number)
 const mobileOrder = [0, 2, 1, 3];
 const NORMAL_H   = 219;
@@ -64,7 +66,7 @@ export default function Process() {
             <div
               key={idx}
               className="relative w-full rounded-[12px] overflow-hidden"
-              style={{ height: card.desc ? 220 : 190 }}
+              style={{ height: card.desc ? 220 : 190, background: CARD_GRADIENT }}
             >
               <img src={card.img} alt="" className="absolute inset-0 w-full h-full object-cover" />
               {/* Dark gradient so text is always legible */}
@@ -102,6 +104,7 @@ export default function Process() {
                 style={{
                   height: getHeight(i),
                   transition,
+                  background: CARD_GRADIENT,
                 }}
                 onMouseEnter={() => setHovered(i)}
                 onMouseLeave={() => setHovered(null)}
@@ -142,6 +145,7 @@ export default function Process() {
                 style={{
                   height: getHeight(i),
                   transition,
+                  background: CARD_GRADIENT,
                 }}
                 onMouseEnter={() => setHovered(i)}
                 onMouseLeave={() => setHovered(null)}
