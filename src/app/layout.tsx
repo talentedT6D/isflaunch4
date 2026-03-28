@@ -42,6 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="google-site-verification" content="XlFIEt2JgRjpA66XPX1sSHq_Km3xYBqzBoWG7TG67pE" />
         <link rel="stylesheet" href="https://use.typekit.net/xfk5kyc.css" />
       </head>
       <body
