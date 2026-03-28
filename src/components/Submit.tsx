@@ -1,4 +1,65 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+function useNoiseDataUrl(width = 300, height = 300) {
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    const c = document.createElement("canvas");
+    c.width = width;
+    c.height = height;
+    const ctx = c.getContext("2d");
+    if (!ctx) return;
+    const img = ctx.createImageData(width, height);
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const n = Math.random();
+      d[i] = 255;     // R (#FF)
+      d[i + 1] = 68;  // G (#44)
+      d[i + 2] = 0;   // B (#00)
+      d[i + 3] = n * 196; // ~77% max opacity
+    }
+    ctx.putImageData(img, 0, 0);
+    setUrl(c.toDataURL());
+  }, [width, height]);
+  return url;
+}
+
+function useButtonNoiseDataUrl(width = 300, height = 300) {
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    const c = document.createElement("canvas");
+    c.width = width;
+    c.height = height;
+    const ctx = c.getContext("2d");
+    if (!ctx) return;
+    const img = ctx.createImageData(width, height);
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const n = Math.random();
+      if (n > 0.2) {
+        // Yellow pixel (#FAFF00)
+        d[i] = 250;
+        d[i + 1] = 255;
+        d[i + 2] = 0;
+        d[i + 3] = 255;
+      } else {
+        // Orange-red pixel (#FF4400)
+        d[i] = 255;
+        d[i + 1] = 68;
+        d[i + 2] = 0;
+        d[i + 3] = 102; // 40% opacity
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+    setUrl(c.toDataURL());
+  }, [width, height]);
+  return url;
+}
+
 export default function Submit() {
+  const noiseUrl = useNoiseDataUrl();
+  const buttonNoiseUrl = useButtonNoiseDataUrl();
   return (
     <section
       id="submit"
@@ -8,31 +69,67 @@ export default function Submit() {
         minHeight: 420,
       }}
     >
-      {/* Mobile layout */}
-      <div className="md:hidden px-6 py-12 flex flex-col gap-6 items-center text-center">
-        <p
-          className="uppercase leading-[0.88]"
+      {/* Noise texture overlay on background */}
+      {noiseUrl && (
+        <div
+          className="absolute inset-0 pointer-events-none z-[1]"
           style={{
-            fontFamily: "obviously-compressed",
-            fontWeight: 300,
-            fontSize: 80,
-            color: "#ffffff",
+            backgroundImage: `url(${noiseUrl})`,
+            backgroundRepeat: "repeat",
             mixBlendMode: "overlay",
           }}
-        >
-          READY TO SUBMIT?
-        </p>
+        />
+      )}
+
+      {/* Mobile layout */}
+      <div className="md:hidden px-6 py-12 flex flex-col gap-6 items-center text-center">
+        <div className="relative">
+          <p
+            className="uppercase leading-[0.88]"
+            style={{
+              fontFamily: "obviously-compressed",
+              fontWeight: 300,
+              fontSize: 80,
+              color: "#ffffff",
+              mixBlendMode: "overlay",
+            }}
+          >
+            READY TO SUBMIT?
+          </p>
+          {/* Noise clipped to text */}
+          {noiseUrl && (
+            <p
+              aria-hidden="true"
+              className="absolute inset-0 uppercase leading-[0.88] pointer-events-none"
+              style={{
+                fontFamily: "obviously-compressed",
+                fontWeight: 300,
+                fontSize: 80,
+                color: "transparent",
+                backgroundImage: `url(${noiseUrl})`,
+                backgroundRepeat: "repeat",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                mixBlendMode: "overlay",
+              }}
+            >
+              READY TO SUBMIT?
+            </p>
+          )}
+        </div>
 
         <div
           style={{ fontFamily: "obviously", fontWeight: 300, fontSize: 18, color: "#faff00", lineHeight: 1.4 }}
         >
-          <p>Submit your film across Comedy, AI, Edits, Emotional, or Food. One submission per category allowed.</p>
+          <p>Submit your film across Comedy, AI, Edits, Emotional, or Food.</p>
         </div>
 
         <div className="flex flex-col gap-3 w-full">
           <a
-            href="#"
-            className="flex items-center justify-center uppercase w-full"
+            href="https://payment.indianscrollfestival.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center uppercase w-full relative overflow-hidden"
             style={{
               fontFamily: "obviously-narrow",
               fontWeight: 400,
@@ -44,11 +141,21 @@ export default function Submit() {
               background: "#faff00",
             }}
           >
-            SUBMIT YOUR FILM
+            {buttonNoiseUrl && (
+              <span
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  backgroundImage: `url(${buttonNoiseUrl})`,
+                  backgroundRepeat: "repeat",
+                  borderRadius: 9999,
+                }}
+              />
+            )}
+            <span className="relative z-[1]" style={{ textShadow: "0 0 4px rgba(255,5,4,0.6)" }}>SUBMIT YOUR FILM</span>
           </a>
           <a
             href="#criteria"
-            className="flex items-center justify-center uppercase w-full border"
+            className="flex items-center justify-center uppercase w-full border relative overflow-hidden"
             style={{
               fontFamily: "obviously-narrow",
               fontWeight: 400,
@@ -60,7 +167,18 @@ export default function Submit() {
               background: "transparent",
             }}
           >
-            VIEW CRITERIA
+            {noiseUrl && (
+              <span
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  backgroundImage: `url(${noiseUrl})`,
+                  backgroundRepeat: "repeat",
+                  mixBlendMode: "overlay",
+                  borderRadius: 9999,
+                }}
+              />
+            )}
+            <span className="relative z-[1]">VIEW CATEGORIES</span>
           </a>
         </div>
       </div>
@@ -69,7 +187,7 @@ export default function Submit() {
       <div className="hidden md:flex max-w-[1440px] mx-auto items-center" style={{ minHeight: 420 }}>
 
         {/* LEFT: Giant text — absolutely positioned per Figma x:14 */}
-        <div className="flex-1 min-w-0 relative self-stretch">
+        <div className="flex-1 min-w-0 relative self-stretch overflow-hidden">
           <p
             className="absolute uppercase whitespace-nowrap leading-[0.82]"
             style={{
@@ -84,6 +202,28 @@ export default function Submit() {
           >
             READY TO SUBMIT?
           </p>
+          {/* Noise clipped to text */}
+          {noiseUrl && (
+            <p
+              aria-hidden="true"
+              className="absolute uppercase whitespace-nowrap leading-[0.82] pointer-events-none"
+              style={{
+                fontFamily: "obviously-compressed",
+                fontWeight: 300,
+                fontSize: 381,
+                color: "transparent",
+                backgroundImage: `url(${noiseUrl})`,
+                backgroundRepeat: "repeat",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                mixBlendMode: "overlay",
+                left: 14,
+                top: 4,
+              }}
+            >
+              READY TO SUBMIT?
+            </p>
+          )}
         </div>
 
         {/* RIGHT: description + buttons */}
@@ -96,13 +236,13 @@ export default function Submit() {
             style={{ fontFamily: "obviously", fontWeight: 300, fontSize: 20, color: "#faff00" }}
           >
             <p>Submit your film across Comedy, AI, Edits, Emotional, or Food.</p>
-            <br />
-            <p>One submission per category allowed.</p>
           </div>
 
           <div className="flex gap-4">
             <a
-              href="#"
+              href="https://payment.indianscrollfestival.com/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="whitespace-nowrap inline-flex items-center justify-center uppercase relative overflow-hidden"
               style={{
                 fontFamily: "obviously-narrow",
@@ -118,11 +258,21 @@ export default function Submit() {
                 background: "#faff00",
               }}
             >
-              SUBMIT YOUR FILM
+              {buttonNoiseUrl && (
+                <span
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    backgroundImage: `url(${buttonNoiseUrl})`,
+                    backgroundRepeat: "repeat",
+                    borderRadius: 9999,
+                  }}
+                />
+              )}
+              <span className="relative z-[1]" style={{ textShadow: "0 0 4px rgba(255,5,4,0.6)" }}>SUBMIT YOUR FILM</span>
             </a>
             <a
               href="#criteria"
-              className="inline-flex items-center justify-center uppercase whitespace-nowrap border transition-all"
+              className="inline-flex items-center justify-center uppercase whitespace-nowrap border transition-all relative overflow-hidden"
               style={{
                 fontFamily: "obviously-narrow",
                 fontWeight: 400,
@@ -137,7 +287,18 @@ export default function Submit() {
                 boxSizing: "border-box",
               }}
             >
-              VIEW CRITERIA
+              {noiseUrl && (
+                <span
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    backgroundImage: `url(${noiseUrl})`,
+                    backgroundRepeat: "repeat",
+                    mixBlendMode: "overlay",
+                    borderRadius: 9999,
+                  }}
+                />
+              )}
+              <span className="relative z-[1]">VIEW CATEGORIES</span>
             </a>
           </div>
         </div>

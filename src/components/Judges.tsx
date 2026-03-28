@@ -1,5 +1,11 @@
 export default function Judges() {
-  const src = "/jury/Group%2040%20(2).png";
+  const images = [
+    "/jury/Asset%202%40finalspng.png",
+    "/jury/Asset%201%40finalspng.png",
+    "/jury/4%40finalspng.png",
+    "/jury/3%40finalspng.png",
+    "/jury/5%40finalspng.png",
+  ];
 
   return (
     <section id="judges" className="py-16 md:py-20 px-6 md:px-[34px]">
@@ -8,29 +14,37 @@ export default function Judges() {
         style={{ background: "#080808", border: "1.5px solid rgba(255,255,255,0.25)" }}
       >
         {/* Header */}
-        <div className="flex items-center mb-5 md:mb-8">
-          <p
-            className="text-[14px] md:text-[18px] uppercase text-red glow-red leading-none whitespace-nowrap shrink-0 tracking-[0.18em]"
-            style={{ fontFamily: "obviously-extended", fontWeight: 300 }}
+        <div className="flex flex-col md:flex-row md:items-center mb-5 md:mb-8 gap-2 md:gap-0">
+          <div className="flex items-center flex-1">
+            <p
+              className="text-[14px] md:text-[18px] uppercase text-red glow-red leading-none whitespace-nowrap shrink-0 tracking-[0.18em]"
+              style={{ fontFamily: "obviously-extended", fontWeight: 300 }}
+            >
+              DOOMSCROLL WITH
+            </p>
+            <div className="mx-4 md:mx-6 flex-1 h-px" style={{ background: "#ff0000" }} />
+          </div>
+          <h2
+            className="text-white text-[22px] sm:text-[28px] md:text-[64px] uppercase leading-none whitespace-nowrap shrink-0"
+            style={{ fontFamily: "obviously-extended", fontWeight: 700 }}
           >
-            JURY PANEL
-          </p>
-          <div className="mx-4 md:mx-6 flex-1 h-px" style={{ background: "#ff0000" }} />
+            THE JUDGES
+          </h2>
         </div>
 
-        {/* Mobile: 2-column grid — all 5 same size */}
-        <div className="md:hidden grid grid-cols-2 gap-[6px]">
-          {[0, 1, 2, 3, 4].map((i) => (
-            <div key={i} className="relative rounded-[12px] overflow-hidden h-[180px]">
+        {/* Mobile: 2-column grid */}
+        <div className="md:hidden grid grid-cols-2 gap-2">
+          {images.map((src, i) => (
+            <div key={i} className="relative rounded-[12px] overflow-hidden" style={{ aspectRatio: "3/4" }}>
               <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover" />
             </div>
           ))}
         </div>
 
-        {/* Desktop: all 5 in one flex row — unchanged */}
-        <div className="hidden md:flex gap-[6px]">
-          {[0, 1, 2, 3, 4].map((i) => (
-            <div key={i} className="relative flex-1 rounded-[16px] overflow-hidden" style={{ height: 340 }}>
+        {/* Desktop: all 5 in one flex row */}
+        <div className="hidden md:grid grid-cols-5 gap-4">
+          {images.map((src, i) => (
+            <div key={i} className="relative rounded-[16px] overflow-hidden" style={{ aspectRatio: "3/4" }}>
               <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover" />
             </div>
           ))}
@@ -38,10 +52,13 @@ export default function Judges() {
 
         {/* Footer note */}
         <p
-          className="mt-4 text-[12px] md:text-[13px] leading-snug"
+          className="mt-4 md:mt-6 text-center text-[12px] md:text-[14px] leading-snug"
           style={{ fontFamily: "obviously", fontWeight: 300, color: "rgba(255,255,255,0.4)" }}
         >
-          *more judges to be announced &bull; replace placeholders with actual names and headshots
+          More judges coming soon &bull; Have a suggestion?{" "}
+          <a href="https://www.instagram.com/indianscrollfestival/" target="_blank" rel="noopener noreferrer" className="underline text-white" style={{ fontWeight: 400 }}>
+            Tag us on stories
+          </a>
         </p>
       </div>
     </section>

@@ -31,27 +31,39 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   background: #000;
   color: #fff;
   font-family: var(--font-obviously), sans-serif;
+  overflow-x: hidden;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
+/* Scrollbar — hide on mobile, show on desktop */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #111;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 }
-::-webkit-scrollbar-track {
-  background: #111;
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  html {
+    scrollbar-width: none;
+  }
 }
 
 /* Ticker scrolling animation */
@@ -163,7 +175,7 @@ body {
   display: inline-block;
   font-family: "obviously-narrow", sans-serif;
   font-weight: 400;
-  font-size: 30px;
+  font-size: 25px;
   color: #ffffff;
   letter-spacing: 0.04em;
   transition: color 0.25s ease;
@@ -174,4 +186,39 @@ body {
   font-family: "obviously-extended", sans-serif;
   font-weight: 500;
   color: #ffffff;
+}
+
+.nav-link-faq {
+  color: #ff0000;
+  font-family: "obviously-extended", sans-serif;
+  font-weight: 500;
+}
+.nav-link.nav-link-faq:hover,
+.nav-link.nav-link-faq.active {
+  color: #ff0000;
+  font-family: "obviously-extended", sans-serif;
+  font-weight: 500;
+  text-shadow: 0 0 6px #ff0000, 0 0 12px #ff0000;
+}
+
+.nav-link-submit {
+  color: #faff00;
+  font-family: "obviously-extended", sans-serif;
+  font-weight: 500;
+}
+.nav-link.nav-link-submit:hover,
+.nav-link.nav-link-submit.active {
+  color: #faff00;
+  font-family: "obviously-extended", sans-serif;
+  font-weight: 500;
+  text-shadow: 0 0 6px #faff00, 0 0 12px #faff00;
+}
+
+/* Email popup entrance */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.slide-up {
+  animation: slideUp 0.4s ease-out;
 }
