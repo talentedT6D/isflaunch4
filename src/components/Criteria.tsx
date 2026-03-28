@@ -79,11 +79,7 @@ export default function Criteria() {
           >
             SCROLL YOUR GENRE
           </p>
-          <img
-            src={assets.decorLines.line4}
-            alt=""
-            className="h-[12px] md:h-[16px] flex-1 object-contain object-left"
-          />
+          <div className="h-px flex-1" style={{ background: "#ff0000" }} />
         </div>
 
         <h2

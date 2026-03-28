@@ -127,11 +127,7 @@ export default function About() {
           >
             {`ABOUT THE  FESTIVAL`}
           </p>
-          <img
-            src={assets.decorLines.line1}
-            alt=""
-            className="h-[16px] w-[371px] object-contain hidden sm:block"
-          />
+          <div className="hidden sm:block h-px flex-1 max-w-[371px]" style={{ background: "#ff0000" }} />
         </div>
 
         <div className="grid lg:grid-cols-[1fr_420px] gap-6 lg:gap-16">
