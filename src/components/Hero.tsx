@@ -3,39 +3,25 @@
 import { useRef, useState } from "react";
 
 export default function Hero() {
-  const desktopVideoRef = useRef<HTMLVideoElement>(null);
-  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
 
   const toggleMute = () => {
     const newMuted = !muted;
-    if (desktopVideoRef.current) desktopVideoRef.current.muted = newMuted;
-    if (mobileVideoRef.current) mobileVideoRef.current.muted = newMuted;
+    if (videoRef.current) videoRef.current.muted = newMuted;
     setMuted(newMuted);
   };
 
   return (
     <section className="relative h-[80vh] md:h-screen md:min-h-[600px] md:max-h-[980px] overflow-hidden">
-      {/* Desktop video background */}
+      {/* Video background */}
       <video
-        ref={desktopVideoRef}
+        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover hidden md:block"
-      >
-        <source src="/videos/hero-bg.mp4" type="video/mp4" />
-      </video>
-
-      {/* Mobile video background (9:16) */}
-      <video
-        ref={mobileVideoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover md:hidden"
+        className="absolute inset-0 w-full h-full object-cover"
       >
         <source src="/videos/hero-mobile.mp4" type="video/mp4" />
       </video>
