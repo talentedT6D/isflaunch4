@@ -30,15 +30,6 @@ export default function Hero() {
       {/* Dark gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80" />
 
-      {/* Center image */}
-      <div className="absolute inset-0 flex items-center justify-center z-10 px-6">
-        <img
-          src="/videos/hero-text.png"
-          alt="India's First Ever Vertical Film Festival"
-          className="w-full max-w-[700px] h-auto"
-        />
-      </div>
-
       {/* Mute/Unmute button */}
       <button
         onClick={toggleMute}
