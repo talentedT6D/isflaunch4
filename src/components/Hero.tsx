@@ -6,7 +6,7 @@ export default function Hero() {
       {/* Image background */}
       <div className="relative md:absolute md:inset-0">
         <img
-          src="/videos/Group 50.png"
+          src="/videos/hero-bg.png"
           alt="Hero background"
           className="w-full h-auto md:h-full md:object-cover"
         />
