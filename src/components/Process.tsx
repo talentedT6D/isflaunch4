@@ -4,13 +4,16 @@ import { useState } from "react";
 import { assets } from "@/lib/assets";
 
 const cards = [
-  { num: "01.", lines: ["SUBMIT", "YOUR FILM"],    img: assets.process.card1, desc: null },
-  { num: "02.", lines: ["STAGE", "SCROLL"],        img: assets.process.card2, desc: "A jury of industry experts will shortlist top entries in each category for the stage round." },
-  { num: "03.", lines: ["SHORTLIST", "ANNOUNCED"], img: assets.process.card3, desc: null },
-  { num: "04.", lines: ["STAGE", "SCROLL"],        img: assets.process.card4, desc: null },
+  { num: "01.", lines: ["SUBMIT", "YOUR REEL"],     img: assets.process.card1, desc: "Upload your short-form video via the submission form. Pick your category, and fill in your details." },
+  { num: "03.", lines: ["SHORTLIST", "ANNOUNCED"],  img: assets.process.card3, desc: "Top finalists are announced publicly and invited to attend the gala screening night." },
+  { num: "02.", lines: ["JURY REVIEW"],             img: assets.process.card2, desc: "A jury of creators and creatives will shortlist top entries for the stage round." },
+  { num: "04.", lines: ["STAGE", "SCROLL"],          img: assets.process.card4, desc: "Finalists will have their reels scrolled in a 9:16 format theatre that would make Nolan quake." },
 ];
 
-// Cards 0,1 = left column (top, bottom) | Cards 2,3 = right column (top, bottom)
+const CARD_GRADIENT = "linear-gradient(180deg, #ff1a00 0%, #ff6a00 55%, #e8ff00 100%)";
+
+// Mobile order: 01, 02, 03, 04 (sequential by number)
+const mobileOrder = [0, 2, 1, 3];
 const NORMAL_H   = 219;
 const EXPANDED_H = 300;
 const SHRUNK_H   = 124;   // 219*2 - 300 = 138, but user specified 124 — gap covers delta
@@ -47,38 +50,35 @@ export default function Process() {
           >
             PROCESS
           </p>
-          <img src={assets.decorLines.line3} alt="" className="h-[16px] w-[476px] object-contain hidden sm:block" />
+          <div className="hidden sm:block h-px flex-1 max-w-[476px]" style={{ background: "#ff0000" }} />
         </div>
 
         <h2
-          className="text-[32px] md:text-[48px] leading-none uppercase text-white glow-white mb-6 md:mb-12"
+          className="text-[24px] sm:text-[32px] md:text-[48px] leading-none uppercase text-white glow-white mb-6 md:mb-12"
           style={{ fontFamily: "obviously-extended", fontWeight: 600 }}
         >
           HOW IT WORKS
         </h2>
 
-        {/* Mobile: single column stack */}
+        {/* Mobile: single column stack — smaller font to prevent overflow */}
         <div className="flex flex-col gap-[6px] md:hidden">
-          {cards.map((card, i) => (
+          {mobileOrder.map((idx) => { const card = cards[idx]; return (
             <div
-              key={i}
+              key={idx}
               className="relative w-full rounded-[12px] overflow-hidden"
-              style={{ height: card.desc ? 220 : 190 }}
+              style={{ height: card.desc ? 220 : 190, background: CARD_GRADIENT }}
             >
-              <img src={card.img} alt="" className="absolute inset-0 w-full h-full object-cover" />
-              {/* Dark gradient so text is always legible */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50" />
               <div className="relative z-10 p-5 flex flex-col justify-between h-full">
                 <div
                   className="leading-none text-white glow-white uppercase mix-blend-screen"
-                  style={{ fontFamily: "obviously-extended", fontWeight: 600, fontSize: 34 }}
+                  style={{ fontFamily: "obviously-extended", fontWeight: 600, fontSize: 24 }}
                 >
                   <p>{card.num}</p>
                   {card.lines.map((line, j) => <p key={j}>{line}</p>)}
                 </div>
                 {card.desc && (
                   <p
-                    className="text-[13px] text-white/80 leading-snug"
+                    className="text-[15px] text-white/80 leading-snug"
                     style={{ fontFamily: "obviously", fontWeight: 300 }}
                   >
                     {card.desc}
@@ -86,7 +86,7 @@ export default function Process() {
                 )}
               </div>
             </div>
-          ))}
+          ); })}
         </div>
 
         {/* Desktop: 2-column grid — cards expand/shrink vertically only */}
@@ -101,14 +101,14 @@ export default function Process() {
                 style={{
                   height: getHeight(i),
                   transition,
+                  background: CARD_GRADIENT,
                 }}
                 onMouseEnter={() => setHovered(i)}
                 onMouseLeave={() => setHovered(null)}
               >
-                <img src={cards[i].img} alt="" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="relative z-10 p-6 flex flex-col justify-between h-full mix-blend-screen">
+                <div className="relative z-10 p-6 flex flex-col justify-between h-full">
                   <div
-                    className="leading-none text-white glow-white uppercase"
+                    className="leading-none text-white glow-white uppercase mix-blend-screen"
                     style={{
                       fontFamily: "obviously-extended",
                       fontWeight: 600,
@@ -141,14 +141,14 @@ export default function Process() {
                 style={{
                   height: getHeight(i),
                   transition,
+                  background: CARD_GRADIENT,
                 }}
                 onMouseEnter={() => setHovered(i)}
                 onMouseLeave={() => setHovered(null)}
               >
-                <img src={cards[i].img} alt="" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="relative z-10 p-6 mix-blend-screen">
+                <div className="relative z-10 p-6 flex flex-col justify-between h-full">
                   <div
-                    className="leading-none text-white glow-white uppercase"
+                    className="leading-none text-white glow-white uppercase mix-blend-screen"
                     style={{
                       fontFamily: "obviously-extended",
                       fontWeight: 600,
@@ -159,6 +159,14 @@ export default function Process() {
                     <p>{cards[i].num}</p>
                     {cards[i].lines.map((line, j) => <p key={j}>{line}</p>)}
                   </div>
+                  {cards[i].desc && hovered === i && (
+                    <p
+                      className="text-[16px] text-black leading-snug max-w-[617px]"
+                      style={{ fontFamily: "obviously", fontWeight: 300 }}
+                    >
+                      {cards[i].desc}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}

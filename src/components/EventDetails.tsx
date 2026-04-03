@@ -1,13 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const timelineItems = [
-  { label: "AWARDS NIGHT",        date: "DD/MM", day: "DAY" },
-  { label: "SUBMISSIONS OPEN",    date: "DD/MM", day: "DAY" },
-  { label: "SUBMISSION DEADLINE", date: "DD/MM", day: "DAY" },
-  { label: "SHORTLIST ANNOUNCED", date: "DD/MM", day: "DAY" },
-  { label: "AWARDS NIGHT",        date: "DD/MM", day: "DAY" },
+  { label: "AWARDS NIGHT",        date: "16/05", day: "SAT" },
+  { label: "SUBMISSIONS OPEN",    date: "01/04", day: "WED" },
+  { label: "SUBMISSION DEADLINE", date: "16/04", day: "WED" },
+  { label: "SHORTLIST ANNOUNCED", date: "01/05", day: "FRI" },
+  { label: "AWARDS NIGHT",        date: "16/05", day: "SAT" },
+  { label: "SUBMISSIONS OPEN",    date: "01/04", day: "WED" },
+  { label: "SUBMISSION DEADLINE", date: "16/04", day: "WED" },
+  { label: "SHORTLIST ANNOUNCED", date: "01/05", day: "FRI" },
 ];
 
 // Desktop sizes
@@ -17,10 +20,10 @@ const DATE_DESK  = [28, 24, 20, 17, 14];
 const DAY_DESK   = [36, 30, 25, 20, 16];
 
 // Mobile sizes — scaled down so multi-word labels fit the pill width
-const ROW_MOB   = 80;
-const LABEL_MOB = [22, 19, 16, 13, 10];
-const DATE_MOB  = [16, 14, 12, 10,  8];
-const DAY_MOB   = [20, 17, 14, 11,  9];
+const ROW_MOB   = 55;
+const LABEL_MOB = [13, 11, 10, 8, 7];
+const DATE_MOB  = [11, 9,  8,  7, 6];
+const DAY_MOB   = [13, 11, 9,  7, 6];
 
 const BLUR_PX  = [ 0,  1,  3,  5,  8];
 const OPACITY  = [1, 0.6, 0.35, 0.18, 0.08];
@@ -28,6 +31,8 @@ const OPACITY  = [1, 0.6, 0.35, 0.18, 0.08];
 export default function EventDetails() {
   const [continuous, setContinuous] = useState(2);
   const [isMobile, setIsMobile] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const timelineRef = useRef<HTMLDivElement>(null);
   const n = timelineItems.length;
 
   useEffect(() => {
@@ -42,22 +47,40 @@ export default function EventDetails() {
   const DATE_PX  = isMobile ? DATE_MOB  : DATE_DESK;
   const DAY_PX   = isMobile ? DAY_MOB   : DAY_DESK;
 
+  // Auto-scroll — pauses on hover
   useEffect(() => {
-    const STEP_DURATION = 10000; // ms per item
+    if (hovered) return;
+    const STEP_DURATION = 5000; // ms per item
     const FPS = 60;
     const increment = 1 / (STEP_DURATION / (1000 / FPS));
     const id = setInterval(() => {
       setContinuous(prev => prev + increment);
     }, 1000 / FPS);
     return () => clearInterval(id);
-  }, []);
+  }, [hovered]);
+
+  // Manual scroll on hover — wheel up/down moves through items
+  useEffect(() => {
+    const el = timelineRef.current;
+    if (!el) return;
+
+    function handleWheel(e: WheelEvent) {
+      if (!hovered) return;
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? 0.15 : -0.15;
+      setContinuous(prev => prev + delta);
+    }
+
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    return () => el.removeEventListener("wheel", handleWheel);
+  }, [hovered]);
 
   const phase = continuous % n;
   const activeIndex = Math.round(phase) % n;
 
   return (
     <section>
-      <div className="relative h-screen overflow-hidden">
+      <div className="relative min-h-0 md:h-screen overflow-hidden">
 
         {/* Red radial gradient background */}
         <div
@@ -71,11 +94,30 @@ export default function EventDetails() {
         {/* Black notch bottom-left */}
         <div
           className="absolute bottom-0 left-0 bg-black"
-          style={{ width: "36%", height: 72, borderTopRightRadius: 60 }}
+          style={{ width: "36%", height: 72, borderTopRightRadius: 52 }}
         />
+        {/* Inverse corner — smooth red-to-black curve right of notch */}
+        <div
+          className="absolute overflow-hidden"
+          style={{
+            left: "36%",
+            bottom: 72,
+            width: 52,
+            height: 52,
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              borderBottomLeftRadius: 52,
+              boxShadow: "0 52px 0 0 #000",
+            }}
+          />
+        </div>
 
         {/* Content */}
-        <div className="relative z-10 h-full flex flex-col px-8 md:px-12 pt-8 pb-4 max-w-[1440px] mx-auto w-full">
+        <div className="relative z-10 h-full flex flex-col px-4 sm:px-8 md:px-12 pt-8 pb-4 max-w-[1440px] mx-auto w-full">
 
           {/* Section label */}
           <div className="flex items-center gap-4 mb-2 shrink-0">
@@ -90,18 +132,21 @@ export default function EventDetails() {
 
           {/* Title */}
           <h2
-            className="text-[26px] sm:text-[38px] md:text-[76px] leading-none uppercase text-white mb-4 shrink-0"
+            className="text-[20px] sm:text-[38px] md:text-[76px] leading-none uppercase text-white mb-4 shrink-0"
             style={{ fontFamily: "obviously-extended", fontWeight: 700 }}
           >
             DATE AND VENUE
           </h2>
 
           {/* Main two-column grid */}
-          <div className="grid lg:grid-cols-[1fr_420px] gap-8 flex-1 min-h-0">
+          <div className="grid lg:grid-cols-[1fr_520px] gap-8 flex-1 min-h-0">
 
             {/* ── LEFT: scroll-through timeline ── */}
             <div
-              className="relative overflow-hidden"
+              ref={timelineRef}
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
+              className="relative overflow-hidden cursor-ns-resize h-[220px] md:h-auto"
               style={{
                 WebkitMaskImage:
                   "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
@@ -153,7 +198,7 @@ export default function EventDetails() {
                         lineHeight: 1.05,
                         color:      isActive ? "#faff00" : "#fff",
                         whiteSpace: "pre-line",
-                        transition: "font-size 0.9s ease, color 0.9s ease",
+                        transition: "font-size 0.5s ease, color 0.5s ease",
                       }}
                     >
                       {label}
@@ -164,7 +209,7 @@ export default function EventDetails() {
                       className="shrink-0 text-right leading-none"
                       style={{
                         color:      isActive ? "#faff00" : "#fff",
-                        transition: "color 0.9s ease",
+                        transition: "color 0.5s ease",
                       }}
                     >
                       <p style={{ fontFamily: "obviously", fontWeight: 300, fontSize: DATE_PX[dist] ?? 9 }}>
@@ -180,22 +225,26 @@ export default function EventDetails() {
             </div>
 
             {/* ── RIGHT: venue image — desktop only ── */}
-            <div className="hidden lg:flex items-center justify-center">
-              <img
-                src="/events%20/event.png"
-                alt="Venue"
-                className="w-full h-full object-contain"
-              />
+            <div className="hidden lg:flex items-center justify-center overflow-hidden">
+              <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer" className="w-full h-full flex items-center justify-center">
+                <img
+                  src="/assets/Gallery%20Desktop.png"
+                  alt="Venue"
+                  className="max-w-full max-h-full object-contain"
+                />
+              </a>
             </div>
           </div>
 
-          {/* Mobile venue image */}
-          <div className="lg:hidden shrink-0 h-[220px] mt-2">
-            <img
-              src="/events%20/event.png"
-              alt="Venue"
-              className="w-full h-full object-contain object-right"
-            />
+          {/* Mobile venue section */}
+          <div className="lg:hidden mt-4 mb-5 flex justify-center">
+            <a href="https://maps.app.goo.gl/qY7X7S1Edy4MsVyp9" target="_blank" rel="noopener noreferrer" className="block w-[90%]">
+              <img
+                src="/assets/Gallery%20Mobile.png"
+                alt="Venue"
+                className="w-full h-auto object-contain rounded-lg"
+              />
+            </a>
           </div>
         </div>
       </div>
