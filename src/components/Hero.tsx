@@ -2,13 +2,13 @@
 
 export default function Hero() {
   return (
-    <section className="relative md:h-screen md:min-h-[600px] md:max-h-[980px] overflow-hidden">
+    <section className="relative h-screen min-h-[600px] max-h-[980px] overflow-hidden">
       {/* Image background */}
-      <div className="relative md:absolute md:inset-0">
+      <div className="absolute inset-0">
         <img
           src="/videos/hero-bg.png"
           alt="Hero background"
-          className="w-full h-auto md:h-full md:object-cover"
+          className="w-full h-full object-cover"
         />
       </div>
 
