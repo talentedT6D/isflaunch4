@@ -10,8 +10,6 @@ export default function Hero() {
           alt="Hero background"
           className="w-full h-auto md:h-full md:object-cover"
         />
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80" />
       </div>
 
       {/* Scrolling ticker at bottom */}
