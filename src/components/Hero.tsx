@@ -1,14 +1,12 @@
 "use client";
 
-import heroBg from "@/videos/Group 59 (1).png";
-
 export default function Hero() {
   return (
     <section className="relative md:h-screen md:min-h-[600px] md:max-h-[980px] overflow-hidden">
       {/* Image background */}
       <div className="relative md:absolute md:inset-0">
         <img
-          src={heroBg.src}
+          src="/videos/23rd.png"
           alt="Hero background"
           className="w-full h-auto md:h-full md:object-cover"
         />
