@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q: "When's the deadline?",
-    a: "16 April 2026, 11:59 PM IST. Not 11:59:01. Not the next morning.",
+    a: "23 April 2026, 11:59 PM IST. Not 11:59:01. Not the next morning.",
   },
   {
     q: "What happens after I submit?",

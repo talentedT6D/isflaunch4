@@ -164,7 +164,7 @@ export default function Criteria() {
             className="text-[13px] md:text-[24px] uppercase text-white leading-none"
             style={{ fontFamily: "obviously-narrow", fontWeight: 400 }}
           >
-            16 April · 11:59 PM IST
+            23 April · 11:59 PM IST
           </span>
         </div>
       </div>
