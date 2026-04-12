@@ -1,15 +1,46 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
+const heroImages = [
+  "/videos/23rd.png",
+  "/videos/slide-2.png",
+  "/videos/slide-3.png",
+  "/videos/slide-4.png",
+  "/videos/slide-5.png",
+];
+
 export default function Hero() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % heroImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative md:h-screen md:min-h-[600px] md:max-h-[980px] overflow-hidden">
-      {/* Image background */}
+      {/* Slideshow background */}
       <div className="relative md:absolute md:inset-0">
+        {/* Invisible sizer to maintain natural image height on mobile */}
         <img
-          src="/videos/23rd.png"
-          alt="Hero background"
-          className="w-full h-auto md:h-full md:object-cover"
+          src={heroImages[0]}
+          alt=""
+          aria-hidden="true"
+          className="w-full h-auto md:h-full md:object-cover invisible"
         />
+        {heroImages.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt={`Hero slide ${i + 1}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              i === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
       </div>
 
       {/* Scrolling ticker at bottom */}
