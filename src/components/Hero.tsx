@@ -1,24 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const heroImages = [
   "/videos/23rd.png",
-  "/videos/slide-2.png",
-  "/videos/slide-3.png",
-  "/videos/slide-4.png",
-  "/videos/slide-5.png",
+  "/videos/23rd.png",
+  "/videos/23rd.png",
+  "/videos/23rd.png",
+  "/videos/23rd.png",
 ];
 
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % heroImages.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <section className="relative md:h-screen md:min-h-[600px] md:max-h-[980px] overflow-hidden">
@@ -33,7 +26,7 @@ export default function Hero() {
         />
         {heroImages.map((src, i) => (
           <img
-            key={src}
+            key={i}
             src={src}
             alt={`Hero slide ${i + 1}`}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
@@ -41,6 +34,22 @@ export default function Hero() {
             }`}
           />
         ))}
+
+        {/* Navigation dots */}
+        <div className="absolute bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 z-20 flex gap-2 md:gap-3">
+          {heroImages.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentIndex(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className={`rounded-full transition-all duration-300 ${
+                i === currentIndex
+                  ? "w-3 h-3 md:w-4 md:h-4 bg-white"
+                  : "w-3 h-3 md:w-4 md:h-4 bg-white/40 hover:bg-white/60"
+              }`}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Scrolling ticker at bottom */}
