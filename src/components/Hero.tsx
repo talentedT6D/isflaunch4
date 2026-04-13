@@ -13,29 +13,25 @@ export default function Hero() {
       </div>
 
       {/* Hero content overlay */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 pb-20 md:pb-24 text-center pointer-events-none">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 pb-16 md:pb-20 text-center pointer-events-none">
         <h1
-          className="uppercase text-[#faff00] leading-[0.85] tracking-tight text-[48px] sm:text-[80px] md:text-[140px] lg:text-[200px] xl:text-[252px]"
+          className="uppercase text-[#faff00] leading-[0.88] text-[40px] sm:text-[64px] md:text-[92px] lg:text-[120px] xl:text-[150px]"
           style={{ fontFamily: "obviously-compressed", fontWeight: 400 }}
         >
           INDIA&apos;S{" "}
-          <span style={{ fontFamily: "obviously-compressed", fontStyle: "italic", fontWeight: 700 }}>
-            FIRST
-          </span>{" "}
+          <span style={{ fontStyle: "italic", fontWeight: 700 }}>FIRST</span>{" "}
           EVER
         </h1>
         <h1
-          className="uppercase text-[#faff00] leading-[0.85] tracking-tight text-[48px] sm:text-[80px] md:text-[140px] lg:text-[200px] xl:text-[252px] mt-2 md:mt-4"
+          className="uppercase text-[#faff00] leading-[0.88] text-[40px] sm:text-[64px] md:text-[92px] lg:text-[120px] xl:text-[150px] mt-1 md:mt-2"
           style={{ fontFamily: "obviously-compressed", fontWeight: 400 }}
         >
-          <span style={{ fontFamily: "obviously-compressed", fontStyle: "italic", fontWeight: 700 }}>
-            VERTICAL
-          </span>{" "}
+          <span style={{ fontStyle: "italic", fontWeight: 700 }}>VERTICAL</span>{" "}
           FILM FESTIVAL
         </h1>
 
         <p
-          className="uppercase text-[#faff00] mt-6 md:mt-10 text-[12px] sm:text-[16px] md:text-[22px] lg:text-[28px] tracking-wider"
+          className="uppercase text-[#faff00] mt-5 md:mt-8 text-[10px] sm:text-[12px] md:text-[14px] lg:text-[16px] tracking-[0.15em]"
           style={{ fontFamily: "obviously-wide", fontWeight: 400 }}
         >
           ENTRIES CLOSE 23RD APRIL
@@ -43,7 +39,7 @@ export default function Hero() {
 
         <a
           href="#submit"
-          className="pointer-events-auto mt-4 md:mt-6 inline-flex items-center justify-center uppercase text-[#faff00] border border-[#faff00] rounded-full px-8 py-3 md:px-12 md:py-4 text-[18px] md:text-[28px] lg:text-[45px] tracking-wider transition-all duration-300 hover:bg-[rgba(250,255,0,0.1)]"
+          className="pointer-events-auto mt-3 md:mt-4 inline-flex items-center justify-center uppercase text-[#faff00] border border-[#faff00] rounded-full px-7 py-2.5 md:px-10 md:py-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[20px] tracking-[0.12em] transition-all duration-300 hover:bg-[rgba(250,255,0,0.1)]"
           style={{ fontFamily: "obviously-wide", fontWeight: 600 }}
         >
           SUBMIT NOW
