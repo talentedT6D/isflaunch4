@@ -13,7 +13,7 @@ export default function Hero() {
       </div>
 
       {/* Hero content overlay */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 pb-16 md:pb-20 text-center pointer-events-none">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center pointer-events-none">
         <h1
           className="uppercase text-[#faff00] leading-[0.88] text-[56px] sm:text-[88px] md:text-[130px] lg:text-[170px] xl:text-[210px]"
           style={{ fontFamily: "obviously-compressed", fontWeight: 400 }}
