@@ -38,7 +38,9 @@ export default function Hero() {
         </p>
 
         <a
-          href="#submit"
+          href="https://payment.indianscrollfestival.com/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="pointer-events-auto mt-4 md:mt-5 inline-flex items-center justify-center uppercase text-[#faff00] border border-[#faff00] rounded-full px-8 py-3 md:px-12 md:py-4 text-[14px] sm:text-[18px] md:text-[22px] lg:text-[28px] tracking-[0.12em] transition-all duration-300 hover:bg-[rgba(250,255,0,0.1)]"
           style={{ fontFamily: "obviously-wide", fontWeight: 600 }}
         >
