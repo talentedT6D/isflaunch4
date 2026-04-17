@@ -36,25 +36,27 @@ export default function Hero() {
           THEATRE SCREEN.
         </h1>
 
-        <a
-          href="https://payment.indianscrollfestival.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="pointer-events-auto mt-6 md:mt-10 inline-flex flex-col items-center bg-[#faff00] rounded-full px-10 py-3 md:px-16 md:py-4 transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5"
-        >
-          <span
-            className="uppercase text-black text-[24px] sm:text-[36px] md:text-[48px] lg:text-[60px] leading-none"
-            style={{ fontFamily: "obviously-wide", fontWeight: 700 }}
+        <div className="pointer-events-auto mt-6 md:mt-10 flex flex-col items-center">
+          <a
+            href="https://payment.indianscrollfestival.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center bg-[#faff00] rounded-full px-10 py-2 md:px-16 md:py-3 transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5"
           >
-            SUBMIT NOW
-          </span>
-          <span
-            className="uppercase text-black text-[10px] sm:text-[13px] md:text-[16px] lg:text-[20px] tracking-[0.1em] mt-0.5"
+            <span
+              className="uppercase text-black text-[28px] sm:text-[40px] md:text-[56px] lg:text-[72px] leading-none"
+              style={{ fontFamily: "obviously-wide", fontWeight: 700 }}
+            >
+              SUBMIT NOW
+            </span>
+          </a>
+          <p
+            className="uppercase text-[#faff00] text-[14px] sm:text-[18px] md:text-[24px] lg:text-[32px] tracking-[0.08em] mt-1 md:mt-2"
             style={{ fontFamily: "obviously-wide", fontWeight: 400 }}
           >
             ENTRIES CLOSE 30TH APRIL
-          </span>
-        </a>
+          </p>
+        </div>
       </div>
 
       {/* Scrolling ticker at bottom */}
