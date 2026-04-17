@@ -14,43 +14,23 @@ export default function Hero() {
 
       {/* Hero content overlay */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center pointer-events-none">
-        <h1
-          className="uppercase text-[#faff00] leading-[0.88] text-[44px] sm:text-[68px] md:text-[100px] lg:text-[130px] xl:text-[160px]"
-          style={{ fontFamily: "obviously-compressed", fontWeight: 400 }}
-        >
-          <span style={{ fontStyle: "italic", fontWeight: 700 }}>FIRST</span>{" "}
-          IN OUR GENERATION
-        </h1>
-        <h1
-          className="uppercase text-[#faff00] leading-[0.88] text-[44px] sm:text-[68px] md:text-[100px] lg:text-[130px] xl:text-[160px] mt-1 md:mt-2"
-          style={{ fontFamily: "obviously-compressed", fontWeight: 400 }}
-        >
-          TO PLAY{" "}
-          <span style={{ fontStyle: "italic", fontWeight: 700 }}>REELS</span>{" "}
-          ON A
-        </h1>
-        <h1
-          className="uppercase text-[#faff00] leading-[0.88] text-[44px] sm:text-[68px] md:text-[100px] lg:text-[130px] xl:text-[160px] mt-1 md:mt-2"
-          style={{ fontFamily: "obviously-compressed", fontStyle: "italic", fontWeight: 700 }}
-        >
-          THEATRE SCREEN.
-        </h1>
-
-        <p
-          className="uppercase text-[#faff00] mt-6 md:mt-10 text-[12px] sm:text-[15px] md:text-[18px] lg:text-[22px] tracking-[0.15em]"
-          style={{ fontFamily: "obviously-wide", fontWeight: 400 }}
-        >
-          ENTRIES CLOSE 30TH APRIL
-        </p>
+        <img
+          src="/fs/First in our generation to play reels on a theatre screen..png"
+          alt="First in our generation to play reels on a theatre screen."
+          className="w-[85%] sm:w-[75%] md:w-[65%] lg:w-[55%] h-auto"
+        />
 
         <a
           href="https://payment.indianscrollfestival.com/"
           target="_blank"
           rel="noopener noreferrer"
-          className="pointer-events-auto mt-4 md:mt-5 inline-flex items-center justify-center uppercase text-[#faff00] border border-[#faff00] rounded-full px-8 py-3 md:px-12 md:py-4 text-[14px] sm:text-[18px] md:text-[22px] lg:text-[28px] tracking-[0.12em] transition-all duration-300 hover:bg-[rgba(250,255,0,0.1)]"
-          style={{ fontFamily: "obviously-wide", fontWeight: 600 }}
+          className="pointer-events-auto mt-6 md:mt-10"
         >
-          SUBMIT NOW
+          <img
+            src="/fs/SUBMIT BUTTON 3.png"
+            alt="Submit Now — Entries close 30th April"
+            className="w-[200px] sm:w-[260px] md:w-[340px] lg:w-[420px] h-auto hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300"
+          />
         </a>
       </div>
 
