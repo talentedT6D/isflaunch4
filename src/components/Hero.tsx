@@ -13,7 +13,7 @@ export default function Hero() {
       </div>
 
       {/* Hero content overlay */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none px-4 pb-12 md:pb-16">
+      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none px-4 pt-16 md:pt-20">
         <div className="flex flex-col items-center">
           <img
             src="/fs/First in our generation to play reels on a theatre screen..png"
