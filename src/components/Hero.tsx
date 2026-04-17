@@ -17,7 +17,7 @@ export default function Hero() {
         <img
           src="/fs/First in our generation to play reels on a theatre screen..png"
           alt="First in our generation to play reels on a theatre screen."
-          className="w-[75%] sm:w-[60%] md:w-[50%] lg:w-[42%] h-auto"
+          className="w-[80%] sm:w-[68%] md:w-[56%] lg:w-[48%] h-auto"
         />
 
         <a
@@ -29,7 +29,7 @@ export default function Hero() {
           <img
             src="/fs/SUBMIT BUTTON 3.png"
             alt="Submit Now — Entries close 30th April"
-            className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] h-auto hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300"
+            className="w-[190px] sm:w-[230px] md:w-[280px] lg:w-[330px] h-auto hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300"
           />
         </a>
       </div>
