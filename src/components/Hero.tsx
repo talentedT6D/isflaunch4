@@ -40,7 +40,7 @@ export default function Hero() {
           className="uppercase text-[#faff00] mt-6 md:mt-10 text-[12px] sm:text-[15px] md:text-[18px] lg:text-[22px] tracking-[0.15em]"
           style={{ fontFamily: "obviously-wide", fontWeight: 400 }}
         >
-          ENTRIES CLOSE 23RD APRIL
+          ENTRIES CLOSE 30TH APRIL
         </p>
 
         <a
