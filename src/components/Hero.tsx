@@ -13,25 +13,27 @@ export default function Hero() {
       </div>
 
       {/* Hero content overlay */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center pointer-events-none">
-        <img
-          src="/fs/First in our generation to play reels on a theatre screen..png"
-          alt="First in our generation to play reels on a theatre screen."
-          className="w-[80%] sm:w-[68%] md:w-[56%] lg:w-[48%] h-auto"
-        />
-
-        <a
-          href="https://payment.indianscrollfestival.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="pointer-events-auto mt-4 md:mt-6"
-        >
+      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+        <div className="flex flex-col items-center">
           <img
-            src="/fs/SUBMIT BUTTON 3.png"
-            alt="Submit Now — Entries close 30th April"
-            className="w-[190px] sm:w-[230px] md:w-[280px] lg:w-[330px] h-auto hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300"
+            src="/fs/First in our generation to play reels on a theatre screen..png"
+            alt="First in our generation to play reels on a theatre screen."
+            className="w-[80vw] sm:w-[68vw] md:w-[56vw] lg:w-[48vw] h-auto"
           />
-        </a>
+
+          <a
+            href="https://payment.indianscrollfestival.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pointer-events-auto mt-4 md:mt-6"
+          >
+            <img
+              src="/fs/SUBMIT BUTTON 3.png"
+              alt="Submit Now — Entries close 30th April"
+              className="w-[190px] sm:w-[230px] md:w-[280px] lg:w-[330px] h-auto hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300"
+            />
+          </a>
+        </div>
       </div>
 
       {/* Scrolling ticker at bottom */}
