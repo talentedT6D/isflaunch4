@@ -15,19 +15,25 @@ export default function Hero() {
       {/* Hero content overlay */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center pointer-events-none">
         <h1
-          className="uppercase text-[#faff00] leading-[0.88] text-[56px] sm:text-[88px] md:text-[130px] lg:text-[170px] xl:text-[210px]"
+          className="uppercase text-[#faff00] leading-[0.88] text-[44px] sm:text-[68px] md:text-[100px] lg:text-[130px] xl:text-[160px]"
           style={{ fontFamily: "obviously-compressed", fontWeight: 400 }}
         >
-          INDIA&apos;S{" "}
           <span style={{ fontStyle: "italic", fontWeight: 700 }}>FIRST</span>{" "}
-          EVER
+          IN OUR GENERATION
         </h1>
         <h1
-          className="uppercase text-[#faff00] leading-[0.88] text-[56px] sm:text-[88px] md:text-[130px] lg:text-[170px] xl:text-[210px] mt-1 md:mt-2"
+          className="uppercase text-[#faff00] leading-[0.88] text-[44px] sm:text-[68px] md:text-[100px] lg:text-[130px] xl:text-[160px] mt-1 md:mt-2"
           style={{ fontFamily: "obviously-compressed", fontWeight: 400 }}
         >
-          <span style={{ fontStyle: "italic", fontWeight: 700 }}>VERTICAL</span>{" "}
-          FILM FESTIVAL
+          TO PLAY{" "}
+          <span style={{ fontStyle: "italic", fontWeight: 700 }}>REELS</span>{" "}
+          ON A
+        </h1>
+        <h1
+          className="uppercase text-[#faff00] leading-[0.88] text-[44px] sm:text-[68px] md:text-[100px] lg:text-[130px] xl:text-[160px] mt-1 md:mt-2"
+          style={{ fontFamily: "obviously-compressed", fontStyle: "italic", fontWeight: 700 }}
+        >
+          THEATRE SCREEN.
         </h1>
 
         <p
