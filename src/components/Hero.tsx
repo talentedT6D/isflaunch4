@@ -28,7 +28,7 @@ export default function Hero() {
             className="pointer-events-auto mt-3 md:mt-6"
           >
             <img
-              src="/fs/SUBMIT BUTTON 3.png"
+              src="/fs/Group 73.png"
               alt="Submit Now — Entries close 30th April"
               className="w-[150px] sm:w-[200px] md:w-[280px] lg:w-[330px] h-auto hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300"
             />
