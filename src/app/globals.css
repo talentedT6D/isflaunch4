@@ -190,8 +190,8 @@ body {
 
 .nav-link-faq {
   color: #ff0000;
-  font-family: "obviously-extended", sans-serif;
-  font-weight: 500;
+  font-family: "obviously-narrow", sans-serif;
+  font-weight: 400;
 }
 .nav-link.nav-link-faq:hover,
 .nav-link.nav-link-faq.active {
@@ -203,8 +203,8 @@ body {
 
 .nav-link-submit {
   color: #faff00;
-  font-family: "obviously-extended", sans-serif;
-  font-weight: 500;
+  font-family: "obviously-narrow", sans-serif;
+  font-weight: 400;
 }
 .nav-link.nav-link-submit:hover,
 .nav-link.nav-link-submit.active {
