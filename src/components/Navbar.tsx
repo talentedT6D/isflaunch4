@@ -130,8 +130,8 @@ export default function Navbar({ onFaqClick }: { onFaqClick?: () => void }) {
               }}
               className={`flex items-center py-4 text-[22px] uppercase border-b border-white/8 last:border-0 cursor-pointer ${link.label === "SUBMIT FILM" ? "text-[#faff00]" : link.label === "FAQs" ? "text-[#ff0000]" : "text-white"}`}
               style={{
-                fontFamily: (link.label === "SUBMIT FILM" || link.label === "FAQs") ? "obviously-extended" : "obviously-narrow",
-                fontWeight: (link.label === "SUBMIT FILM" || link.label === "FAQs") ? 500 : 400,
+                fontFamily: "obviously-narrow",
+                fontWeight: 400,
               }}
             >
               {link.label}

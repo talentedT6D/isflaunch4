@@ -9,31 +9,26 @@ const criteriaByCategory: Record<string, string[]> = {
   Comedy: [
     "(1) Content should make people laugh. That's it.",
     "(2) Skits, brainrot, elite humour, stand-up,",
-    "(3) Content created must be unpublished and original.",
-    "(4) Max duration – 2 minutes, Max size – 200mb.",
+    "(3) Max duration – 2 minutes, Max size – 200mb.",
   ],
   AI: [
     "(1) AI content that's worth the 2 sticks of RAM.",
     "(2) At least 50% of your entry needs to be generated",
-    "(3) Content created must be unpublished and original.",
-    "(4) Max duration – 2 minutes, Max size – 200mb.",
+    "(3) Max duration – 2 minutes, Max size – 200mb.",
   ],
   Edits: [
     "(1) Any edit that makes people go 🔥🔥🔥",
     "(2) Sports, music, couples, anime, lifestyle. No category is off limits.",
-    "(3) Content created must be unpublished and original.",
-    "(4) Max duration – 1 minute, Max size – 200mb.",
+    "(3) Max duration – 1 minute, Max size – 200mb.",
   ],
   Emotional: [
     "(1) Help us get in touch with our feelings with your entry.",
     "(2) Nostalgia, happiness, sadness, heck create an emotion.",
-    "(3) Content created must be unpublished and original.",
-    "(4) Max duration – 2 minutes, Max size – 200mb.",
+    "(3) Max duration – 2 minutes, Max size – 200mb.",
   ],
   Food: [
     "(1) Basically, food porn. Just make people hungry.",
-    "(2) Content created must be unpublished and original.",
-    "(3) Max duration – 1 minute, Max size – 200mb.",
+    "(2) Max duration – 1 minute, Max size – 200mb.",
   ],
 };
 
@@ -164,7 +159,7 @@ export default function Criteria() {
             className="text-[13px] md:text-[24px] uppercase text-white leading-none"
             style={{ fontFamily: "obviously-narrow", fontWeight: 400 }}
           >
-            16 April · 11:59 PM IST
+            30 April · 11:59 PM IST
           </span>
         </div>
       </div>

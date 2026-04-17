@@ -9,7 +9,7 @@ const faqs = [
   },
   {
     q: "Does my film need to be unpublished?",
-    a: "Yes. Content submitted to ISF must not have been posted on any public platform before — no Instagram, no YouTube, nothing. If it's already out there, it's not eligible.",
+    a: "No. Your content does not need to be unpublished. Even if it has already been posted on platforms like Instagram or YouTube, it's eligible. We're here to celebrate the best reels on the internet — and bring them to the big screen.",
   },
   {
     q: "How much does it cost to submit?",
@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q: "When's the deadline?",
-    a: "16 April 2026, 11:59 PM IST. Not 11:59:01. Not the next morning.",
+    a: "30 April 2026, 11:59 PM IST. Not 11:59:01. Not the next morning.",
   },
   {
     q: "What happens after I submit?",

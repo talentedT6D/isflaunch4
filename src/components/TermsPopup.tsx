@@ -103,7 +103,7 @@ export default function TermsPopup({ onClose }: { onClose: () => void }) {
               <li>Submission is complete upon receipt of a confirmation acknowledgement from the Organisers.</li>
             </ol>
             <p className="text-white font-medium mt-3">3.4 Submission Deadline</p>
-            <p className="mt-1">All Submissions must be received by 16 April 2026, 11:59 PM IST. Submissions received after this deadline will not be considered. The Organisers accept no responsibility for late or failed submissions arising from technical issues on the part of the Participant.</p>
+            <p className="mt-1">All Submissions must be received by 30 April 2026, 11:59 PM IST. Submissions received after this deadline will not be considered. The Organisers accept no responsibility for late or failed submissions arising from technical issues on the part of the Participant.</p>
           </div>
 
           <div>

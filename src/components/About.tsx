@@ -166,15 +166,9 @@ export default function About() {
             <p className="uppercase text-white leading-[0.79]">
               <span
                 className="text-[40px] sm:text-[64px] md:text-[160px] lg:text-[230px]"
-                style={{ fontFamily: "Roboto Condensed", fontWeight: 300 }}
-              >
-                &#8377;
-              </span>
-              <span
-                className="text-[40px] sm:text-[64px] md:text-[160px] lg:text-[230px]"
                 style={{ fontFamily: "obviously-compressed", fontWeight: 700 }}
               >
-                8 LAKHS IN PRIZES{" "}
+                LAKHS IN PRIZES{" "}
               </span>
             </p>
           </div>
