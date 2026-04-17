@@ -17,19 +17,19 @@ export default function Hero() {
         <img
           src="/fs/First in our generation to play reels on a theatre screen..png"
           alt="First in our generation to play reels on a theatre screen."
-          className="w-[85%] sm:w-[75%] md:w-[65%] lg:w-[55%] h-auto"
+          className="w-[75%] sm:w-[60%] md:w-[50%] lg:w-[42%] h-auto"
         />
 
         <a
           href="https://payment.indianscrollfestival.com/"
           target="_blank"
           rel="noopener noreferrer"
-          className="pointer-events-auto mt-6 md:mt-10"
+          className="pointer-events-auto mt-4 md:mt-6"
         >
           <img
             src="/fs/SUBMIT BUTTON 3.png"
             alt="Submit Now — Entries close 30th April"
-            className="w-[200px] sm:w-[260px] md:w-[340px] lg:w-[420px] h-auto hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300"
+            className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] h-auto hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300"
           />
         </a>
       </div>
